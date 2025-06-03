@@ -1,0 +1,40 @@
+# 忽略node_modules目录，因为这个目录下的依赖可以通过npm install重新生成
+/node_modules
+
+# 忽略构建输出目录，默认情况下是dist，如果你的配置不同，请相应调整
+/dist
+
+# 在使用Vue CLI创建项目时，可能会生成的环境变量文件
+.env.local
+.env.*.local
+
+# 忽略编辑器或IDE特定的配置文件或目录
+# VSCode
+.vscode/
+
+# macOS系统自动生成的文件
+.DS_Store
+
+# Windows系统文件（虽然你可能不需要这个，但以防万一有跨平台协作）
+Thumbs.db
+
+# 忽略单元测试和端到端测试报告及缓存
+/test-results/
+/coverage/
+
+# npm的锁文件不应该被忽略，以保证所有开发者使用相同的依赖版本
+# 如果你切换到了yarn或pnpm，请根据需要修改
+# package-lock.json不会被忽略
+
+# 如果你的项目中有包含敏感信息的配置文件，也应将其添加到.gitignore中
+/config/local.js
+
+# 忽略Prettier或ESLint等代码格式化工具的缓存文件
+/.eslintcache
+.prettier-cache
+
+# 忽略其他临时文件或用户特定设置
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
