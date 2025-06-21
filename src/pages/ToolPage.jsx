@@ -5,6 +5,7 @@ import PlainTextExtractor from "../tools/PlainTextExtractor";
 import JavaToJson from "../tools/JavaToJson";
 import ShellCommands from "../tools/ShellCommands";
 import RegexTester from "../tools/RegexTester";
+import LotteryTool from "../tools/LotteryTool";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { HomeIcon } from "lucide-react";
@@ -27,6 +28,8 @@ const ToolPage = ({ toolId }) => {
         return <ShellCommands />;
       case "regex":
         return <RegexTester />;
+      case "lottery":
+        return <LotteryTool />;
       default:
         return (
           <div className="text-center py-12">
@@ -45,7 +48,8 @@ const ToolPage = ({ toolId }) => {
       plaintext: "纯文本提取工具",
       "java-json": "Java类转JSON工具",
       shell: "Shell命令速查",
-      regex: "正则表达式测试器"
+      regex: "正则表达式测试器",
+      lottery: "抽奖工具"
     };
     return titles[toolId] || "开发工具箱";
   };
@@ -58,7 +62,8 @@ const ToolPage = ({ toolId }) => {
       plaintext: "从富文本中提取纯文本内容",
       "java-json": "将Java类转换为JSON格式并生成Mock数据",
       shell: "常用Shell命令速查与示例",
-      regex: "在线测试正则表达式"
+      regex: "在线测试正则表达式",
+      lottery: "多轮抽奖工具，支持自定义参与者和奖品"
     };
     return descriptions[toolId] || "多功能开发工具箱";
   };

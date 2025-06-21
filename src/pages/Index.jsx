@@ -8,6 +8,7 @@ import {
   FileTextIcon,
   TerminalIcon,
   CpuIcon,
+  GiftIcon,
   ArrowRightIcon
 } from "lucide-react";
 
@@ -60,6 +61,13 @@ const toolCards = [
     description: "在线测试正则表达式",
     icon: <CpuIcon className="h-6 w-6" />,
     color: "bg-pink-500"
+  },
+  {
+    id: "lottery",
+    title: "抽奖工具",
+    description: "多轮抽奖工具，支持自定义参与者和奖品",
+    icon: <GiftIcon className="h-6 w-6" />,
+    color: "bg-orange-500"
   }
 ];
 

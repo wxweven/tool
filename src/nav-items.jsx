@@ -5,7 +5,8 @@ import {
   LinkIcon, 
   FileTextIcon,
   TerminalIcon,
-  CpuIcon
+  CpuIcon,
+  GiftIcon
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
@@ -61,5 +62,11 @@ export const navItems = [
     to: "/regex",
     icon: <CpuIcon className="h-4 w-4" />,
     page: <ToolPage toolId="regex" />,
+  },
+  {
+    title: "抽奖工具",
+    to: "/lottery",
+    icon: <GiftIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="lottery" />,
   },
 ];
