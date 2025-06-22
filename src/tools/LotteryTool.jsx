@@ -142,21 +142,29 @@ const LotteryTool = () => {
 
   return (
     <div className="space-y-6">
-      <Card>
-        <CardHeader>
-          <CardTitle>参与者名单</CardTitle>
+      <Card className="border-2 border-blue-200 bg-blue-50/50 dark:bg-blue-900/20">
+        <CardHeader className="pb-3">
+          <CardTitle className="text-xl text-blue-700 dark:text-blue-300 flex items-center gap-2">
+            <GiftIcon className="h-5 w-5" />
+            参与者名单
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div>
-            <Label htmlFor="participants">参与者名单（每行一个名字）</Label>
+            <Label htmlFor="participants" className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              参与者名单（每行一个名字）
+            </Label>
             <Textarea
               id="participants"
               value={participants}
               onChange={(e) => setParticipants(e.target.value)}
-              placeholder="请输入参与者名单，每行一个名字"
-              rows={6}
-              className="mt-1"
+              placeholder="请输入参与者名单，每行一个名字&#10;例如：&#10;张三&#10;李四&#10;王五"
+              rows={8}
+              className="mt-2 border-2 border-blue-200 focus:border-blue-400 focus:ring-blue-400"
             />
+            <p className="text-xs text-gray-500 mt-2">
+              当前参与者数量：{parseParticipants().length} 人
+            </p>
           </div>
         </CardContent>
       </Card>
