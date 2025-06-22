@@ -9,7 +9,8 @@ import {
   GiftIcon,
   CalculatorIcon,
   WrenchIcon,
-  HeartIcon
+  HeartIcon,
+  FileCodeIcon
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
@@ -47,6 +48,12 @@ export const navItems = [
     to: "/url",
     icon: <LinkIcon className="h-4 w-4" />,
     page: <ToolPage toolId="url" />,
+  },
+  {
+    title: "代码格式化",
+    to: "/code-formatter",
+    icon: <FileCodeIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="code-formatter" />,
   },
   {
     title: "纯文本提取",
@@ -105,6 +112,11 @@ export const categoryNavItems = [
         title: "URL编解码",
         to: "/url",
         icon: <LinkIcon className="h-4 w-4" />,
+      },
+      {
+        title: "代码格式化",
+        to: "/code-formatter",
+        icon: <FileCodeIcon className="h-4 w-4" />,
       },
       {
         title: "纯文本提取",

@@ -12,7 +12,8 @@ import {
   ArrowRightIcon,
   CalculatorIcon,
   WrenchIcon,
-  HeartIcon
+  HeartIcon,
+  FileCodeIcon
 } from "lucide-react";
 
 const devTools = [
@@ -43,6 +44,13 @@ const devTools = [
     description: "URL编码与解码工具",
     icon: <LinkIcon className="h-6 w-6" />,
     color: "bg-purple-500"
+  },
+  {
+    id: "code-formatter",
+    title: "代码格式化",
+    description: "支持多种编程语言的代码格式化",
+    icon: <FileCodeIcon className="h-6 w-6" />,
+    color: "bg-teal-500"
   },
   {
     id: "plaintext",
