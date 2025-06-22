@@ -17,6 +17,13 @@ import {
 
 const devTools = [
   {
+    id: "json",
+    title: "JSON格式化",
+    description: "格式化、验证并美化JSON数据",
+    icon: <CodeIcon className="h-6 w-6" />,
+    color: "bg-green-500"
+  },
+  {
     id: "timestamp",
     title: "时间戳转换",
     description: "时间戳与日期时间相互转换",
@@ -24,11 +31,11 @@ const devTools = [
     color: "bg-blue-500"
   },
   {
-    id: "json",
-    title: "JSON格式化",
-    description: "格式化、验证并美化JSON数据",
+    id: "java-json",
+    title: "Java转JSON",
+    description: "将Java类转换为JSON格式并生成Mock数据",
     icon: <CodeIcon className="h-6 w-6" />,
-    color: "bg-green-500"
+    color: "bg-red-500"
   },
   {
     id: "url",
@@ -43,13 +50,6 @@ const devTools = [
     description: "从富文本中提取纯文本内容",
     icon: <FileTextIcon className="h-6 w-6" />,
     color: "bg-amber-500"
-  },
-  {
-    id: "java-json",
-    title: "Java转JSON",
-    description: "将Java类转换为JSON格式并生成Mock数据",
-    icon: <CodeIcon className="h-6 w-6" />,
-    color: "bg-red-500"
   },
   {
     id: "shell",

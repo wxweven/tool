@@ -25,16 +25,22 @@ export const navItems = [
     page: <Index />,
   },
   {
+    title: "JSON格式化",
+    to: "/json",
+    icon: <CodeIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="json" />,
+  },
+  {
     title: "时间戳转换",
     to: "/timestamp",
     icon: <ClockIcon className="h-4 w-4" />,
     page: <ToolPage toolId="timestamp" />,
   },
   {
-    title: "JSON格式化",
-    to: "/json",
+    title: "Java转JSON",
+    to: "/java-json",
     icon: <CodeIcon className="h-4 w-4" />,
-    page: <ToolPage toolId="json" />,
+    page: <ToolPage toolId="java-json" />,
   },
   {
     title: "URL编解码",
@@ -47,12 +53,6 @@ export const navItems = [
     to: "/plaintext",
     icon: <FileTextIcon className="h-4 w-4" />,
     page: <ToolPage toolId="plaintext" />,
-  },
-  {
-    title: "Java转JSON",
-    to: "/java-json",
-    icon: <CodeIcon className="h-4 w-4" />,
-    page: <ToolPage toolId="java-json" />,
   },
   {
     title: "Shell命令",
@@ -87,13 +87,18 @@ export const categoryNavItems = [
     icon: <WrenchIcon className="h-4 w-4" />,
     items: [
       {
+        title: "JSON格式化",
+        to: "/json",
+        icon: <CodeIcon className="h-4 w-4" />,
+      },
+      {
         title: "时间戳转换",
         to: "/timestamp",
         icon: <ClockIcon className="h-4 w-4" />,
       },
       {
-        title: "JSON格式化",
-        to: "/json",
+        title: "Java转JSON",
+        to: "/java-json",
         icon: <CodeIcon className="h-4 w-4" />,
       },
       {
@@ -105,11 +110,6 @@ export const categoryNavItems = [
         title: "纯文本提取",
         to: "/plaintext",
         icon: <FileTextIcon className="h-4 w-4" />,
-      },
-      {
-        title: "Java转JSON",
-        to: "/java-json",
-        icon: <CodeIcon className="h-4 w-4" />,
       },
       {
         title: "Shell命令",
