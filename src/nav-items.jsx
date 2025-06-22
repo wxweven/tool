@@ -74,7 +74,7 @@ export const navItems = [
     page: <ToolPage toolId="regex" />,
   },
   {
-    title: "抽奖工具",
+    title: "年会抽奖工具",
     to: "/lottery",
     icon: <GiftIcon className="h-4 w-4" />,
     page: <ToolPage toolId="lottery" />,
@@ -140,7 +140,7 @@ export const categoryNavItems = [
     icon: <HeartIcon className="h-4 w-4" />,
     items: [
       {
-        title: "抽奖工具",
+        title: "年会抽奖工具",
         to: "/lottery",
         icon: <GiftIcon className="h-4 w-4" />,
       },

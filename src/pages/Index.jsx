@@ -80,8 +80,8 @@ const devTools = [
 const lifeTools = [
   {
     id: "lottery",
-    title: "抽奖工具",
-    description: "多轮抽奖工具，支持自定义参与者和奖品",
+    title: "年会抽奖工具",
+    description: "年会多轮抽奖工具，支持自定义参与者和奖品",
     icon: <GiftIcon className="h-5 w-5" />,
     color: "bg-orange-500"
   },
@@ -187,9 +187,9 @@ const Index = () => {
       />
 
       <div className="mt-6 text-center">
-        <h2 className="text-xl font-semibold mb-2">一站式解决开发中的常见需求，提升工作效率</h2>
+        <h2 className="text-xl font-semibold mb-2">一站式解决开发/生活中的常见需求，提升工作效率</h2>
         <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
-          如果您有特定需求或创意工具想法，欢迎反馈给我们
+          如果您有特定需求或创意工具想法，欢迎反馈给我。个人微信：wxweven
         </p>
       </div>
 
