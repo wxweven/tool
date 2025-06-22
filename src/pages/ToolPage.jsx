@@ -6,6 +6,7 @@ import JavaToJson from "../tools/JavaToJson";
 import ShellCommands from "../tools/ShellCommands";
 import RegexTester from "../tools/RegexTester";
 import LotteryTool from "../tools/LotteryTool";
+import MortgageCalculator from "../tools/MortgageCalculator";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { HomeIcon } from "lucide-react";
@@ -30,6 +31,8 @@ const ToolPage = ({ toolId }) => {
         return <RegexTester />;
       case "lottery":
         return <LotteryTool />;
+      case "mortgage":
+        return <MortgageCalculator />;
       default:
         return (
           <div className="text-center py-12">
@@ -49,7 +52,8 @@ const ToolPage = ({ toolId }) => {
       "java-json": "Java类转JSON工具",
       shell: "Shell命令速查",
       regex: "正则表达式测试器",
-      lottery: "抽奖工具"
+      lottery: "抽奖工具",
+      mortgage: "房贷计算器"
     };
     return titles[toolId] || "开发工具箱";
   };
@@ -63,7 +67,8 @@ const ToolPage = ({ toolId }) => {
       "java-json": "将Java类转换为JSON格式并生成Mock数据",
       shell: "常用Shell命令速查与示例",
       regex: "在线测试正则表达式",
-      lottery: "多轮抽奖工具，支持自定义参与者和奖品"
+      lottery: "多轮抽奖工具，支持自定义参与者和奖品",
+      mortgage: "房贷计算器，支持等额本息和等额本金两种还款方式"
     };
     return descriptions[toolId] || "多功能开发工具箱";
   };

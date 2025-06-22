@@ -9,10 +9,13 @@ import {
   TerminalIcon,
   CpuIcon,
   GiftIcon,
-  ArrowRightIcon
+  ArrowRightIcon,
+  CalculatorIcon,
+  WrenchIcon,
+  HeartIcon
 } from "lucide-react";
 
-const toolCards = [
+const devTools = [
   {
     id: "timestamp",
     title: "时间戳转换",
@@ -61,30 +64,37 @@ const toolCards = [
     description: "在线测试正则表达式",
     icon: <CpuIcon className="h-6 w-6" />,
     color: "bg-pink-500"
-  },
+  }
+];
+
+const lifeTools = [
   {
     id: "lottery",
     title: "抽奖工具",
     description: "多轮抽奖工具，支持自定义参与者和奖品",
     icon: <GiftIcon className="h-6 w-6" />,
     color: "bg-orange-500"
+  },
+  {
+    id: "mortgage",
+    title: "房贷计算器",
+    description: "支持等额本息和等额本金两种还款方式",
+    icon: <CalculatorIcon className="h-6 w-6" />,
+    color: "bg-cyan-500"
   }
 ];
 
-const Index = () => {
+const ToolCategory = ({ title, icon, tools }) => {
   return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="text-center mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-4">
-          开发者工具箱
-        </h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          一站式解决开发中的常见需求，提升工作效率
-        </p>
+    <div className="mb-16">
+      <div className="flex items-center gap-2 mb-6">
+        <div className="p-2 rounded-lg bg-muted">
+          {icon}
+        </div>
+        <h2 className="text-2xl font-semibold">{title}</h2>
       </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {toolCards.map((tool) => (
+        {tools.map((tool) => (
           <Link to={`/${tool.id}`} key={tool.id} className="group">
             <Card className="h-full transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-1">
               <CardHeader>
@@ -103,6 +113,33 @@ const Index = () => {
           </Link>
         ))}
       </div>
+    </div>
+  );
+};
+
+const Index = () => {
+  return (
+    <div className="container mx-auto px-4 py-12">
+      <div className="text-center mb-16">
+        <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-4">
+          开发者工具箱
+        </h1>
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          一站式解决开发中的常见需求，提升工作效率
+        </p>
+      </div>
+
+      <ToolCategory 
+        title="开发者工具" 
+        icon={<WrenchIcon className="h-5 w-5" />} 
+        tools={devTools} 
+      />
+      
+      <ToolCategory 
+        title="生活工具" 
+        icon={<HeartIcon className="h-5 w-5" />} 
+        tools={lifeTools} 
+      />
 
       <div className="mt-16 text-center">
         <h2 className="text-2xl font-semibold mb-4">更多工具持续开发中</h2>
