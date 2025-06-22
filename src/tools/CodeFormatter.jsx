@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,6 +14,20 @@ const CodeFormatter = () => {
   const [inputCode, setInputCode] = useState("");
   const [formattedCode, setFormattedCode] = useState("");
   const [copied, setCopied] = useState(false);
+
+  // 从localStorage获取上次选择的语言
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("codeFormatterLanguage");
+    if (savedLanguage) {
+      setLanguage(savedLanguage);
+    }
+  }, []);
+
+  // 当语言改变时保存到localStorage
+  const handleLanguageChange = (newLanguage) => {
+    setLanguage(newLanguage);
+    localStorage.setItem("codeFormatterLanguage", newLanguage);
+  };
 
   const languageOptions = [
     { value: "javascript", label: "JavaScript", icon: "⚡" },
@@ -436,7 +450,7 @@ const CodeFormatter = () => {
                   <div className="flex items-center justify-between">
                     <Label>格式化结果</Label>
                     <div className="flex gap-2">
-                      <Select value={language} onValueChange={setLanguage}>
+                      <Select value={language} onValueChange={handleLanguageChange}>
                         <SelectTrigger className="w-32">
                           <SelectValue />
                         </SelectTrigger>
@@ -480,7 +494,7 @@ const CodeFormatter = () => {
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
                   <Label>选择语言：</Label>
-                  <Select value={language} onValueChange={setLanguage}>
+                  <Select value={language} onValueChange={handleLanguageChange}>
                     <SelectTrigger className="w-40">
                       <SelectValue />
                     </SelectTrigger>
