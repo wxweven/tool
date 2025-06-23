@@ -17,7 +17,8 @@ import {
   ChevronUpIcon,
   BracesIcon,
   FileDiffIcon,
-  FilterIcon
+  FilterIcon,
+  DownloadIcon
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -77,6 +78,13 @@ const devTools = [
     description: "去除重复行，支持CSV下载",
     icon: <FilterIcon className="h-5 w-5" />,
     color: "bg-violet-500"
+  },
+  {
+    id: "download-files",
+    title: "批量下载文件",
+    description: "批量下载文件并打包为zip",
+    icon: <DownloadIcon className="h-5 w-5" />,
+    color: "bg-orange-500"
   },
   {
     id: "plaintext",

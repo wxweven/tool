@@ -14,6 +14,7 @@ import {
   BracesIcon,
   FileDiffIcon,
   FilterIcon,
+  DownloadIcon,
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
@@ -75,6 +76,12 @@ export const navItems = [
     to: "/remove-duplicates",
     icon: <FilterIcon className="h-4 w-4" />,
     page: <ToolPage toolId="remove-duplicates" />,
+  },
+  {
+    title: "批量下载文件",
+    to: "/download-files",
+    icon: <DownloadIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="download-files" />,
   },
   {
     title: "纯文本提取",
@@ -153,6 +160,11 @@ export const categoryNavItems = [
         title: "文本去重",
         to: "/remove-duplicates",
         icon: <FilterIcon className="h-4 w-4" />,
+      },
+      {
+        title: "批量下载文件",
+        to: "/download-files",
+        icon: <DownloadIcon className="h-4 w-4" />,
       },
       {
         title: "纯文本提取",
