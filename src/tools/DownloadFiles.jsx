@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CopyIcon, Wand2Icon, DownloadIcon, ChevronUpIcon, LinkIcon, FileIcon, AlertCircleIcon, ZapIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 
 const DownloadFiles = () => {
   const [input, setInput] = useState("");
@@ -14,6 +15,7 @@ const DownloadFiles = () => {
   const [downloadResults, setDownloadResults] = useState([]);
   const [isScrollToTopVisible, setIsScrollToTopVisible] = useState(false);
   const [isConcurrentMode, setIsConcurrentMode] = useState(false);
+  const [overallProgress, setOverallProgress] = useState(0);
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -76,6 +78,17 @@ const DownloadFiles = () => {
     }
   };
 
+  const updateOverallProgress = () => {
+    if (urls.length === 0) return;
+    
+    const totalProgress = Object.values(downloadProgress).reduce((sum, progress) => {
+      return sum + (progress.progress || 0);
+    }, 0);
+    
+    const averageProgress = totalProgress / urls.length;
+    setOverallProgress(Math.round(averageProgress));
+  };
+
   const downloadSingleFile = async (url) => {
     const fileName = getFileNameFromUrl(url);
     
@@ -97,6 +110,9 @@ const DownloadFiles = () => {
         [url]: { status: 'success', progress: 100 }
       }));
 
+      // 更新总体进度
+      setTimeout(updateOverallProgress, 100);
+
       return {
         url,
         fileName,
@@ -109,6 +125,9 @@ const DownloadFiles = () => {
         ...prev,
         [url]: { status: 'error', progress: 0, error: error.message }
       }));
+
+      // 更新总体进度
+      setTimeout(updateOverallProgress, 100);
 
       return {
         url,
@@ -128,6 +147,7 @@ const DownloadFiles = () => {
     setIsDownloading(true);
     setDownloadProgress({});
     setDownloadResults([]);
+    setOverallProgress(0);
 
     const results = [];
     const downloadedFiles = [];
@@ -224,6 +244,7 @@ const DownloadFiles = () => {
     setDownloadProgress({});
     setDownloadResults([]);
     setIsConcurrentMode(false);
+    setOverallProgress(0);
   };
 
   const loadExample = () => {
@@ -237,6 +258,7 @@ https://invalid-url.com/file.txt`;
     setDownloadProgress({});
     setDownloadResults([]);
     setIsConcurrentMode(false);
+    setOverallProgress(0);
   };
 
   const copyToClipboard = () => {
@@ -329,6 +351,19 @@ https://invalid-url.com/file.txt`;
             </div>
           </CardHeader>
           <CardContent>
+            {isDownloading && (
+              <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-md">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-medium text-blue-700 dark:text-blue-300">总体进度</span>
+                  <span className="text-sm text-blue-600 font-semibold">{overallProgress}%</span>
+                </div>
+                <Progress value={overallProgress} className="h-2" />
+                <p className="text-xs text-blue-600 mt-1">
+                  已处理 {downloadResults.length} / {urls.length} 个文件
+                </p>
+              </div>
+            )}
+
             {downloadResults.length > 0 ? (
               <div className="space-y-3">
                 {downloadResults.map((result, index) => (
@@ -344,6 +379,11 @@ https://invalid-url.com/file.txt`;
                         <Badge variant={result.status === 'success' ? 'default' : 'destructive'}>
                           {result.status === 'success' ? '成功' : '失败'}
                         </Badge>
+                        {downloadProgress[result.url]?.progress !== undefined && (
+                          <span className="text-xs text-gray-500">
+                            {downloadProgress[result.url].progress}%
+                          </span>
+                        )}
                       </div>
                       <p className="text-xs text-gray-500 truncate">{result.url}</p>
                       {result.status === 'success' && (
