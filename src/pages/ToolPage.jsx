@@ -9,6 +9,7 @@ import LotteryTool from "../tools/LotteryTool";
 import MortgageCalculator from "../tools/MortgageCalculator";
 import CodeFormatter from "../tools/CodeFormatter";
 import JavaToStringFormatter from "../tools/JavaToStringFormatter";
+import TextDiff from "../tools/TextDiff";
 
 const ToolPage = ({ toolId }) => {
   const renderTool = () => {
@@ -35,6 +36,8 @@ const ToolPage = ({ toolId }) => {
         return <CodeFormatter />;
       case "java-tostring":
         return <JavaToStringFormatter />;
+      case "text-diff":
+        return <TextDiff />;
       default:
         return (
           <div className="text-center py-12">
