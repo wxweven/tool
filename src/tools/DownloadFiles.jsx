@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CopyIcon, Wand2Icon, DownloadIcon, ChevronUpIcon, LinkIcon, FileIcon, AlertCircleIcon } from "lucide-react";
+import { CopyIcon, Wand2Icon, DownloadIcon, ChevronUpIcon, LinkIcon, FileIcon, AlertCircleIcon, ZapIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const DownloadFiles = () => {
@@ -13,6 +13,7 @@ const DownloadFiles = () => {
   const [downloadProgress, setDownloadProgress] = useState({});
   const [downloadResults, setDownloadResults] = useState([]);
   const [isScrollToTopVisible, setIsScrollToTopVisible] = useState(false);
+  const [isConcurrentMode, setIsConcurrentMode] = useState(false);
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -51,6 +52,8 @@ const DownloadFiles = () => {
     });
 
     setUrls(uniqueUrls);
+    // 检查是否需要并发模式
+    setIsConcurrentMode(uniqueUrls.length > 50);
   };
 
   const isValidUrl = (string) => {
@@ -73,6 +76,49 @@ const DownloadFiles = () => {
     }
   };
 
+  const downloadSingleFile = async (url) => {
+    const fileName = getFileNameFromUrl(url);
+    
+    setDownloadProgress(prev => ({
+      ...prev,
+      [url]: { status: 'downloading', progress: 0 }
+    }));
+
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const blob = await response.blob();
+      
+      setDownloadProgress(prev => ({
+        ...prev,
+        [url]: { status: 'success', progress: 100 }
+      }));
+
+      return {
+        url,
+        fileName,
+        status: 'success',
+        size: blob.size,
+        blob
+      };
+    } catch (error) {
+      setDownloadProgress(prev => ({
+        ...prev,
+        [url]: { status: 'error', progress: 0, error: error.message }
+      }));
+
+      return {
+        url,
+        fileName,
+        status: 'error',
+        error: error.message
+      };
+    }
+  };
+
   const downloadFiles = async () => {
     if (urls.length === 0) {
       alert('请先输入有效的URL');
@@ -86,47 +132,51 @@ const DownloadFiles = () => {
     const results = [];
     const downloadedFiles = [];
 
-    for (let i = 0; i < urls.length; i++) {
-      const url = urls[i];
-      const fileName = getFileNameFromUrl(url);
+    if (isConcurrentMode) {
+      // 并发下载模式
+      const batchSize = 10; // 每批10个并发
+      const batches = [];
       
-      setDownloadProgress(prev => ({
-        ...prev,
-        [url]: { status: 'downloading', progress: 0 }
-      }));
+      for (let i = 0; i < urls.length; i += batchSize) {
+        batches.push(urls.slice(i, i + batchSize));
+      }
 
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
-
-        const blob = await response.blob();
-        downloadedFiles.push({ name: fileName, blob });
+      for (let batchIndex = 0; batchIndex < batches.length; batchIndex++) {
+        const batch = batches[batchIndex];
+        const batchPromises = batch.map(url => downloadSingleFile(url));
         
-        setDownloadProgress(prev => ({
-          ...prev,
-          [url]: { status: 'success', progress: 100 }
-        }));
-
-        results.push({
-          url,
-          fileName,
-          status: 'success',
-          size: blob.size
+        const batchResults = await Promise.allSettled(batchPromises);
+        
+        batchResults.forEach((result, index) => {
+          if (result.status === 'fulfilled') {
+            const fileResult = result.value;
+            results.push(fileResult);
+            
+            if (fileResult.status === 'success' && fileResult.blob) {
+              downloadedFiles.push({ name: fileResult.fileName, blob: fileResult.blob });
+            }
+          } else {
+            // 处理Promise被拒绝的情况
+            const url = batch[index];
+            const fileName = getFileNameFromUrl(url);
+            results.push({
+              url,
+              fileName,
+              status: 'error',
+              error: result.reason?.message || '下载失败'
+            });
+          }
         });
-      } catch (error) {
-        setDownloadProgress(prev => ({
-          ...prev,
-          [url]: { status: 'error', progress: 0, error: error.message }
-        }));
-
-        results.push({
-          url,
-          fileName,
-          status: 'error',
-          error: error.message
-        });
+      }
+    } else {
+      // 顺序下载模式
+      for (let i = 0; i < urls.length; i++) {
+        const result = await downloadSingleFile(urls[i]);
+        results.push(result);
+        
+        if (result.status === 'success' && result.blob) {
+          downloadedFiles.push({ name: result.fileName, blob: result.blob });
+        }
       }
     }
 
@@ -173,6 +223,7 @@ const DownloadFiles = () => {
     setUrls([]);
     setDownloadProgress({});
     setDownloadResults([]);
+    setIsConcurrentMode(false);
   };
 
   const loadExample = () => {
@@ -185,6 +236,7 @@ https://invalid-url.com/file.txt`;
     setUrls([]);
     setDownloadProgress({});
     setDownloadResults([]);
+    setIsConcurrentMode(false);
   };
 
   const copyToClipboard = () => {
@@ -246,6 +298,12 @@ https://invalid-url.com/file.txt`;
                   <p className="text-sm text-gray-600 dark:text-gray-300">
                     共解析出 {urls.length} 个有效URL（已去重）
                   </p>
+                  {isConcurrentMode && (
+                    <div className="flex items-center gap-2 mt-2">
+                      <ZapIcon className="h-4 w-4 text-orange-600" />
+                      <span className="text-sm text-orange-600 font-medium">已启用并发下载模式</span>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -309,6 +367,7 @@ https://invalid-url.com/file.txt`;
               <div className="text-center py-12 text-muted-foreground">
                 <p>输入URL并点击解析按钮</p>
                 <p className="mt-2 text-sm">支持批量下载文件并打包为zip</p>
+                <p className="mt-1 text-xs">超过50个URL时自动启用并发下载</p>
               </div>
             )}
           </CardContent>
