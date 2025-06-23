@@ -3,12 +3,60 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CopyIcon } from "lucide-react";
+import { CopyIcon, FileTextIcon } from "lucide-react";
 
 const JavaToJson = () => {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [copied, setCopied] = useState(false);
+
+  // 测试示例
+  const examples = {
+    user: `public class User {
+    private String username;
+    private String email;
+    private Integer age;
+    private Boolean isActive;
+    private Date createTime;
+    private Long userId;
+    private Double balance;
+}`,
+    order: `public class Order {
+    private Long orderId;
+    private String orderNumber;
+    private Integer status;
+    private Double totalAmount;
+    private Date orderTime;
+    private Boolean isPaid;
+    private String customerName;
+    private String shippingAddress;
+}`,
+    product: `public class Product {
+    private Long productId;
+    private String productName;
+    private String description;
+    private Double price;
+    private Integer stock;
+    private Boolean isAvailable;
+    private String category;
+    private Date createTime;
+}`,
+    employee: `public class Employee {
+    private Integer employeeId;
+    private String name;
+    private String department;
+    private Double salary;
+    private Date hireDate;
+    private Boolean isFullTime;
+    private String position;
+    private String email;
+}`
+  };
+
+  const loadExample = (exampleKey) => {
+    setInput(examples[exampleKey]);
+    setOutput("");
+  };
 
   const convertToJson = () => {
     if (!input) return;
@@ -68,71 +116,118 @@ const JavaToJson = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <Card>
-        <CardHeader>
-          <CardTitle>Java类转JSON</CardTitle>
+    <div className="space-y-6">
+      {/* 测试示例区域 */}
+      <Card className="border-2 border-green-200 bg-green-50/50 dark:bg-green-900/20">
+        <CardHeader className="pb-3">
+          <CardTitle className="text-lg text-green-700 dark:text-green-300 flex items-center gap-2">
+            <FileTextIcon className="h-5 w-5" />
+            测试示例
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
-            <div>
-              <Label htmlFor="java-input">Java类代码</Label>
-              <Textarea
-                id="java-input"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="输入Java类代码"
-                rows={8}
-                className="font-mono mt-1"
-              />
-            </div>
-            
-            <div className="flex gap-2">
-              <Button onClick={convertToJson}>转换为JSON</Button>
-              <Button variant="secondary" onClick={clearAll}>
-                清空
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-      
-      <Card>
-        <CardHeader>
-          <div className="flex justify-between items-center">
-            <CardTitle>JSON结果</CardTitle>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             <Button 
               variant="outline" 
-              size="sm"
-              onClick={copyToClipboard}
-              disabled={!output}
+              onClick={() => loadExample('user')}
+              className="text-sm h-auto py-2"
             >
-              <CopyIcon className="mr-2 h-4 w-4" />
-              复制
+              用户信息类
+            </Button>
+            <Button 
+              variant="outline" 
+              onClick={() => loadExample('order')}
+              className="text-sm h-auto py-2"
+            >
+              订单类
+            </Button>
+            <Button 
+              variant="outline" 
+              onClick={() => loadExample('product')}
+              className="text-sm h-auto py-2"
+            >
+              商品类
+            </Button>
+            <Button 
+              variant="outline" 
+              onClick={() => loadExample('employee')}
+              className="text-sm h-auto py-2"
+            >
+              员工类
             </Button>
           </div>
-        </CardHeader>
-        <CardContent>
-          {output ? (
-            <div className="relative">
-              <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded-md overflow-auto font-mono">
-                {output}
-              </pre>
-              
-              {copied && (
-                <div className="absolute top-4 right-4 bg-green-500 text-white text-xs px-2 py-1 rounded">
-                  已复制!
-                </div>
-              )}
-            </div>
-          ) : (
-            <div className="text-center py-12 text-muted-foreground">
-              <p>输入Java类代码并点击转换按钮</p>
-              <p className="mt-2 text-sm">支持基本数据类型的转换和Mock数据生成</p>
-            </div>
-          )}
+          <p className="text-xs text-gray-500 mt-3">
+            点击上方按钮加载对应的Java类示例，然后点击"转换为JSON"按钮查看结果
+          </p>
         </CardContent>
       </Card>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>Java类转JSON</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="java-input">Java类代码</Label>
+                <Textarea
+                  id="java-input"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="输入Java类代码或选择上方示例"
+                  rows={12}
+                  className="font-mono mt-1"
+                />
+              </div>
+              
+              <div className="flex gap-2">
+                <Button onClick={convertToJson}>转换为JSON</Button>
+                <Button variant="secondary" onClick={clearAll}>
+                  清空
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader>
+            <div className="flex justify-between items-center">
+              <CardTitle>JSON结果</CardTitle>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={copyToClipboard}
+                disabled={!output}
+              >
+                <CopyIcon className="mr-2 h-4 w-4" />
+                复制
+              </Button>
+            </div>
+          </CardHeader>
+          <CardContent>
+            {output ? (
+              <div className="relative">
+                <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded-md overflow-auto font-mono text-sm">
+                  {output}
+                </pre>
+                
+                {copied && (
+                  <div className="absolute top-4 right-4 bg-green-500 text-white text-xs px-2 py-1 rounded">
+                    已复制!
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="text-center py-12 text-muted-foreground">
+                <p>输入Java类代码并点击转换按钮</p>
+                <p className="mt-2 text-sm">支持基本数据类型的转换和Mock数据生成</p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 };
