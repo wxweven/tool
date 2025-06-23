@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { 
-  ClockIcon, 
-  CodeIcon, 
-  LinkIcon, 
+import {
+  ClockIcon,
+  CodeIcon,
+  LinkIcon,
   FileTextIcon,
   TerminalIcon,
   CpuIcon,
@@ -14,7 +14,8 @@ import {
   WrenchIcon,
   HeartIcon,
   FileCodeIcon,
-  ChevronUpIcon
+  ChevronUpIcon,
+  BracesIcon
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -39,6 +40,13 @@ const devTools = [
     description: "将Java类转换为JSON格式并生成Mock数据",
     icon: <CodeIcon className="h-5 w-5" />,
     color: "bg-red-500"
+  },
+  {
+    id: "java-tostring",
+    title: "toString转JSON",
+    description: "将Java toString输出转换为JSON格式",
+    icon: <BracesIcon className="h-5 w-5" />,
+    color: "bg-emerald-500"
   },
   {
     id: "url",
@@ -174,16 +182,16 @@ const Index = () => {
         </h1>
       </div>
 
-      <ToolCategory 
-        title="开发者工具" 
-        icon={<WrenchIcon className="h-4 w-4" />} 
-        tools={devTools} 
+      <ToolCategory
+        title="开发者工具"
+        icon={<WrenchIcon className="h-4 w-4" />}
+        tools={devTools}
       />
-      
-      <ToolCategory 
-        title="生活工具" 
-        icon={<HeartIcon className="h-4 w-4" />} 
-        tools={lifeTools} 
+
+      <ToolCategory
+        title="生活工具"
+        icon={<HeartIcon className="h-4 w-4" />}
+        tools={lifeTools}
       />
 
       <div className="mt-6 text-center">

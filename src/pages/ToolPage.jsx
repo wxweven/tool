@@ -8,6 +8,7 @@ import RegexTester from "../tools/RegexTester";
 import LotteryTool from "../tools/LotteryTool";
 import MortgageCalculator from "../tools/MortgageCalculator";
 import CodeFormatter from "../tools/CodeFormatter";
+import JavaToStringFormatter from "../tools/JavaToStringFormatter";
 
 const ToolPage = ({ toolId }) => {
   const renderTool = () => {
@@ -32,6 +33,8 @@ const ToolPage = ({ toolId }) => {
         return <MortgageCalculator />;
       case "code-formatter":
         return <CodeFormatter />;
+      case "java-tostring":
+        return <JavaToStringFormatter />;
       default:
         return (
           <div className="text-center py-12">

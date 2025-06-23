@@ -1,8 +1,8 @@
-import { 
-  HomeIcon, 
-  ClockIcon, 
-  CodeIcon, 
-  LinkIcon, 
+import {
+  HomeIcon,
+  ClockIcon,
+  CodeIcon,
+  LinkIcon,
   FileTextIcon,
   TerminalIcon,
   CpuIcon,
@@ -10,7 +10,8 @@ import {
   CalculatorIcon,
   WrenchIcon,
   HeartIcon,
-  FileCodeIcon
+  FileCodeIcon,
+  BracesIcon
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
@@ -42,6 +43,12 @@ export const navItems = [
     to: "/java-json",
     icon: <CodeIcon className="h-4 w-4" />,
     page: <ToolPage toolId="java-json" />,
+  },
+  {
+    title: "toString转JSON",
+    to: "/java-tostring",
+    icon: <BracesIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="java-tostring" />,
   },
   {
     title: "URL编解码",
@@ -107,6 +114,11 @@ export const categoryNavItems = [
         title: "Java转JSON",
         to: "/java-json",
         icon: <CodeIcon className="h-4 w-4" />,
+      },
+      {
+        title: "toString转JSON",
+        to: "/java-tostring",
+        icon: <BracesIcon className="h-4 w-4" />,
       },
       {
         title: "URL编解码",
