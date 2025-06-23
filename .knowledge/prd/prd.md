@@ -87,7 +87,15 @@
 - 如果输入的是 json，那么现将 json 格式化，然后进行 diff；
 好的，优化下文本 diff 工具：
 - 左右两个文本下方分别添加两个按钮："JSON 格式化"，让用户手动进行 JSON 格式化，然后再做 diff
+帮我的项目添加 vercel 的 Web Analytics，官网的文档如下：
+```js
+// Add the React component
+// Import and use the <Analytics/> React component into your app's layout.
+import { Analytics } from "@vercel/analytics/next"
+```
 # 待修订功能
+
+
 
 
 
