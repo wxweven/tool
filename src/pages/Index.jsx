@@ -15,7 +15,8 @@ import {
   HeartIcon,
   FileCodeIcon,
   ChevronUpIcon,
-  BracesIcon
+  BracesIcon,
+  FileDiffIcon
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -61,6 +62,13 @@ const devTools = [
     description: "支持多种编程语言的代码格式化",
     icon: <FileCodeIcon className="h-5 w-5" />,
     color: "bg-teal-500"
+  },
+  {
+    id: "text-diff",
+    title: "文本Diff",
+    description: "文本对比工具，支持JSON格式化",
+    icon: <FileDiffIcon className="h-5 w-5" />,
+    color: "bg-slate-500"
   },
   {
     id: "plaintext",
