@@ -13,6 +13,7 @@ import {
   FileCodeIcon,
   BracesIcon,
   FileDiffIcon,
+  FilterIcon,
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
@@ -68,6 +69,12 @@ export const navItems = [
     to: "/text-diff",
     icon: <FileDiffIcon className="h-4 w-4" />,
     page: <ToolPage toolId="text-diff" />,
+  },
+  {
+    title: "文本去重",
+    to: "/remove-duplicates",
+    icon: <FilterIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="remove-duplicates" />,
   },
   {
     title: "纯文本提取",
@@ -141,6 +148,11 @@ export const categoryNavItems = [
         title: "文本Diff",
         to: "/text-diff",
         icon: <FileDiffIcon className="h-4 w-4" />,
+      },
+      {
+        title: "文本去重",
+        to: "/remove-duplicates",
+        icon: <FilterIcon className="h-4 w-4" />,
       },
       {
         title: "纯文本提取",

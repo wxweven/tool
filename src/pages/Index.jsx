@@ -16,7 +16,8 @@ import {
   FileCodeIcon,
   ChevronUpIcon,
   BracesIcon,
-  FileDiffIcon
+  FileDiffIcon,
+  FilterIcon
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -69,6 +70,13 @@ const devTools = [
     description: "文本对比工具，支持JSON格式化",
     icon: <FileDiffIcon className="h-5 w-5" />,
     color: "bg-slate-500"
+  },
+  {
+    id: "remove-duplicates",
+    title: "文本去重",
+    description: "去除重复行，支持CSV下载",
+    icon: <FilterIcon className="h-5 w-5" />,
+    color: "bg-violet-500"
   },
   {
     id: "plaintext",

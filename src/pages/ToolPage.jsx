@@ -10,6 +10,7 @@ import MortgageCalculator from "../tools/MortgageCalculator";
 import CodeFormatter from "../tools/CodeFormatter";
 import JavaToStringFormatter from "../tools/JavaToStringFormatter";
 import TextDiff from "../tools/TextDiff";
+import RemoveDuplicates from "../tools/RemoveDuplicates";
 
 const ToolPage = ({ toolId }) => {
   const renderTool = () => {
@@ -38,6 +39,8 @@ const ToolPage = ({ toolId }) => {
         return <JavaToStringFormatter />;
       case "text-diff":
         return <TextDiff />;
+      case "remove-duplicates":
+        return <RemoveDuplicates />;
       default:
         return (
           <div className="text-center py-12">
