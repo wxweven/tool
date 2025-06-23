@@ -15,7 +15,7 @@ const DownloadFiles = () => {
   const [downloadResults, setDownloadResults] = useState([]);
   const [isScrollToTopVisible, setIsScrollToTopVisible] = useState(false);
   const [isConcurrentMode, setIsConcurrentMode] = useState(false);
-  const [overallProgress, setOverallProgress] = useState(0);
+  const [completedCount, setCompletedCount] = useState(0);
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -38,7 +38,7 @@ const DownloadFiles = () => {
   };
 
   const parseUrls = () => {
-    if (!input.trim()) return;
+    if (!input.trim()) return [];
 
     const lines = input.split('\n').map(line => line.trim()).filter(line => line.length > 0);
     
@@ -53,9 +53,7 @@ const DownloadFiles = () => {
       }
     });
 
-    setUrls(uniqueUrls);
-    // 检查是否需要并发模式
-    setIsConcurrentMode(uniqueUrls.length > 50);
+    return uniqueUrls;
   };
 
   const isValidUrl = (string) => {
@@ -78,15 +76,11 @@ const DownloadFiles = () => {
     }
   };
 
-  const updateOverallProgress = () => {
-    if (urls.length === 0) return;
-    
-    const totalProgress = Object.values(downloadProgress).reduce((sum, progress) => {
-      return sum + (progress.progress || 0);
-    }, 0);
-    
-    const averageProgress = totalProgress / urls.length;
-    setOverallProgress(Math.round(averageProgress));
+  const updateCompletedCount = () => {
+    const completed = downloadResults.filter(result => 
+      result.status === 'success' || result.status === 'error'
+    ).length;
+    setCompletedCount(completed);
   };
 
   const downloadSingleFile = async (url) => {
@@ -110,9 +104,6 @@ const DownloadFiles = () => {
         [url]: { status: 'success', progress: 100 }
       }));
 
-      // 更新总体进度
-      setTimeout(updateOverallProgress, 100);
-
       return {
         url,
         fileName,
@@ -126,9 +117,6 @@ const DownloadFiles = () => {
         [url]: { status: 'error', progress: 0, error: error.message }
       }));
 
-      // 更新总体进度
-      setTimeout(updateOverallProgress, 100);
-
       return {
         url,
         fileName,
@@ -139,15 +127,26 @@ const DownloadFiles = () => {
   };
 
   const downloadFiles = async () => {
-    if (urls.length === 0) {
+    if (!input.trim()) {
       alert('请先输入有效的URL');
       return;
     }
 
+    // 自动解析URL
+    const parsedUrls = parseUrls();
+    if (parsedUrls.length === 0) {
+      alert('没有找到有效的URL，请检查输入格式');
+      return;
+    }
+
+    setUrls(parsedUrls);
     setIsDownloading(true);
     setDownloadProgress({});
     setDownloadResults([]);
-    setOverallProgress(0);
+    setCompletedCount(0);
+    
+    // 检查是否需要并发模式
+    setIsConcurrentMode(parsedUrls.length > 50);
 
     const results = [];
     const downloadedFiles = [];
@@ -157,8 +156,8 @@ const DownloadFiles = () => {
       const batchSize = 10; // 每批10个并发
       const batches = [];
       
-      for (let i = 0; i < urls.length; i += batchSize) {
-        batches.push(urls.slice(i, i + batchSize));
+      for (let i = 0; i < parsedUrls.length; i += batchSize) {
+        batches.push(parsedUrls.slice(i, i + batchSize));
       }
 
       for (let batchIndex = 0; batchIndex < batches.length; batchIndex++) {
@@ -187,20 +186,26 @@ const DownloadFiles = () => {
             });
           }
         });
+
+        // 更新结果和进度
+        setDownloadResults([...results]);
+        updateCompletedCount();
       }
     } else {
       // 顺序下载模式
-      for (let i = 0; i < urls.length; i++) {
-        const result = await downloadSingleFile(urls[i]);
+      for (let i = 0; i < parsedUrls.length; i++) {
+        const result = await downloadSingleFile(parsedUrls[i]);
         results.push(result);
         
         if (result.status === 'success' && result.blob) {
           downloadedFiles.push({ name: result.fileName, blob: result.blob });
         }
+
+        // 每下载完一个文件就更新结果和进度
+        setDownloadResults([...results]);
+        updateCompletedCount();
       }
     }
-
-    setDownloadResults(results);
 
     // 如果有成功下载的文件，创建zip
     if (downloadedFiles.length > 0) {
@@ -244,7 +249,7 @@ const DownloadFiles = () => {
     setDownloadProgress({});
     setDownloadResults([]);
     setIsConcurrentMode(false);
-    setOverallProgress(0);
+    setCompletedCount(0);
   };
 
   const loadExample = () => {
@@ -258,7 +263,7 @@ https://invalid-url.com/file.txt`;
     setDownloadProgress({});
     setDownloadResults([]);
     setIsConcurrentMode(false);
-    setOverallProgress(0);
+    setCompletedCount(0);
   };
 
   const copyToClipboard = () => {
@@ -268,6 +273,8 @@ https://invalid-url.com/file.txt`;
 
   const successCount = downloadResults.filter(r => r.status === 'success').length;
   const errorCount = downloadResults.filter(r => r.status === 'error').length;
+  const progressPercentage = urls.length > 0 ? Math.round((completedCount / urls.length) * 100) : 0;
+  const failedFiles = downloadResults.filter(r => r.status === 'error');
 
   return (
     <>
@@ -291,11 +298,7 @@ https://invalid-url.com/file.txt`;
               </div>
               
               <div className="flex gap-2 flex-wrap">
-                <Button onClick={parseUrls} disabled={isDownloading}>
-                  <Wand2Icon className="mr-2 h-4 w-4" />
-                  解析URL
-                </Button>
-                <Button onClick={downloadFiles} disabled={urls.length === 0 || isDownloading}>
+                <Button onClick={downloadFiles} disabled={isDownloading}>
                   <DownloadIcon className="mr-2 h-4 w-4" />
                   {isDownloading ? '下载中...' : '开始下载'}
                 </Button>
@@ -354,58 +357,42 @@ https://invalid-url.com/file.txt`;
             {isDownloading && (
               <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-md">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-blue-700 dark:text-blue-300">总体进度</span>
-                  <span className="text-sm text-blue-600 font-semibold">{overallProgress}%</span>
+                  <span className="text-sm font-medium text-blue-700 dark:text-blue-300">下载进度</span>
+                  <span className="text-sm text-blue-600 font-semibold">{completedCount} / {urls.length}</span>
                 </div>
-                <Progress value={overallProgress} className="h-2" />
+                <Progress value={progressPercentage} className="h-2" />
                 <p className="text-xs text-blue-600 mt-1">
-                  已处理 {downloadResults.length} / {urls.length} 个文件
+                  进度: {progressPercentage}% ({completedCount} / {urls.length})
                 </p>
               </div>
             )}
 
-            {downloadResults.length > 0 ? (
+            {failedFiles.length > 0 ? (
               <div className="space-y-3">
-                {downloadResults.map((result, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 border rounded-md">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        {result.status === 'success' ? (
-                          <FileIcon className="h-4 w-4 text-green-600" />
-                        ) : (
-                          <AlertCircleIcon className="h-4 w-4 text-red-600" />
-                        )}
-                        <span className="text-sm font-medium truncate">{result.fileName}</span>
-                        <Badge variant={result.status === 'success' ? 'default' : 'destructive'}>
-                          {result.status === 'success' ? '成功' : '失败'}
-                        </Badge>
-                        {downloadProgress[result.url]?.progress !== undefined && (
-                          <span className="text-xs text-gray-500">
-                            {downloadProgress[result.url].progress}%
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-xs text-gray-500 truncate">{result.url}</p>
-                      {result.status === 'success' && (
-                        <p className="text-xs text-gray-400">
-                          大小: {(result.size / 1024).toFixed(1)} KB
-                        </p>
-                      )}
-                      {result.status === 'error' && (
-                        <p className="text-xs text-red-500">{result.error}</p>
-                      )}
+                <div className="flex items-center gap-2 mb-3">
+                  <AlertCircleIcon className="h-4 w-4 text-red-600" />
+                  <span className="text-sm font-medium text-red-700">下载失败的文件</span>
+                </div>
+                {failedFiles.map((result, index) => (
+                  <div key={index} className="p-3 border border-red-200 bg-red-50 dark:bg-red-900/20 rounded-md">
+                    <div className="flex items-center gap-2 mb-1">
+                      <AlertCircleIcon className="h-4 w-4 text-red-600" />
+                      <span className="text-sm font-medium text-red-700">{result.fileName}</span>
                     </div>
-                    {downloadProgress[result.url]?.status === 'downloading' && (
-                      <div className="ml-2">
-                        <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-                      </div>
-                    )}
+                    <p className="text-xs text-red-600 break-all">{result.url}</p>
+                    <p className="text-xs text-red-500 mt-1">{result.error}</p>
                   </div>
                 ))}
               </div>
+            ) : downloadResults.length > 0 ? (
+              <div className="text-center py-8 text-green-600">
+                <FileIcon className="h-12 w-12 mx-auto mb-3 text-green-500" />
+                <p className="font-medium">所有文件下载成功！</p>
+                <p className="text-sm text-green-500 mt-1">文件已打包为zip下载到本地</p>
+              </div>
             ) : (
               <div className="text-center py-12 text-muted-foreground">
-                <p>输入URL并点击解析按钮</p>
+                <p>输入URL并点击开始下载</p>
                 <p className="mt-2 text-sm">支持批量下载文件并打包为zip</p>
                 <p className="mt-1 text-xs">超过50个URL时自动启用并发下载</p>
               </div>
