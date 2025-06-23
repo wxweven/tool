@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CopyIcon, Wand2Icon, DownloadIcon, ChevronUpIcon, ArrowUpDownIcon } from "lucide-react";
+import { CopyIcon, Wand2Icon, DownloadIcon, ChevronUpIcon, ArrowUpDownIcon, ArrowUpIcon, ArrowDownIcon } from "lucide-react";
 
 const RemoveDuplicates = () => {
   const [input, setInput] = useState("");
@@ -12,6 +12,7 @@ const RemoveDuplicates = () => {
   const [isScrollToTopVisible, setIsScrollToTopVisible] = useState(false);
   const [stats, setStats] = useState({ original: 0, unique: 0, removed: 0 });
   const [isSorted, setIsSorted] = useState(false);
+  const [sortDirection, setSortDirection] = useState('none'); // 'none', 'asc', 'desc'
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -56,18 +57,29 @@ const RemoveDuplicates = () => {
     setStats({ original: originalCount, unique: uniqueCount, removed: removedCount });
     setOutput(uniqueLines.join('\n'));
     setIsSorted(false); // 重置排序状态
+    setSortDirection('none'); // 重置排序方向
   };
 
   const toggleSort = () => {
     if (!output) return;
     
     const lines = output.split('\n');
-    const sortedLines = isSorted 
-      ? lines.sort((a, b) => a.localeCompare(b, 'zh-CN')) // 升序排序
-      : lines.sort((a, b) => b.localeCompare(a, 'zh-CN')); // 降序排序
+    let newDirection;
+    let sortedLines;
+    
+    if (sortDirection === 'none' || sortDirection === 'desc') {
+      // 升序排序
+      sortedLines = lines.sort((a, b) => a.localeCompare(b, 'zh-CN'));
+      newDirection = 'asc';
+    } else {
+      // 降序排序
+      sortedLines = lines.sort((a, b) => b.localeCompare(a, 'zh-CN'));
+      newDirection = 'desc';
+    }
     
     setOutput(sortedLines.join('\n'));
-    setIsSorted(!isSorted);
+    setIsSorted(true);
+    setSortDirection(newDirection);
   };
 
   const copyToClipboard = () => {
@@ -102,6 +114,7 @@ const RemoveDuplicates = () => {
     setOutput("");
     setStats({ original: 0, unique: 0, removed: 0 });
     setIsSorted(false);
+    setSortDirection('none');
   };
 
   const loadExample = () => {
@@ -119,9 +132,34 @@ const RemoveDuplicates = () => {
     setOutput("");
     setStats({ original: 0, unique: 0, removed: 0 });
     setIsSorted(false);
+    setSortDirection('none');
   };
 
-  const shouldShowDownload = output.split('\n').length > 5;
+  const shouldShowDownload = output.split('\n').length > 100;
+
+  // 根据排序方向选择图标
+  const getSortIcon = () => {
+    switch (sortDirection) {
+      case 'asc':
+        return <ArrowUpIcon className="mr-2 h-4 w-4" />;
+      case 'desc':
+        return <ArrowDownIcon className="mr-2 h-4 w-4" />;
+      default:
+        return <ArrowUpDownIcon className="mr-2 h-4 w-4" />;
+    }
+  };
+
+  // 根据排序方向选择按钮文字
+  const getSortText = () => {
+    switch (sortDirection) {
+      case 'asc':
+        return '升序';
+      case 'desc':
+        return '降序';
+      default:
+        return '排序';
+    }
+  };
 
   return (
     <>
@@ -171,8 +209,8 @@ const RemoveDuplicates = () => {
                     size="sm"
                     onClick={toggleSort}
                   >
-                    <ArrowUpDownIcon className="mr-2 h-4 w-4" />
-                    {isSorted ? '降序' : '升序'}
+                    {getSortIcon()}
+                    {getSortText()}
                   </Button>
                 )}
                 {shouldShowDownload && (
@@ -232,7 +270,7 @@ const RemoveDuplicates = () => {
                 {shouldShowDownload && (
                   <div className="text-center p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-md">
                     <p className="text-sm text-yellow-700 dark:text-yellow-300">
-                      结果超过500行，建议下载CSV文件
+                      结果超过100行，建议下载CSV文件
                     </p>
                   </div>
                 )}
