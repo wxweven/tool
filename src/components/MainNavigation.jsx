@@ -16,16 +16,16 @@ import { HomeIcon } from "lucide-react";
 const MainNavigation = () => {
   return (
     <div className="sticky top-0 z-50 w-full border-b bg-gradient-to-r from-blue-600/90 to-indigo-600/90 backdrop-blur supports-[backdrop-filter]:bg-background/60 text-white">
-      <div className="container flex h-16 items-center">
+      <div className="container flex h-12 items-center">
         <NavigationMenu>
           <NavigationMenuList className="gap-2">
             <NavigationMenuItem>
               <Link to="/">
                 <NavigationMenuLink className={cn(
                   navigationMenuTriggerStyle(),
-                  "bg-white/20 hover:bg-white/30 text-white text-base font-medium"
+                  "bg-white/20 hover:bg-white/30 text-white text-sm font-medium"
                 )}>
-                  <HomeIcon className="h-5 w-5 mr-2" />
+                  <HomeIcon className="h-4 w-4 mr-2" />
                   首页
                 </NavigationMenuLink>
               </Link>
@@ -33,8 +33,8 @@ const MainNavigation = () => {
             
             {categoryNavItems.map((category, index) => (
               <NavigationMenuItem key={index}>
-                <NavigationMenuTrigger className="bg-white/20 hover:bg-white/30 text-white text-base font-medium">
-                  {category.icon && <span className="mr-2">{React.cloneElement(category.icon, { className: "h-5 w-5" })}</span>}
+                <NavigationMenuTrigger className="bg-white/20 hover:bg-white/30 text-white text-sm font-medium">
+                  {category.icon && <span className="mr-2">{React.cloneElement(category.icon, { className: "h-4 w-4" })}</span>}
                   {category.title}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
