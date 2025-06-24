@@ -22,10 +22,10 @@ const TimestampConverter = () => {
 
   const convertTimestampToDate = () => {
     if (!timestamp) return;
-    
+
     const ts = parseInt(timestamp);
     if (isNaN(ts)) return;
-    
+
     const date = new Date(isMilliseconds ? ts : ts * 1000);
     setDateTime(date.toLocaleString("zh-CN", {
       year: 'numeric',
@@ -40,10 +40,10 @@ const TimestampConverter = () => {
 
   const convertDateToTimestamp = () => {
     if (!dateTime) return;
-    
+
     const date = new Date(dateTime);
     if (isNaN(date.getTime())) return;
-    
+
     const ts = isMilliseconds ? date.getTime() : Math.floor(date.getTime() / 1000);
     setTimestamp(ts.toString());
   };
@@ -69,10 +69,7 @@ const TimestampConverter = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <Card>
-        <CardHeader>
-          <CardTitle>时间戳转换</CardTitle>
-        </CardHeader>
-        <CardContent>
+        <CardContent className="pt-6">
           <div className="space-y-4">
             <div>
               <Label htmlFor="timestamp">时间戳</Label>
@@ -86,7 +83,7 @@ const TimestampConverter = () => {
                 <Button onClick={convertTimestampToDate}>转换</Button>
               </div>
             </div>
-            
+
             <div>
               <Label htmlFor="datetime">日期时间</Label>
               <div className="flex gap-2 mt-1">
@@ -99,21 +96,21 @@ const TimestampConverter = () => {
                 <Button onClick={convertDateToTimestamp}>转换</Button>
               </div>
             </div>
-            
+
             <div className="flex items-center space-x-2">
-              <Switch 
-                id="time-unit" 
-                checked={isMilliseconds} 
-                onCheckedChange={setIsMilliseconds} 
+              <Switch
+                id="time-unit"
+                checked={isMilliseconds}
+                onCheckedChange={setIsMilliseconds}
               />
               <Label htmlFor="time-unit">
                 {isMilliseconds ? "毫秒 (13位)" : "秒 (10位)"}
               </Label>
             </div>
-            
+
             <div className="flex justify-between items-center pt-4">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 onClick={() => {
                   setTimestamp(currentTime.toString());
                   convertTimestampToDate();
@@ -121,9 +118,9 @@ const TimestampConverter = () => {
               >
                 当前时间
               </Button>
-              
-              <Button 
-                variant="secondary" 
+
+              <Button
+                variant="secondary"
                 onClick={() => {
                   setTimestamp("");
                   setDateTime("");
@@ -135,11 +132,8 @@ const TimestampConverter = () => {
           </div>
         </CardContent>
       </Card>
-      
+
       <Card>
-        <CardHeader>
-          <CardTitle>转换结果</CardTitle>
-        </CardHeader>
         <CardContent>
           {dateTime ? (
             <div className="space-y-4">
@@ -147,8 +141,8 @@ const TimestampConverter = () => {
                 <h3 className="font-medium mb-2">日期时间格式:</h3>
                 <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-md flex justify-between items-center">
                   <span>{dateTime}</span>
-                  <Button 
-                    size="icon" 
+                  <Button
+                    size="icon"
                     variant="ghost"
                     onClick={() => copyToClipboard(dateTime)}
                   >
@@ -156,13 +150,13 @@ const TimestampConverter = () => {
                   </Button>
                 </div>
               </div>
-              
+
               <div>
                 <h3 className="font-medium mb-2">时间戳格式:</h3>
                 <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-md flex justify-between items-center">
                   <span>{timestamp}</span>
-                  <Button 
-                    size="icon" 
+                  <Button
+                    size="icon"
                     variant="ghost"
                     onClick={() => copyToClipboard(timestamp)}
                   >
@@ -170,7 +164,7 @@ const TimestampConverter = () => {
                   </Button>
                 </div>
               </div>
-              
+
               {copied && (
                 <div className="text-green-500 text-sm mt-2">
                   已复制到剪贴板!

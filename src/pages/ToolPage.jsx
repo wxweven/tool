@@ -13,8 +13,24 @@ import TextDiff from "../tools/TextDiff";
 import RemoveDuplicates from "../tools/RemoveDuplicates";
 import DownloadFiles from "../tools/DownloadFiles";
 import SubstractLines from "../tools/SubstractLines";
+import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
+import { StarIcon as StarIconOutline } from "@heroicons/react/24/outline";
+import { useFavorites } from "../context/FavoritesContext";
+import { navItems } from "../nav-items.jsx";
 
 const ToolPage = ({ toolId }) => {
+  const { addFavorite, removeFavorite, isFavorite } = useFavorites();
+  const tool = navItems.find(item => item.to === `/${toolId}`);
+  const title = tool ? tool.title : "工具";
+
+  const handleFavoriteClick = () => {
+    if (isFavorite(toolId)) {
+      removeFavorite(toolId);
+    } else {
+      addFavorite(toolId);
+    }
+  };
+
   const renderTool = () => {
     switch (toolId) {
       case "timestamp":
@@ -59,6 +75,20 @@ const ToolPage = ({ toolId }) => {
 
   return (
     <div className="container mx-auto px-4 py-6">
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">{title}</h1>
+        <button
+          onClick={handleFavoriteClick}
+          className="p-2 rounded-full hover:bg-gray-200 transition-colors"
+          aria-label={isFavorite(toolId) ? "取消收藏" : "收藏"}
+        >
+          {isFavorite(toolId) ? (
+            <StarIconSolid className="h-6 w-6 text-yellow-400" />
+          ) : (
+            <StarIconOutline className="h-6 w-6 text-gray-400" />
+          )}
+        </button>
+      </div>
       {renderTool()}
     </div>
   );

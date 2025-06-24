@@ -20,9 +20,11 @@ import {
   FilterIcon,
   DownloadIcon,
   MinusIcon,
-  TextIcon
+  TextIcon,
+  StarIcon
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { useFavorites } from "../context/FavoritesContext";
 
 const devTools = [
   {
@@ -210,6 +212,13 @@ const ScrollToTop = () => {
 };
 
 const Index = () => {
+  const { favorites } = useFavorites();
+
+  const favoriteTools = useMemo(() => {
+    const allTools = [...devTools, ...textTools, ...lifeTools];
+    return allTools.filter(tool => favorites.includes(tool.id));
+  }, [favorites]);
+
   return (
     <div className="container mx-auto px-4 py-4">
       <div className="text-center mb-6">
@@ -217,6 +226,14 @@ const Index = () => {
           开发者工具箱
         </h1>
       </div>
+
+      {favoriteTools.length > 0 && (
+        <ToolCategory
+          title="我的收藏"
+          icon={<StarIcon className="h-4 w-4" />}
+          tools={favoriteTools}
+        />
+      )}
 
       <ToolCategory
         title="开发者工具"

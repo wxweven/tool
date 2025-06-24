@@ -60,7 +60,7 @@ const CodeFormatter = () => {
 
     try {
       let formatted = "";
-      
+
       switch (lang) {
         case "javascript":
         case "typescript":
@@ -87,7 +87,7 @@ const CodeFormatter = () => {
         default:
           formatted = code;
       }
-      
+
       setFormattedCode(formatted);
     } catch (error) {
       setFormattedCode("格式化失败，请检查代码语法");
@@ -423,73 +423,81 @@ const CodeFormatter = () => {
               <TabsTrigger value="formatter">代码格式化</TabsTrigger>
               <TabsTrigger value="samples">示例代码</TabsTrigger>
             </TabsList>
-            
+
             <TabsContent value="formatter" className="space-y-6 py-4">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <Label>输入代码</Label>
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm" onClick={loadSample}>
-                        加载示例
-                      </Button>
-                      <Button variant="outline" size="sm" onClick={handleClear}>
-                        <RotateCcw className="h-4 w-4" />
-                      </Button>
+                <Card>
+                  <CardContent className="pt-6">
+                    <div className="space-y-4">
+                      <div className="flex items-center space-x-4">
+                        <Label>输入代码</Label>
+                        <div className="flex gap-2">
+                          <Button variant="outline" size="sm" onClick={loadSample}>
+                            加载示例
+                          </Button>
+                          <Button variant="outline" size="sm" onClick={handleClear}>
+                            <RotateCcw className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </div>
+                      <Textarea
+                        placeholder="在此输入需要格式化的代码..."
+                        value={inputCode}
+                        onChange={(e) => setInputCode(e.target.value)}
+                        className="min-h-[400px] font-mono text-sm"
+                      />
                     </div>
-                  </div>
-                  <Textarea
-                    placeholder="在此输入需要格式化的代码..."
-                    value={inputCode}
-                    onChange={(e) => setInputCode(e.target.value)}
-                    className="min-h-[400px] font-mono text-sm"
-                  />
-                </div>
-                
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <Label>格式化结果</Label>
-                    <div className="flex gap-2">
-                      <Select value={language} onValueChange={handleLanguageChange}>
-                        <SelectTrigger className="w-32">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {languageOptions.map((option) => (
-                            <SelectItem key={option.value} value={option.value}>
-                              <span className="flex items-center gap-2">
-                                <span>{option.icon}</span>
-                                <span>{option.label}</span>
-                              </span>
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <Button onClick={handleFormat} size="sm">
-                        格式化
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        onClick={handleCopy}
-                        disabled={!formattedCode}
-                      >
-                        <Copy className="h-4 w-4" />
-                      </Button>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardContent className="pt-6">
+                    <div className="space-y-4">
+                      <div className="flex items-center space-x-4">
+                        <Label>格式化结果</Label>
+                        <div className="flex gap-2">
+                          <Select value={language} onValueChange={handleLanguageChange}>
+                            <SelectTrigger className="w-32">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {languageOptions.map((option) => (
+                                <SelectItem key={option.value} value={option.value}>
+                                  <span className="flex items-center gap-2">
+                                    <span>{option.icon}</span>
+                                    <span>{option.label}</span>
+                                  </span>
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <Button onClick={handleFormat} size="sm">
+                            格式化
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={handleCopy}
+                            disabled={!formattedCode}
+                          >
+                            <Copy className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </div>
+                      <div className="relative">
+                        <Textarea
+                          value={formattedCode}
+                          readOnly
+                          className="min-h-[400px] font-mono text-sm bg-muted"
+                          placeholder="格式化后的代码将显示在这里..."
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="relative">
-                    <Textarea
-                      value={formattedCode}
-                      readOnly
-                      className="min-h-[400px] font-mono text-sm bg-muted"
-                      placeholder="格式化后的代码将显示在这里..."
-                    />
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               </div>
             </TabsContent>
-            
+
             <TabsContent value="samples" className="py-4">
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
@@ -511,7 +519,7 @@ const CodeFormatter = () => {
                   </Select>
                   <Button onClick={loadSample}>加载示例</Button>
                 </div>
-                
+
                 <div className="bg-muted p-4 rounded-lg">
                   <Label className="text-sm font-medium mb-2 block">示例代码：</Label>
                   <pre className="text-sm font-mono whitespace-pre-wrap">
@@ -527,4 +535,4 @@ const CodeFormatter = () => {
   );
 };
 
-export default CodeFormatter; 
+export default CodeFormatter;

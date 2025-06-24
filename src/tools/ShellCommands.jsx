@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { CopyIcon, SearchIcon } from "lucide-react";
 
 const shellCommands = [
@@ -89,7 +89,7 @@ const ShellCommands = () => {
 
   const filteredCommands = shellCommands.map(category => ({
     ...category,
-    commands: category.commands.filter(cmd => 
+    commands: category.commands.filter(cmd =>
       cmd.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       cmd.description.toLowerCase().includes(searchTerm.toLowerCase())
     )

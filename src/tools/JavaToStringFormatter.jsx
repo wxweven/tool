@@ -161,10 +161,7 @@ const JavaToStringFormatter = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <Card>
-        <CardHeader>
-          <CardTitle>Java toString 转 JSON</CardTitle>
-        </CardHeader>
-        <CardContent>
+        <CardContent className="pt-6">
           <div className="space-y-4">
             <div>
               <Label htmlFor="tostring-input">输入Java toString输出</Label>

@@ -16,10 +16,12 @@ import {
   FilterIcon,
   DownloadIcon,
   MinusIcon,
-  TextIcon
+  TextIcon,
+  StarIcon
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
+import FavoritesPage from "./pages/FavoritesPage.jsx";
 
 /**
 * Central place for defining the navigation items. Used for navigation components and routing.
@@ -30,6 +32,12 @@ export const navItems = [
     to: "/",
     icon: <HomeIcon className="h-4 w-4" />,
     page: <Index />,
+  },
+  {
+    title: "我的收藏",
+    to: "/favorites",
+    icon: <StarIcon className="h-4 w-4" />,
+    page: <FavoritesPage />,
   },
   {
     title: "JSON格式化",
@@ -125,6 +133,11 @@ export const navItems = [
 
 // 分类导航菜单
 export const categoryNavItems = [
+  {
+    title: "我的收藏",
+    icon: <StarIcon className="h-4 w-4" />,
+    to: "/favorites"
+  },
   {
     title: "开发者工具",
     icon: <WrenchIcon className="h-4 w-4" />,

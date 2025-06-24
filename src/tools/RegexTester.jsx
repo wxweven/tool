@@ -60,10 +60,7 @@ const RegexTester = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <Card>
-        <CardHeader>
-          <CardTitle>正则表达式测试</CardTitle>
-        </CardHeader>
-        <CardContent>
+        <CardContent className="pt-6">
           <div className="space-y-4">
             <div>
               <Label htmlFor="pattern">正则表达式</Label>

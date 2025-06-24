@@ -33,7 +33,7 @@ const JavaToJson = () => {
       // 简单的Java类解析逻辑
       const lines = input.split("\n");
       const fields = {};
-      
+
       lines.forEach(line => {
         // 匹配private/public字段定义
         const fieldMatch = line.match(/\s*(private|public)\s+(\w+)\s+(\w+)\s*;/);
@@ -86,10 +86,7 @@ const JavaToJson = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <Card>
-        <CardHeader>
-          <CardTitle>Java类转JSON</CardTitle>
-        </CardHeader>
-        <CardContent>
+        <CardContent className="pt-6">
           <div className="space-y-4">
             <div>
               <Label htmlFor="java-input">Java类代码</Label>
@@ -102,7 +99,7 @@ const JavaToJson = () => {
                 className="font-mono mt-1"
               />
             </div>
-            
+
             <div className="flex gap-2 flex-wrap">
               <Button onClick={convertToJson}>
                 <Wand2Icon className="mr-2 h-4 w-4" />
@@ -118,13 +115,13 @@ const JavaToJson = () => {
           </div>
         </CardContent>
       </Card>
-      
+
       <Card>
-        <CardHeader>
+        <CardContent>
           <div className="flex justify-between items-center">
             <CardTitle>JSON结果</CardTitle>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               size="sm"
               onClick={copyToClipboard}
               disabled={!output}
@@ -133,14 +130,12 @@ const JavaToJson = () => {
               复制
             </Button>
           </div>
-        </CardHeader>
-        <CardContent>
           {output ? (
             <div className="relative">
               <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded-md overflow-auto font-mono text-sm">
                 {output}
               </pre>
-              
+
               {copied && (
                 <div className="absolute top-4 right-4 bg-green-500 text-white text-xs px-2 py-1 rounded">
                   已复制!

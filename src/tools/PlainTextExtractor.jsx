@@ -12,14 +12,14 @@ const PlainTextExtractor = () => {
 
   const extractPlainText = () => {
     if (!input) return;
-    
+
     // 创建一个临时的div元素来解析HTML
     const temp = document.createElement("div");
     temp.innerHTML = input;
-    
+
     // 获取纯文本内容
     const plainText = temp.textContent || temp.innerText || "";
-    
+
     // 清理空白字符
     setOutput(plainText.trim());
   };
@@ -39,10 +39,7 @@ const PlainTextExtractor = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <Card>
-        <CardHeader>
-          <CardTitle>纯文本提取</CardTitle>
-        </CardHeader>
-        <CardContent>
+        <CardContent className="pt-6">
           <div className="space-y-4">
             <div>
               <Label htmlFor="rich-text">富文本内容</Label>
@@ -55,7 +52,7 @@ const PlainTextExtractor = () => {
                 className="mt-1"
               />
             </div>
-            
+
             <div className="flex gap-2">
               <Button onClick={extractPlainText}>提取纯文本</Button>
               <Button variant="secondary" onClick={clearAll}>
@@ -65,13 +62,13 @@ const PlainTextExtractor = () => {
           </div>
         </CardContent>
       </Card>
-      
+
       <Card>
         <CardHeader>
           <div className="flex justify-between items-center">
             <CardTitle>提取结果</CardTitle>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               size="sm"
               onClick={copyToClipboard}
               disabled={!output}
@@ -87,7 +84,7 @@ const PlainTextExtractor = () => {
               <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded-md overflow-auto whitespace-pre-wrap">
                 {output}
               </pre>
-              
+
               {copied && (
                 <div className="absolute top-4 right-4 bg-green-500 text-white text-xs px-2 py-1 rounded">
                   已复制!

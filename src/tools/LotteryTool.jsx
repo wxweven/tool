@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { PlusIcon, TrashIcon, PlayIcon, SquareIcon, ArrowUpIcon, GiftIcon, RefreshCwIcon, ChevronUpIcon, ChevronDownIcon } from "lucide-react";
 
@@ -35,7 +35,7 @@ const LotteryTool = () => {
       behavior: 'smooth'
     });
   };
-  
+
   const parseParticipants = () => {
     if (!participants.trim()) return [];
     return participants.split('\n').map(name => name.trim()).filter(name => name.length > 0);
@@ -76,7 +76,7 @@ const LotteryTool = () => {
 
     const allWinners = rounds.flatMap(r => r.winners);
     const availableParticipants = participantList.filter(p => !allWinners.includes(p));
-    
+
     if (availableParticipants.length < round.count) {
       alert(`剩余参与者不足，需要${round.count}人，但只有${availableParticipants.length}人`);
       return;
@@ -92,16 +92,16 @@ const LotteryTool = () => {
       clearInterval(animationRef.current);
       animationRef.current = null;
     }
-    
+
     const round = rounds.find(r => r.id === roundId);
     if (!round) return;
-    
+
     const allWinners = rounds.flatMap(r => r.winners);
     const availableParticipants = parseParticipants().filter(p => !allWinners.includes(p));
-    
+
     finishLottery(availableParticipants, round.count, roundId);
   };
-  
+
   const startAnimation = (participants, winnerCount, roundId) => {
     let counter = 0;
     const interval = 50;
@@ -122,11 +122,11 @@ const LotteryTool = () => {
   const finishLottery = (participants, winnerCount, roundId) => {
     const round = rounds.find(r => r.id === roundId);
     if (!round) return;
-    
+
     const actualWinnerCount = round.count;
     const shuffled = [...participants].sort(() => Math.random() - 0.5);
     const winners = shuffled.slice(0, actualWinnerCount);
-    
+
     setRounds(rounds.map(r => r.id === roundId ? { ...r, winners, isRunning: false } : r));
     setDisplayNames(winners);
     setIsDrawing(false);
@@ -142,12 +142,12 @@ const LotteryTool = () => {
 
   return (
     <div className="space-y-6">
-      <Card className="border-2 border-blue-200 bg-blue-50/50 dark:bg-blue-900/20">
-        <CardHeader className="pb-3">
-          <CardTitle className="text-xl text-blue-700 dark:text-blue-300 flex items-center gap-2">
-            <GiftIcon className="h-5 w-5" />
-            参与者名单
-          </CardTitle>
+      <Card>
+        <CardHeader>
+          <CardTitle>参与者名单</CardTitle>
+          <CardDescription>
+            在此处输入所有参与抽奖的人员名单，每行一个。
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div>
@@ -176,9 +176,9 @@ const LotteryTool = () => {
               <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200">{round.name}抽奖</h3>
               <div className="flex items-center">
                 {rounds.length > 1 && (
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
+                  <Button
+                    variant="ghost"
+                    size="icon"
                     className="text-red-500 hover:bg-red-100 dark:hover:bg-red-900/50"
                     onClick={() => removeRound(round.id)}
                     disabled={round.isRunning}
@@ -232,8 +232,8 @@ const LotteryTool = () => {
                         <>
                           <GiftIcon className="mx-auto h-12 w-12 text-blue-500 mb-4" />
                           <p className="text-muted-foreground mb-6">准备好开始{round.name}抽奖了吗？</p>
-                          <Button 
-                            onClick={() => startLottery(round.id)} 
+                          <Button
+                            onClick={() => startLottery(round.id)}
                             size="lg"
                             disabled={!participants.trim() || !round.count || isDrawing}
                             className="bg-blue-600 hover:bg-blue-700 text-white"
@@ -252,8 +252,8 @@ const LotteryTool = () => {
                               </div>
                             ))}
                           </div>
-                          <Button 
-                            size="lg" 
+                          <Button
+                            size="lg"
                             variant="destructive"
                             onClick={() => stopLottery(round.id)}
                             className="mt-8"
@@ -284,7 +284,7 @@ const LotteryTool = () => {
             )}
           </div>
         ))}
-        
+
         <div className="flex justify-center mt-8 pt-6 border-t border-dashed">
           <Button onClick={addRound} className="gap-2" variant="outline">
             <PlusIcon className="h-4 w-4" />
@@ -306,4 +306,4 @@ const LotteryTool = () => {
   );
 };
 
-export default LotteryTool; 
+export default LotteryTool;
