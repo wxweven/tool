@@ -15,7 +15,8 @@ import {
   FileDiffIcon,
   FilterIcon,
   DownloadIcon,
-  MinusIcon
+  MinusIcon,
+  TextIcon
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
@@ -159,6 +160,27 @@ export const categoryNavItems = [
         icon: <FileCodeIcon className="h-4 w-4" />,
       },
       {
+        title: "批量下载文件",
+        to: "/download-files",
+        icon: <DownloadIcon className="h-4 w-4" />,
+      },
+      {
+        title: "Shell命令",
+        to: "/shell",
+        icon: <TerminalIcon className="h-4 w-4" />,
+      },
+      {
+        title: "正则测试",
+        to: "/regex",
+        icon: <CpuIcon className="h-4 w-4" />,
+      },
+    ]
+  },
+  {
+    title: "文本工具",
+    icon: <TextIcon className="h-4 w-4" />,
+    items: [
+      {
         title: "文本Diff",
         to: "/text-diff",
         icon: <FileDiffIcon className="h-4 w-4" />,
@@ -174,24 +196,9 @@ export const categoryNavItems = [
         icon: <MinusIcon className="h-4 w-4" />,
       },
       {
-        title: "批量下载文件",
-        to: "/download-files",
-        icon: <DownloadIcon className="h-4 w-4" />,
-      },
-      {
         title: "纯文本提取",
         to: "/plaintext",
         icon: <FileTextIcon className="h-4 w-4" />,
-      },
-      {
-        title: "Shell命令",
-        to: "/shell",
-        icon: <TerminalIcon className="h-4 w-4" />,
-      },
-      {
-        title: "正则测试",
-        to: "/regex",
-        icon: <CpuIcon className="h-4 w-4" />,
       },
     ]
   },

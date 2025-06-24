@@ -19,7 +19,8 @@ import {
   FileDiffIcon,
   FilterIcon,
   DownloadIcon,
-  MinusIcon
+  MinusIcon,
+  TextIcon
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -67,6 +68,30 @@ const devTools = [
     color: "bg-teal-500"
   },
   {
+    id: "download-files",
+    title: "批量下载文件",
+    description: "批量下载文件并打包为zip",
+    icon: <DownloadIcon className="h-5 w-5" />,
+    color: "bg-orange-500"
+  },
+  {
+    id: "shell",
+    title: "Shell命令",
+    description: "常用Shell命令速查与示例",
+    icon: <TerminalIcon className="h-5 w-5" />,
+    color: "bg-indigo-500"
+  },
+  {
+    id: "regex",
+    title: "正则测试",
+    description: "在线测试正则表达式",
+    icon: <CpuIcon className="h-5 w-5" />,
+    color: "bg-pink-500"
+  }
+];
+
+const textTools = [
+  {
     id: "text-diff",
     title: "文本Diff",
     description: "文本对比工具，支持JSON格式化",
@@ -88,32 +113,11 @@ const devTools = [
     color: "bg-orange-500"
   },
   {
-    id: "download-files",
-    title: "批量下载文件",
-    description: "批量下载文件并打包为zip",
-    icon: <DownloadIcon className="h-5 w-5" />,
-    color: "bg-orange-500"
-  },
-  {
     id: "plaintext",
     title: "纯文本提取",
     description: "从富文本中提取纯文本内容",
     icon: <FileTextIcon className="h-5 w-5" />,
     color: "bg-amber-500"
-  },
-  {
-    id: "shell",
-    title: "Shell命令",
-    description: "常用Shell命令速查与示例",
-    icon: <TerminalIcon className="h-5 w-5" />,
-    color: "bg-indigo-500"
-  },
-  {
-    id: "regex",
-    title: "正则测试",
-    description: "在线测试正则表达式",
-    icon: <CpuIcon className="h-5 w-5" />,
-    color: "bg-pink-500"
   }
 ];
 
@@ -218,6 +222,12 @@ const Index = () => {
         title="开发者工具"
         icon={<WrenchIcon className="h-4 w-4" />}
         tools={devTools}
+      />
+
+      <ToolCategory
+        title="文本工具"
+        icon={<TextIcon className="h-4 w-4" />}
+        tools={textTools}
       />
 
       <ToolCategory
