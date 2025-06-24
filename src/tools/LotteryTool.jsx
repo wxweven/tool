@@ -145,20 +145,14 @@ const LotteryTool = () => {
       <Card>
         <CardHeader>
           <CardTitle>参与者名单</CardTitle>
-          <CardDescription>
-            在此处输入所有参与抽奖的人员名单，每行一个。
-          </CardDescription>
         </CardHeader>
         <CardContent>
           <div>
-            <Label htmlFor="participants" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              参与者名单（每行一个名字）
-            </Label>
             <Textarea
               id="participants"
               value={participants}
               onChange={(e) => setParticipants(e.target.value)}
-              placeholder="请输入参与者名单，每行一个名字&#10;例如：&#10;张三&#10;李四&#10;王五"
+              placeholder="在此处输入所有参与抽奖的人员名单，每行一个，例如：&#10;张三&#10;李四&#10;王五"
               rows={8}
               className="mt-2 border-2 border-blue-200 focus:border-blue-400 focus:ring-blue-400"
             />
