@@ -36,6 +36,16 @@ export const FavoritesProvider = ({ children }) => {
     setFavorites((prevFavorites) => prevFavorites.filter((id) => id !== toolId));
   };
 
+  const toggleFavorite = (toolId) => {
+    setFavorites((prevFavorites) => {
+      if (prevFavorites.includes(toolId)) {
+        return prevFavorites.filter((id) => id !== toolId);
+      } else {
+        return [...prevFavorites, toolId];
+      }
+    });
+  };
+
   const isFavorite = (toolId) => {
     return favorites.includes(toolId);
   };
@@ -45,6 +55,7 @@ export const FavoritesProvider = ({ children }) => {
     addFavorite,
     removeFavorite,
     isFavorite,
+    toggleFavorite,
   };
 
   return (

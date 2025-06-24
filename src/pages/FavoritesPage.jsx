@@ -4,13 +4,12 @@ import { ArrowRightIcon, StarIcon, SortAscIcon, SortDescIcon } from "lucide-reac
 import React, { useState, useMemo } from 'react';
 import { Link } from "react-router-dom";
 import { useFavorites } from "../context/FavoritesContext";
-import { navItems } from "../nav-items";
-import { devTools, textTools, lifeTools } from "./Index";
+import { devTools, textTools, lifeTools } from "@/tools-data.jsx";
 
 const allTools = [...devTools, ...textTools, ...lifeTools];
 
 const FavoritesPage = () => {
-  const { favorites } = useFavorites();
+  const { favorites, toggleFavorite } = useFavorites();
   const [sortOrder, setSortOrder] = useState('asc'); // 'asc' or 'desc'
 
   const favoriteTools = useMemo(() => {
@@ -58,7 +57,18 @@ const FavoritesPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {sortedFavoriteTools.map((tool) => (
           <Link to={`/${tool.id}`} key={tool.id} className="group">
-            <Card className="h-full transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-1">
+            <Card className="h-full transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-1 relative">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute top-2 right-2 z-10 h-7 w-7"
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleFavorite(tool.id);
+                }}
+              >
+                <StarIcon className={`h-5 w-5 ${favorites.includes(tool.id) ? 'text-yellow-400 fill-yellow-400' : 'text-gray-400'}`} />
+              </Button>
               <CardHeader className="pb-3">
                 <div className={`${tool.color} w-10 h-10 rounded-lg flex items-center justify-center mb-3`}>
                   {tool.icon}
