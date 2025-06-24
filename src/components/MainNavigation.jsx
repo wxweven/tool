@@ -20,15 +20,18 @@ const MainNavigation = () => {
         <NavigationMenu>
           <NavigationMenuList className="gap-2">
             <NavigationMenuItem>
-              <Link to="/">
-                <NavigationMenuLink className={cn(
-                  navigationMenuTriggerStyle(),
-                  "bg-white/20 hover:bg-white/30 text-white text-sm font-medium"
-                )}>
+              <NavigationMenuLink asChild>
+                <Link
+                  to="/"
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "bg-white/20 hover:bg-white/30 text-white text-sm font-medium"
+                  )}
+                >
                   <HomeIcon className="h-4 w-4 mr-2" />
                   首页
-                </NavigationMenuLink>
-              </Link>
+                </Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
 
             {categoryNavItems.map((category, index) => (
@@ -43,37 +46,39 @@ const MainNavigation = () => {
                       <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-white rounded-lg shadow-lg">
                         {category.items.map((item, itemIndex) => (
                           <li key={itemIndex}>
-                            <Link to={item.to}>
-                              <NavigationMenuLink asChild>
-                                <a
-                                  className={cn(
-                                    "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700"
-                                  )}
-                                >
-                                  <div className="flex items-center gap-2">
-                                    <div className="bg-blue-100 p-2 rounded-md">
-                                      {React.cloneElement(item.icon, { className: "h-5 w-5 text-blue-600" })}
-                                    </div>
-                                    <span className="text-base font-medium leading-none">{item.title}</span>
+                            <NavigationMenuLink asChild>
+                              <Link
+                                to={item.to}
+                                className={cn(
+                                  "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700"
+                                )}
+                              >
+                                <div className="flex items-center gap-2">
+                                  <div className="bg-blue-100 p-2 rounded-md">
+                                    {React.cloneElement(item.icon, { className: "h-5 w-5 text-blue-600" })}
                                   </div>
-                                </a>
-                              </NavigationMenuLink>
-                            </Link>
+                                  <span className="text-base font-medium leading-none">{item.title}</span>
+                                </div>
+                              </Link>
+                            </NavigationMenuLink>
                           </li>
                         ))}
                       </ul>
                     </NavigationMenuContent>
                   </>
                 ) : (
-                  <Link to={category.to}>
-                    <NavigationMenuLink className={cn(
-                      navigationMenuTriggerStyle(),
-                      "bg-white/20 hover:bg-white/30 text-white text-sm font-medium"
-                    )}>
+                  <NavigationMenuLink asChild>
+                    <Link
+                      to={category.to}
+                      className={cn(
+                        navigationMenuTriggerStyle(),
+                        "bg-white/20 hover:bg-white/30 text-white text-sm font-medium"
+                      )}
+                    >
                       {category.icon && <span className="mr-2">{React.cloneElement(category.icon, { className: "h-4 w-4" })}</span>}
                       {category.title}
-                    </NavigationMenuLink>
-                  </Link>
+                    </Link>
+                  </NavigationMenuLink>
                 )}
               </NavigationMenuItem>
             ))}
