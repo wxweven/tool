@@ -144,7 +144,7 @@ const LotteryTool = () => {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>参与者名单</CardTitle>
+          <CardTitle className="text-xl font-bold">参与者名单</CardTitle>
         </CardHeader>
         <CardContent>
           <div>
@@ -167,7 +167,7 @@ const LotteryTool = () => {
         {rounds.map((round) => (
           <div key={round.id} className="border rounded-lg p-6 relative bg-white dark:bg-gray-800 shadow-md transition-all duration-300">
             <div className="flex justify-between items-start mb-6">
-              <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200">{round.name}抽奖</h3>
+              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">{round.name}抽奖</h3>
               <div className="flex items-center">
                 {rounds.length > 1 && (
                   <Button
