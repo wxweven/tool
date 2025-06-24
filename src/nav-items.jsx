@@ -17,7 +17,8 @@ import {
   DownloadIcon,
   MinusIcon,
   TextIcon,
-  StarIcon
+  StarIcon,
+  FileSpreadsheetIcon
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
@@ -74,6 +75,12 @@ export const navItems = [
     to: "/code-formatter",
     icon: <FileCodeIcon className="h-4 w-4" />,
     page: <ToolPage toolId="code-formatter" />,
+  },
+  {
+    title: "Excel转表格",
+    to: "/excel2table",
+    icon: <FileSpreadsheetIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="excel2table" />,
   },
   {
     title: "文本Diff",
@@ -193,6 +200,11 @@ export const categoryNavItems = [
     title: "文本工具",
     icon: <TextIcon className="h-4 w-4" />,
     items: [
+      {
+        title: "Excel转表格",
+        to: "/excel2table",
+        icon: <FileSpreadsheetIcon className="h-4 w-4" />,
+      },
       {
         title: "文本Diff",
         to: "/text-diff",

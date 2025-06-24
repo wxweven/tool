@@ -13,6 +13,7 @@ import TextDiff from "../tools/TextDiff";
 import RemoveDuplicates from "../tools/RemoveDuplicates";
 import DownloadFiles from "../tools/DownloadFiles";
 import SubstractLines from "../tools/SubstractLines";
+import ExcelToTable from "../tools/ExcelToTable";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import { StarIcon as StarIconOutline } from "@heroicons/react/24/outline";
 import { useFavorites } from "../context/FavoritesContext";
@@ -63,6 +64,8 @@ const ToolPage = ({ toolId }) => {
         return <DownloadFiles />;
       case "substract-lines":
         return <SubstractLines />;
+      case "excel2table":
+        return <ExcelToTable />;
       default:
         return (
           <div className="text-center py-12">
