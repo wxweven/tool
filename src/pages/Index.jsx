@@ -81,6 +81,13 @@ const devTools = [
     color: "bg-violet-500"
   },
   {
+    id: "substract-lines",
+    title: "文本相减",
+    description: "两个文本按行相减，输出差异结果",
+    icon: <MinusIcon className="h-5 w-5" />,
+    color: "bg-orange-500"
+  },
+  {
     id: "download-files",
     title: "批量下载文件",
     description: "批量下载文件并打包为zip",
@@ -107,13 +114,6 @@ const devTools = [
     description: "在线测试正则表达式",
     icon: <CpuIcon className="h-5 w-5" />,
     color: "bg-pink-500"
-  },
-  {
-    id: "substract-lines",
-    title: "文本相减",
-    description: "两个文本按行相减，输出差异结果",
-    icon: <MinusIcon className="h-5 w-5" />,
-    color: "bg-orange-500"
   }
 ];
 

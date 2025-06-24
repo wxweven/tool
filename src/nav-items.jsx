@@ -79,6 +79,12 @@ export const navItems = [
     page: <ToolPage toolId="remove-duplicates" />,
   },
   {
+    title: "文本相减",
+    to: "/substract-lines",
+    icon: <MinusIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="substract-lines" />,
+  },
+  {
     title: "批量下载文件",
     to: "/download-files",
     icon: <DownloadIcon className="h-4 w-4" />,
@@ -101,12 +107,6 @@ export const navItems = [
     to: "/regex",
     icon: <CpuIcon className="h-4 w-4" />,
     page: <ToolPage toolId="regex" />,
-  },
-  {
-    title: "文本相减",
-    to: "/substract-lines",
-    icon: <MinusIcon className="h-4 w-4" />,
-    page: <ToolPage toolId="substract-lines" />,
   },
   {
     title: "年会抽奖工具",
@@ -169,6 +169,11 @@ export const categoryNavItems = [
         icon: <FilterIcon className="h-4 w-4" />,
       },
       {
+        title: "文本相减",
+        to: "/substract-lines",
+        icon: <MinusIcon className="h-4 w-4" />,
+      },
+      {
         title: "批量下载文件",
         to: "/download-files",
         icon: <DownloadIcon className="h-4 w-4" />,
@@ -187,11 +192,6 @@ export const categoryNavItems = [
         title: "正则测试",
         to: "/regex",
         icon: <CpuIcon className="h-4 w-4" />,
-      },
-      {
-        title: "文本相减",
-        to: "/substract-lines",
-        icon: <MinusIcon className="h-4 w-4" />,
       },
     ]
   },
