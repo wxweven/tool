@@ -12,6 +12,7 @@ import JavaToStringFormatter from "../tools/JavaToStringFormatter";
 import TextDiff from "../tools/TextDiff";
 import RemoveDuplicates from "../tools/RemoveDuplicates";
 import DownloadFiles from "../tools/DownloadFiles";
+import SubstractLines from "../tools/SubstractLines";
 
 const ToolPage = ({ toolId }) => {
   const renderTool = () => {
@@ -44,6 +45,8 @@ const ToolPage = ({ toolId }) => {
         return <RemoveDuplicates />;
       case "download-files":
         return <DownloadFiles />;
+      case "substract-lines":
+        return <SubstractLines />;
       default:
         return (
           <div className="text-center py-12">

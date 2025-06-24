@@ -15,6 +15,7 @@ import {
   FileDiffIcon,
   FilterIcon,
   DownloadIcon,
+  MinusIcon
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
@@ -102,6 +103,12 @@ export const navItems = [
     page: <ToolPage toolId="regex" />,
   },
   {
+    title: "文本相减",
+    to: "/substract-lines",
+    icon: <MinusIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="substract-lines" />,
+  },
+  {
     title: "年会抽奖工具",
     to: "/lottery",
     icon: <GiftIcon className="h-4 w-4" />,
@@ -180,6 +187,11 @@ export const categoryNavItems = [
         title: "正则测试",
         to: "/regex",
         icon: <CpuIcon className="h-4 w-4" />,
+      },
+      {
+        title: "文本相减",
+        to: "/substract-lines",
+        icon: <MinusIcon className="h-4 w-4" />,
       },
     ]
   },
