@@ -55,5 +55,25 @@ INSERT INTO combination_keypoint (id, displayname, lastoperatorid, difficulty, a
 # 已修订功能
 
 # 待修订功能
+- 现在需要分别输入表名和字段名，希望直接输入MySQL 的建表语句，比如下面的示例：
+```sql
+CREATE TABLE `combination_keypoint` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `displayName` varchar(500) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '客户端展示名称',
+  `keypoints` varchar(500) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '包含知识点列表合集，多个用逗号分割',
+  `lastOperatorId` bigint(20) NOT NULL DEFAULT '999' COMMENT '最后操作人id 999-系统',
+  `difficulty` tinyint(4) NOT NULL DEFAULT '0' COMMENT '难度',
+  `ability` text COLLATE utf8mb4_unicode_ci COMMENT '能力',
+  `dbctime` datetime(3) DEFAULT CURRENT_TIMESTAMP(3),
+  `dbutime` datetime(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+  `phaseId` int(11) NOT NULL DEFAULT '0' COMMENT '学段',
+  `courseId` int(11) NOT NULL DEFAULT '0' COMMENT '学科ID',
+  PRIMARY KEY (`id`),
+  KEY `idx_keypoints` (`keypoints`) USING BTREE
+)
+```
+从上面的 SQL 中提取表名和字段名，并忽略 PRIMARY KEY 和 KEY 等部分。
+- 生成的 SQL 结果中，加上行号显示；
+- 支持下载导出生成的 SQL 结果集，命名为"表名_insert.sql"。
 
 

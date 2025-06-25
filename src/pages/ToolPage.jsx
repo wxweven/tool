@@ -14,6 +14,7 @@ import RemoveDuplicates from "../tools/RemoveDuplicates";
 import DownloadFiles from "../tools/DownloadFiles";
 import SubstractLines from "../tools/SubstractLines";
 import BatchGenerator from "../tools/BatchGenerator";
+import ExcelToSql from "../tools/ExcelToSql";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import { StarIcon as StarIconOutline } from "@heroicons/react/24/outline";
 import { useFavorites } from "../context/FavoritesContext";
@@ -66,6 +67,8 @@ const ToolPage = ({ toolId }) => {
         return <SubstractLines />;
       case "batch-generator":
         return <BatchGenerator />;
+      case "excel-to-sql":
+        return <ExcelToSql />;
       default:
         return (
           <div className="text-center py-12">

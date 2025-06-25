@@ -136,6 +136,12 @@ export const navItems = [
     icon: <ZapIcon className="h-4 w-4" />,
     page: <ToolPage toolId="batch-generator" />,
   },
+  {
+    title: "Excel/CSV转SQL",
+    to: "/excel-to-sql",
+    icon: <FileCodeIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="excel-to-sql" />,
+  },
 ];
 
 // 分类导航菜单
@@ -204,6 +210,11 @@ export const categoryNavItems = [
         title: "正则测试",
         to: "/regex",
         icon: <CpuIcon className="h-4 w-4" />,
+      },
+      {
+        title: "Excel/CSV转SQL",
+        to: "/excel-to-sql",
+        icon: <FileCodeIcon className="h-4 w-4" />,
       },
     ]
   },

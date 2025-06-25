@@ -15,6 +15,21 @@ import {
     MinusIcon,
     ZapIcon
 } from "lucide-react";
+import {
+    JavaToStringFormatter,
+    JsonFormatter,
+    CodeFormatter,
+    PlainTextExtractor,
+    TextDiff,
+    RegexTester,
+    UrlEncoder,
+    BatchGenerator,
+    RemoveDuplicates,
+    SubstractLines,
+    ShellCommands,
+    JavaToJson,
+    ExcelToSql,
+} from "./tools";
 
 export const efficiencyTools = [
     {
@@ -89,6 +104,13 @@ export const devTools = [
         description: "在线测试正则表达式",
         icon: <CpuIcon className="h-5 w-5" />,
         color: "bg-pink-500"
+    },
+    {
+        id: "excel-to-sql",
+        title: "Excel/CSV转SQL",
+        description: "将Excel或CSV文件内容转换为SQL插入语句",
+        icon: <FileCodeIcon className="h-5 w-5" />,
+        color: "bg-lime-500"
     }
 ];
 
