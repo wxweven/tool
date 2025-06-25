@@ -13,8 +13,18 @@ import {
     FilterIcon,
     DownloadIcon,
     MinusIcon,
-    FileSpreadsheetIcon
+    ZapIcon
 } from "lucide-react";
+
+export const efficiencyTools = [
+    {
+        id: "batch-generator",
+        title: "批量生成",
+        description: "批量生成随机姓名、数字等多种数据",
+        icon: <ZapIcon className="h-5 w-5" />,
+        color: "bg-yellow-500"
+    }
+];
 
 export const devTools = [
     {
@@ -83,13 +93,6 @@ export const devTools = [
 ];
 
 export const textTools = [
-    {
-        id: "excel2table",
-        title: "Excel转表格",
-        description: "将Excel文件转换为表格显示，支持CSV格式",
-        icon: <FileSpreadsheetIcon className="h-5 w-5" />,
-        color: "bg-green-600"
-    },
     {
         id: "text-diff",
         title: "文本Diff",

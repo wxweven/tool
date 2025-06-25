@@ -4,9 +4,9 @@ import { ArrowRightIcon, StarIcon, SortAscIcon, SortDescIcon } from "lucide-reac
 import React, { useState, useMemo } from 'react';
 import { Link } from "react-router-dom";
 import { useFavorites } from "../context/FavoritesContext";
-import { devTools, textTools, lifeTools } from "@/tools-data.jsx";
+import { devTools, textTools, lifeTools, efficiencyTools } from "@/tools-data.jsx";
 
-const allTools = [...devTools, ...textTools, ...lifeTools];
+const allTools = [...devTools, ...textTools, ...lifeTools, ...efficiencyTools];
 
 const FavoritesPage = () => {
   const { favorites, toggleFavorite } = useFavorites();

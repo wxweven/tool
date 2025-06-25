@@ -18,7 +18,7 @@ import {
   MinusIcon,
   TextIcon,
   StarIcon,
-  FileSpreadsheetIcon
+  ZapIcon
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
@@ -77,12 +77,6 @@ export const navItems = [
     page: <ToolPage toolId="code-formatter" />,
   },
   {
-    title: "Excel转表格",
-    to: "/excel2table",
-    icon: <FileSpreadsheetIcon className="h-4 w-4" />,
-    page: <ToolPage toolId="excel2table" />,
-  },
-  {
     title: "文本Diff",
     to: "/text-diff",
     icon: <FileDiffIcon className="h-4 w-4" />,
@@ -136,6 +130,12 @@ export const navItems = [
     icon: <CalculatorIcon className="h-4 w-4" />,
     page: <ToolPage toolId="mortgage" />,
   },
+  {
+    title: "批量生成",
+    to: "/batch-generator",
+    icon: <ZapIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="batch-generator" />,
+  },
 ];
 
 // 分类导航菜单
@@ -144,6 +144,17 @@ export const categoryNavItems = [
     title: "我的收藏",
     icon: <StarIcon className="h-4 w-4" />,
     to: "/favorites"
+  },
+  {
+    title: "效率工具",
+    icon: <ZapIcon className="h-4 w-4" />,
+    items: [
+      {
+        title: "批量生成",
+        to: "/batch-generator",
+        icon: <ZapIcon className="h-4 w-4" />,
+      },
+    ]
   },
   {
     title: "开发者工具",
@@ -200,11 +211,6 @@ export const categoryNavItems = [
     title: "文本工具",
     icon: <TextIcon className="h-4 w-4" />,
     items: [
-      {
-        title: "Excel转表格",
-        to: "/excel2table",
-        icon: <FileSpreadsheetIcon className="h-4 w-4" />,
-      },
       {
         title: "文本Diff",
         to: "/text-diff",

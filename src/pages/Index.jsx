@@ -21,13 +21,14 @@ import {
   DownloadIcon,
   MinusIcon,
   TextIcon,
-  StarIcon
+  StarIcon,
+  ZapIcon
 } from "lucide-react";
 import { useState, useEffect, useMemo } from "react";
 import { useFavorites } from "@/context/FavoritesContext";
-import { devTools, lifeTools, textTools } from "@/tools-data.jsx";
+import { devTools, lifeTools, textTools, efficiencyTools } from "@/tools-data.jsx";
 
-const allTools = [...devTools, ...textTools, ...lifeTools];
+const allTools = [...devTools, ...textTools, ...lifeTools, ...efficiencyTools];
 
 const ToolCategory = ({ title, icon, tools }) => {
   const { favorites, toggleFavorite } = useFavorites();
@@ -142,6 +143,12 @@ const Index = () => {
         title="文本工具"
         icon={<TextIcon className="h-4 w-4" />}
         tools={textTools}
+      />
+
+      <ToolCategory
+        title="效率工具"
+        icon={<ZapIcon className="h-4 w-4" />}
+        tools={efficiencyTools}
       />
 
       <ToolCategory
