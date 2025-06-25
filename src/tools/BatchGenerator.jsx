@@ -5,7 +5,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
-import { useToast } from '@/components/ui/use-toast';
+import { toast } from "sonner";
 import { CopyIcon, RefreshCwIcon, PlusIcon, MinusIcon, ChevronUpIcon } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -43,13 +43,12 @@ const BatchGenerator = () => {
   const [delimiter, setDelimiter] = useState('\n');
   const [result, setResult] = useState('');
   const [copied, setCopied] = useState(false);
-  const { toast } = useToast();
 
   const handleGenerate = useCallback(() => {
     let generatedData = [];
     let tempSet = new Set();
     const lastNames = ['王', '李', '张', '刘', '陈', '杨', '黄', '赵', '吴', '周', '徐', '孙', '马', '朱', '胡', '郭', '何', '高', '林', '郑', '谢', '罗', '梁', '宋', '唐', '许', '韩', '冯', '邓', '曹', '彭', '曾', '肖', '田', '董', '袁', '潘', '于', '蒋', '蔡', '余', '杜', '叶', '魏', '程', '苏', '吕', '丁', '任', '沈', '姚', '卢', '姜', '崔', '钟', '谭', '陆', '汪', '范', '金', '石', '廖', '贾', '夏', '韦', '付', '方', '白', '邹', '孟', '熊', '秦', '邱', '江', '尹', '薛', '阎', '段', '雷', '侯', '龙', '史', '陶', '黎', '贺', '顾', '毛', '郝', '龚', '邵', '万', '钱', '严', '赖', '覃', '洪', '武', '戴', '莫', '孔', '向', '文', '香', '包', '郭', '丁'];
-    const firstNames = ['伟', '芳', '娜', '敏', '静', '丽', '强', '磊', '军', '勇', '艳', '杰', '刚', '明', '秀英', '华', '平', '红', '亮', '欣', '桂英', '梅', '建华', '桂芳', '玉兰', '立', '建军', '英', '文', '德', '志强', '晓', '海', '永', '金', '义', '福', '荣', '新', '春', '乐', '发', '长', '秀', '芬', '琴', '兰', '梅', '菊', '凤', '霞', '翠', '萍', '珍', '爱', '莲', '珠', '玲', '素', '冬', '燕', '晶', '丹', '阳', '清', '蓉', '钰', '婷', '璐', '嘉', '思', '雨', '梦', '琪', '雅', '涵', '蕊', '悦', '彤', '茜', '蕾', '姗', '娜', '妮', '莎', '娜', '佳', '莉', '菲', '萱', '琳', '怡', '宁', '洁', '丽', '欣', '悦', '畅', '逸', '飞', '扬', '帆', '宇', '昊', '晨', '星', '辰', '阳', '辉', '达', '强', '磊', '军', '勇', '斌', '超', '健', '伟', '博', '文', '涛', '杰', '凯', '浩', '明', '睿', '轩', '子', '天', '宇', '泽', '峻', '辰', '逸', '翔', '鹏', '龙', '虎', '彪', '森', '柏', '峰', '磊', '岩', '林', '枫', '洋', '涛', '海', '江', '河', '川', '山', '石', '玉', '金', '银', '铜', '铁', '锡', '钢', '铝', '锌', '铅', '汞', '钛', '铂', '锰', '钴', '镍', '铬', '钒', '钨', '钼', '硅', '碳', '磷', '硫', '氯', '溴', '碘', '氟', '氧', '氮', '氢', '氦', '氖', '氩', '氪', '氙', '氡'];
+    const firstNames = ['伟', '芳', '娜', '敏', '静', '丽', '强', '磊', '军', '勇', '艳', '杰', '刚', '明', '秀英', '华', '平', '红', '亮', '欣', '桂英', '梅', '建华', '桂芳', '玉兰', '立', '建军', '英', '文', '德', '志强', '晓', '海', '永', '金', '义', '福', '荣', '新', '春', '乐', '发', '长', '秀', '芬', '琴', '兰', '梅', '菊', '凤', '霞', '翠', '萍', '珍', '爱', '莲', '珠', '玲', '素', '冬', '燕', '晶', '丹', '阳', '清', '蓉', '钰', '婷', '璐', '嘉', '思', '雨', '梦', '琪', '雅', '涵', '蕊', '悦', '彤', '茜', '蕾', '姗', '娜', '妮', '莎', '娜', '佳', '莉', '菲', '萱', '琳', '怡', '宁', '洁', '丽', '欣', '悦', '畅', '逸', '飞', '扬', '帆', '宇', '昊', '晨', '星', '辰', '阳', '辉', '达', '强', '磊', '军', '勇', '斌', '超', '健', '伟', '博', '文', '涛', '杰', '凯', '浩', '明', '睿', '轩', '子', '天', '宇', '泽', '峻', '辰', '逸', '翔', '鹏', '龙', '虎', '彪', '森', '柏', '峰', '磊', '岩', '林', '枫', '洋', '涛', '海', '江', '河', '川', '山', '石', '玉', '金', '银', '铜', '铁', '锡', '钢', '铝', '锌', '铅', '汞', '钛', '铂', '锰', '钴', '铬', '钒', '钨', '钼', '硅', '碳', '磷', '硫', '氯', '溴', '碘', '氟', '氧', '氮', '氢', '氦', '氖', '氩', '氪', '氙', '氡'];
 
 
     const generateRandomName = () => {
@@ -166,10 +165,8 @@ const BatchGenerator = () => {
     const numQuantity = parseInt(quantity, 10);
     if (isNaN(numQuantity) || numQuantity < 1) {
         setQuantity('10');
-        toast({
-            title: '请输入有效的生成数量',
+        toast.error('请输入有效的生成数量', {
             description: '生成数量必须是大于0的数字。已重置为10。',
-            variant: 'destructive',
         });
         return;
     }
@@ -227,16 +224,19 @@ const BatchGenerator = () => {
     setResult(generatedData.join(effectiveDelimiter));
   }, [command, quantity, filterDuplicates, delimiter]);
 
-  const handleCopy = useCallback(() => {
+  const handleCopy = async () => {
     if (!result) return;
-    navigator.clipboard.writeText(result).then(() => {
-      toast({
-        title: '已复制!',
-        description: '生成结果已复制到剪贴板',
-        duration: 2000
+    try {
+      await navigator.clipboard.writeText(result);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+      toast.error('复制失败', {
+        description: '无法将内容复制到剪贴板。',
       });
-    });
-  }, [result, toast]);
+    }
+  };
 
   const handleQuantityChange = useCallback((change) => {
     setQuantity(prev => String(Math.max(1, (parseInt(prev, 10) || 0) + change)));
@@ -305,6 +305,11 @@ const BatchGenerator = () => {
                 className="whitespace-pre-wrap break-all bg-white dark:bg-gray-950 border-2 border-blue-200 focus:border-blue-400 focus:ring-blue-400 rounded p-3 min-h-[120px] text-sm font-mono select-all transition-all"
                 style={{wordBreak: 'break-all'}}
               >{result || <span className="text-gray-400">暂无生成结果</span>}</pre>
+              {copied && (
+                <div className="absolute bottom-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded">
+                  已复制!
+                </div>
+              )}
             </div>
           </div>
 
