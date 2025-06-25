@@ -102,7 +102,7 @@ export const textTools = [
     },
     {
         id: "remove-duplicates",
-        title: "文本去重",
+        title: "文本去重排序",
         description: "去除文本行中的重复项",
         icon: <FilterIcon className="h-5 w-5" />,
         color: "bg-gray-500"

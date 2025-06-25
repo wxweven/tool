@@ -83,7 +83,7 @@ export const navItems = [
     page: <ToolPage toolId="text-diff" />,
   },
   {
-    title: "文本去重",
+    title: "文本去重排序",
     to: "/remove-duplicates",
     icon: <FilterIcon className="h-4 w-4" />,
     page: <ToolPage toolId="remove-duplicates" />,
@@ -217,7 +217,7 @@ export const categoryNavItems = [
         icon: <FileDiffIcon className="h-4 w-4" />,
       },
       {
-        title: "文本去重",
+        title: "文本去重排序",
         to: "/remove-duplicates",
         icon: <FilterIcon className="h-4 w-4" />,
       },
