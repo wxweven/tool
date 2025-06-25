@@ -136,6 +136,12 @@ export const navItems = [
     icon: <ZapIcon className="h-4 w-4" />,
     page: <ToolPage toolId="batch-generator" />,
   },
+  {
+    title: "Excel转SQL",
+    to: "/excel-to-sql",
+    icon: <FileTextIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="excel-to-sql" />,
+  },
 ];
 
 // 分类导航菜单

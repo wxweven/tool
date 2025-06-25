@@ -89,7 +89,14 @@ export const devTools = [
         description: "在线测试正则表达式",
         icon: <CpuIcon className="h-5 w-5" />,
         color: "bg-pink-500"
-    }
+    },
+    {
+        id: "excel-to-sql",
+        title: "Excel转SQL",
+        description: "输入Excel或CSV文件以及MySQL建表字段定义，输出对应的INSERT语句",
+        color: "bg-blue-100",
+        icon: <FileTextIcon className="h-5 w-5 text-blue-600" />,
+    },
 ];
 
 export const textTools = [

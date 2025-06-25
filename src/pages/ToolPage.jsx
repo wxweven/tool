@@ -18,6 +18,7 @@ import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import { StarIcon as StarIconOutline } from "@heroicons/react/24/outline";
 import { useFavorites } from "../context/FavoritesContext";
 import { navItems } from "../nav-items.jsx";
+import ExcelToSQL from "../tools/ExcelToSQL.jsx";
 
 const ToolPage = ({ toolId }) => {
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
@@ -66,6 +67,8 @@ const ToolPage = ({ toolId }) => {
         return <SubstractLines />;
       case "batch-generator":
         return <BatchGenerator />;
+      case "excel-to-sql":
+        return <ExcelToSQL />;
       default:
         return (
           <div className="text-center py-12">
