@@ -67,13 +67,21 @@ const RemoveDuplicates = () => {
     let newDirection;
     let sortedLines;
     
+    const isAllNumbers = lines.every(line => !isNaN(line));
+    
     if (sortDirection === 'none' || sortDirection === 'desc') {
-      // 升序排序
-      sortedLines = lines.sort((a, b) => a.localeCompare(b, 'zh-CN'));
+      if (isAllNumbers) {
+        sortedLines = lines.sort((a, b) => parseFloat(a) - parseFloat(b));
+      } else {
+        sortedLines = lines.sort((a, b) => a.localeCompare(b, 'zh-CN'));
+      }
       newDirection = 'asc';
     } else {
-      // 降序排序
-      sortedLines = lines.sort((a, b) => b.localeCompare(a, 'zh-CN'));
+      if (isAllNumbers) {
+        sortedLines = lines.sort((a, b) => parseFloat(b) - parseFloat(a));
+      } else {
+        sortedLines = lines.sort((a, b) => b.localeCompare(a, 'zh-CN'));
+      }
       newDirection = 'desc';
     }
     
@@ -166,7 +174,7 @@ const RemoveDuplicates = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle>文本去重</CardTitle>
+            <CardTitle>文本去重排序</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -299,4 +307,4 @@ const RemoveDuplicates = () => {
   );
 };
 
-export default RemoveDuplicates; 
+export default RemoveDuplicates;
