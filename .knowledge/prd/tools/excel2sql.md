@@ -54,7 +54,6 @@ INSERT INTO combination_keypoint (id, displayname, lastoperatorid, difficulty, a
 请你帮我实现这个功能。
 # 已修订功能
 
-# 待修订功能
 - 现在需要分别输入表名和字段名，希望直接输入MySQL 的建表语句，比如下面的示例：
 ```sql
 CREATE TABLE `combination_keypoint` (
@@ -75,5 +74,6 @@ CREATE TABLE `combination_keypoint` (
 从上面的 SQL 中提取表名和字段名，并忽略 PRIMARY KEY 和 KEY 等部分。
 - 生成的 SQL 结果中，加上行号显示；
 - 支持下载导出生成的 SQL 结果集，命名为"表名_insert.sql"。
-
+# 待修订功能
+bug fix: 生成的SQL语句，没有表名，需要修复。
 

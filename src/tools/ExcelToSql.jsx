@@ -46,7 +46,7 @@ const ExcelToSql = () => {
           const worksheet = workbook.Sheets[sheetName];
           jsonData = XLSX.utils.sheet_to_json(worksheet);
         }
-        generateSql(jsonData);
+        generateSql(jsonData, extractedTableName);
       } catch (error) {
         console.error("Error processing file:", error);
         toast.error("处理文件时出错");
@@ -60,7 +60,7 @@ const ExcelToSql = () => {
     }
   };
 
-  const generateSql = (data) => {
+  const generateSql = (data, tableNameParam) => {
     // Extract fields from DDL
     const fields = ddl
       .split("\n")
@@ -72,7 +72,7 @@ const ExcelToSql = () => {
       toast.error("无法从建表语句中解析出字段");
       return;
     }
-    
+
     // Check if file headers match DDL fields
     if (data.length > 0) {
       const fileHeaders = Object.keys(data[0]).map(h => h.toLowerCase());
@@ -84,7 +84,6 @@ const ExcelToSql = () => {
           // and we can assume the user provides correct files.
       }
     }
-
 
     const insertStatements = data
       .map((row) => {
@@ -107,13 +106,13 @@ const ExcelToSql = () => {
             return value;
           })
           .join(", ");
-        return `INSERT INTO \`${tableName}\` (${fields.map(f => `\`${f}\``).join(", ")}) VALUES (${values});`;
+        return `INSERT INTO \`${tableNameParam}\` (${fields.map(f => `\`${f}\``).join(", ")}) VALUES (${values});`;
       })
       .join("\n");
 
     setSql(insertStatements);
   };
-  
+
   const handleCopy = () => {
     if (sql) {
       navigator.clipboard.writeText(sql);
@@ -143,7 +142,6 @@ const ExcelToSql = () => {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-bold">Excel/CSV 转 SQL</h2>
       <div>
         <Label htmlFor="ddl">MySQL 建表语句</Label>
         <Textarea
@@ -180,4 +178,4 @@ const ExcelToSql = () => {
   );
 };
 
-export default ExcelToSql; 
+export default ExcelToSql;

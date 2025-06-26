@@ -39,11 +39,11 @@ const RemoveDuplicates = () => {
 
     const lines = input.split('\n').map(line => line.trim()).filter(line => line.length > 0);
     const originalCount = lines.length;
-    
+
     // 使用Set去重，保持原有顺序
     const uniqueLines = [];
     const seen = new Set();
-    
+
     lines.forEach(line => {
       if (!seen.has(line)) {
         seen.add(line);
@@ -53,7 +53,7 @@ const RemoveDuplicates = () => {
 
     const uniqueCount = uniqueLines.length;
     const removedCount = originalCount - uniqueCount;
-    
+
     setStats({ original: originalCount, unique: uniqueCount, removed: removedCount });
     setOutput(uniqueLines.join('\n'));
     setIsSorted(false); // 重置排序状态
@@ -62,13 +62,13 @@ const RemoveDuplicates = () => {
 
   const toggleSort = () => {
     if (!output) return;
-    
+
     const lines = output.split('\n');
     let newDirection;
     let sortedLines;
-    
+
     const isAllNumbers = lines.every(line => !isNaN(line));
-    
+
     if (sortDirection === 'none' || sortDirection === 'desc') {
       if (isAllNumbers) {
         sortedLines = lines.sort((a, b) => parseFloat(a) - parseFloat(b));
@@ -84,7 +84,7 @@ const RemoveDuplicates = () => {
       }
       newDirection = 'desc';
     }
-    
+
     setOutput(sortedLines.join('\n'));
     setIsSorted(true);
     setSortDirection(newDirection);
@@ -99,13 +99,13 @@ const RemoveDuplicates = () => {
 
   const downloadAsCSV = () => {
     if (!output) return;
-    
+
     const lines = output.split('\n');
     // 修复：直接使用行内容，不添加双引号
     const csvContent = lines.join('\n');
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
-    
+
     if (link.download !== undefined) {
       const url = URL.createObjectURL(blob);
       link.setAttribute('href', url);
@@ -173,9 +173,6 @@ const RemoveDuplicates = () => {
     <>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
-          <CardHeader>
-            <CardTitle>文本去重排序</CardTitle>
-          </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <div>
@@ -189,7 +186,7 @@ const RemoveDuplicates = () => {
                   className="font-mono mt-1"
                 />
               </div>
-              
+
               <div className="flex gap-2 flex-wrap">
                 <Button onClick={removeDuplicates}>
                   <Wand2Icon className="mr-2 h-4 w-4" />
@@ -205,15 +202,15 @@ const RemoveDuplicates = () => {
             </div>
           </CardContent>
         </Card>
-        
+
         <Card>
           <CardHeader>
             <div className="flex justify-between items-center">
               <CardTitle>去重结果</CardTitle>
               <div className="flex gap-2">
                 {output && (
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     size="sm"
                     onClick={toggleSort}
                   >
@@ -222,8 +219,8 @@ const RemoveDuplicates = () => {
                   </Button>
                 )}
                 {shouldShowDownload && (
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     size="sm"
                     onClick={downloadAsCSV}
                   >
@@ -231,8 +228,8 @@ const RemoveDuplicates = () => {
                     下载CSV
                   </Button>
                 )}
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   size="sm"
                   onClick={copyToClipboard}
                   disabled={!output}
@@ -267,7 +264,7 @@ const RemoveDuplicates = () => {
                   <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded-md overflow-auto font-mono text-sm max-h-96">
                     {output}
                   </pre>
-                  
+
                   {copied && (
                     <div className="absolute top-4 right-4 bg-green-500 text-white text-xs px-2 py-1 rounded">
                       已复制!

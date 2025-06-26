@@ -41,11 +41,11 @@ const DownloadFiles = () => {
     if (!input.trim()) return [];
 
     const lines = input.split('\n').map(line => line.trim()).filter(line => line.length > 0);
-    
+
     // 去重并验证URL
     const uniqueUrls = [];
     const seen = new Set();
-    
+
     lines.forEach(url => {
       if (!seen.has(url) && isValidUrl(url)) {
         seen.add(url);
@@ -77,7 +77,7 @@ const DownloadFiles = () => {
   };
 
   const updateCompletedCount = () => {
-    const completed = downloadResults.filter(result => 
+    const completed = downloadResults.filter(result =>
       result.status === 'success' || result.status === 'error'
     ).length;
     setCompletedCount(completed);
@@ -85,7 +85,7 @@ const DownloadFiles = () => {
 
   const downloadSingleFile = async (url) => {
     const fileName = getFileNameFromUrl(url);
-    
+
     setDownloadProgress(prev => ({
       ...prev,
       [url]: { status: 'downloading', progress: 0 }
@@ -98,7 +98,7 @@ const DownloadFiles = () => {
       }
 
       const blob = await response.blob();
-      
+
       setDownloadProgress(prev => ({
         ...prev,
         [url]: { status: 'success', progress: 100 }
@@ -144,7 +144,7 @@ const DownloadFiles = () => {
     setDownloadProgress({});
     setDownloadResults([]);
     setCompletedCount(0);
-    
+
     // 检查是否需要并发模式
     setIsConcurrentMode(parsedUrls.length > 50);
 
@@ -155,7 +155,7 @@ const DownloadFiles = () => {
       // 并发下载模式
       const batchSize = 10; // 每批10个并发
       const batches = [];
-      
+
       for (let i = 0; i < parsedUrls.length; i += batchSize) {
         batches.push(parsedUrls.slice(i, i + batchSize));
       }
@@ -163,14 +163,14 @@ const DownloadFiles = () => {
       for (let batchIndex = 0; batchIndex < batches.length; batchIndex++) {
         const batch = batches[batchIndex];
         const batchPromises = batch.map(url => downloadSingleFile(url));
-        
+
         const batchResults = await Promise.allSettled(batchPromises);
-        
+
         batchResults.forEach((result, index) => {
           if (result.status === 'fulfilled') {
             const fileResult = result.value;
             results.push(fileResult);
-            
+
             if (fileResult.status === 'success' && fileResult.blob) {
               downloadedFiles.push({ name: fileResult.fileName, blob: fileResult.blob });
             }
@@ -196,7 +196,7 @@ const DownloadFiles = () => {
       for (let i = 0; i < parsedUrls.length; i++) {
         const result = await downloadSingleFile(parsedUrls[i]);
         results.push(result);
-        
+
         if (result.status === 'success' && result.blob) {
           downloadedFiles.push({ name: result.fileName, blob: result.blob });
         }
@@ -226,7 +226,7 @@ const DownloadFiles = () => {
       });
 
       const zipBlob = await zip.generateAsync({ type: 'blob' });
-      
+
       // 下载zip文件
       const link = document.createElement('a');
       const url = URL.createObjectURL(zipBlob);
@@ -280,9 +280,6 @@ https://invalid-url.com/file.txt`;
     <>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
-          <CardHeader>
-            <CardTitle>批量下载文件</CardTitle>
-          </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <div>
@@ -296,7 +293,7 @@ https://invalid-url.com/file.txt`;
                   className="font-mono mt-1"
                 />
               </div>
-              
+
               <div className="flex gap-2 flex-wrap">
                 <Button onClick={downloadFiles} disabled={isDownloading}>
                   <DownloadIcon className="mr-2 h-4 w-4" />
@@ -334,7 +331,7 @@ https://invalid-url.com/file.txt`;
             </div>
           </CardContent>
         </Card>
-        
+
         <Card>
           <CardHeader>
             <div className="flex justify-between items-center">
@@ -415,4 +412,4 @@ https://invalid-url.com/file.txt`;
   );
 };
 
-export default DownloadFiles; 
+export default DownloadFiles;
