@@ -107,6 +107,12 @@ export const navItems = [
     page: <ToolPage toolId="plaintext" />,
   },
   {
+    title: "Excel/CSV转SQL",
+    to: "/excel-to-sql",
+    icon: <FileTextIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="excel-to-sql" />,
+  },
+  {
     title: "Shell命令",
     to: "/shell",
     icon: <TerminalIcon className="h-4 w-4" />,
@@ -135,12 +141,6 @@ export const navItems = [
     to: "/batch-generator",
     icon: <ZapIcon className="h-4 w-4" />,
     page: <ToolPage toolId="batch-generator" />,
-  },
-  {
-    title: "Excel/CSV转SQL",
-    to: "/excel-to-sql",
-    icon: <FileCodeIcon className="h-4 w-4" />,
-    page: <ToolPage toolId="excel-to-sql" />,
   },
 ];
 
@@ -202,6 +202,16 @@ export const categoryNavItems = [
         icon: <DownloadIcon className="h-4 w-4" />,
       },
       {
+        title: "纯文本提取",
+        to: "/plaintext",
+        icon: <FileTextIcon className="h-4 w-4" />,
+      },
+      {
+        title: "Excel/CSV转SQL",
+        to: "/excel-to-sql",
+        icon: <FileTextIcon className="h-4 w-4" />,
+      },
+      {
         title: "Shell命令",
         to: "/shell",
         icon: <TerminalIcon className="h-4 w-4" />,
@@ -210,11 +220,6 @@ export const categoryNavItems = [
         title: "正则测试",
         to: "/regex",
         icon: <CpuIcon className="h-4 w-4" />,
-      },
-      {
-        title: "Excel/CSV转SQL",
-        to: "/excel-to-sql",
-        icon: <FileCodeIcon className="h-4 w-4" />,
       },
     ]
   },

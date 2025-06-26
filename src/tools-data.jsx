@@ -92,6 +92,13 @@ export const devTools = [
         color: "bg-sky-500"
     },
     {
+        id: "excel-to-sql",
+        title: "Excel/CSV转SQL",
+        description: "将Excel或CSV文件内容转换为SQL插入语句",
+        icon: <FileCodeIcon className="h-5 w-5" />,
+        color: "bg-lime-500"
+    },
+    {
         id: "shell",
         title: "Shell命令",
         description: "常用Shell命令速查与示例",
@@ -105,13 +112,6 @@ export const devTools = [
         icon: <CpuIcon className="h-5 w-5" />,
         color: "bg-pink-500"
     },
-    {
-        id: "excel-to-sql",
-        title: "Excel/CSV转SQL",
-        description: "将Excel或CSV文件内容转换为SQL插入语句",
-        icon: <FileCodeIcon className="h-5 w-5" />,
-        color: "bg-lime-500"
-    }
 ];
 
 export const textTools = [
