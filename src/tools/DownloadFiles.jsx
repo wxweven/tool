@@ -8,7 +8,11 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 
 const DownloadFiles = () => {
-  const [input, setInput] = useState("");
+  const defaultExample = `https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+https://images.pexels.com/photos/1528640/pexels-photo-1528640.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+`;
+  const [input, setInput] = useState(defaultExample);
   const [urls, setUrls] = useState([]);
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadProgress, setDownloadProgress] = useState({});
@@ -248,21 +252,16 @@ const DownloadFiles = () => {
     setUrls([]);
     setDownloadProgress({});
     setDownloadResults([]);
-    setIsConcurrentMode(false);
+    setIsDownloading(false);
     setCompletedCount(0);
   };
 
   const loadExample = () => {
-    const example = `https://example.com/file1.pdf
-https://example.com/image.jpg
-https://example.com/document.docx
-https://example.com/file1.pdf
-https://invalid-url.com/file.txt`;
-    setInput(example);
+    setInput(defaultExample);
     setUrls([]);
     setDownloadProgress({});
     setDownloadResults([]);
-    setIsConcurrentMode(false);
+    setIsDownloading(false);
     setCompletedCount(0);
   };
 

@@ -6,11 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CopyIcon, Wand2Icon } from "lucide-react";
 
 const JavaToJson = () => {
-  const [input, setInput] = useState("");
-  const [output, setOutput] = useState("");
-  const [copied, setCopied] = useState(false);
-
-  // 默认示例
   const defaultExample = `public class User {
     private String username;
     private String email;
@@ -20,6 +15,9 @@ const JavaToJson = () => {
     private Long userId;
     private Double balance;
 }`;
+  const [input, setInput] = useState(defaultExample);
+  const [output, setOutput] = useState("");
+  const [copied, setCopied] = useState(false);
 
   const loadExample = () => {
     setInput(defaultExample);

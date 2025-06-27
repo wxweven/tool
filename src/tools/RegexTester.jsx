@@ -7,9 +7,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 
 const RegexTester = () => {
-  const [pattern, setPattern] = useState("");
+  const defaultPattern = "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b";
+  const defaultTestText = "这是一段包含邮箱地址的文本，例如：test@example.com 和 a.b-c@example.co.uk。";
+  const [pattern, setPattern] = useState(defaultPattern);
   const [flags, setFlags] = useState("g");
-  const [testText, setTestText] = useState("");
+  const [testText, setTestText] = useState(defaultTestText);
   const [matches, setMatches] = useState([]);
   const [error, setError] = useState("");
   const [isMultiline, setIsMultiline] = useState(false);
@@ -55,6 +57,11 @@ const RegexTester = () => {
     setTestText("");
     setMatches([]);
     setError("");
+  };
+
+  const loadExample = () => {
+    setPattern(defaultPattern);
+    setTestText(defaultTestText);
   };
 
   return (
@@ -115,6 +122,9 @@ const RegexTester = () => {
               <Button onClick={testRegex}>测试</Button>
               <Button variant="secondary" onClick={clearAll}>
                 清空
+              </Button>
+              <Button variant="outline" onClick={loadExample}>
+                示例
               </Button>
             </div>
 

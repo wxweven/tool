@@ -8,7 +8,11 @@ import { Badge } from "@/components/ui/badge";
 import { PlusIcon, TrashIcon, PlayIcon, SquareIcon, ArrowUpIcon, GiftIcon, RefreshCwIcon, ChevronUpIcon, ChevronDownIcon } from "lucide-react";
 
 const LotteryTool = () => {
-  const [participants, setParticipants] = useState("");
+  const defaultParticipants = [
+    "张三", "李四", "王五", "赵六", "孙七", "周八", "吴九", "郑十",
+    "陈十一", "刘十二", "黄十三", "马十四", "林十五", "高十六"
+  ].join('\n');
+  const [participants, setParticipants] = useState(defaultParticipants);
   const [rounds, setRounds] = useState([
     { id: 1, name: "第1轮", count: 1, prize: "奖品1", winners: [], isRunning: false, isCollapsed: false }
   ]);

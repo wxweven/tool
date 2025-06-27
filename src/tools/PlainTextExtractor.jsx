@@ -6,7 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CopyIcon } from "lucide-react";
 
 const PlainTextExtractor = () => {
-  const [input, setInput] = useState("");
+  const defaultExample = `<h1>这是一个标题</h1><p>这是一个段落，其中包含<b>粗体</b>和<i>斜体</i>文本。</p><ul><li>列表项1</li><li>列表项2</li></ul>`;
+  const [input, setInput] = useState(defaultExample);
   const [output, setOutput] = useState("");
   const [copied, setCopied] = useState(false);
 
@@ -36,6 +37,10 @@ const PlainTextExtractor = () => {
     setOutput("");
   };
 
+  const loadExample = () => {
+    setInput(defaultExample);
+  };
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <Card>
@@ -57,6 +62,9 @@ const PlainTextExtractor = () => {
               <Button onClick={extractPlainText}>提取纯文本</Button>
               <Button variant="secondary" onClick={clearAll}>
                 清空
+              </Button>
+              <Button variant="outline" onClick={loadExample}>
+                示例
               </Button>
             </div>
           </div>

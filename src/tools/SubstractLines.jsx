@@ -6,8 +6,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CopyIcon, DownloadIcon, MinusIcon, ChevronUpIcon } from "lucide-react";
 
 const SubstractLines = () => {
-  const [text1, setText1] = useState("");
-  const [text2, setText2] = useState("");
+  const defaultText1 = "apple\nbanana\norange\ngrape";
+  const defaultText2 = "apple\nbanana";
+  const [text1, setText1] = useState(defaultText1);
+  const [text2, setText2] = useState(defaultText2);
   const [result, setResult] = useState("");
   const [copied, setCopied] = useState(false);
   const [isScrollToTopVisible, setIsScrollToTopVisible] = useState(false);
@@ -85,8 +87,8 @@ const SubstractLines = () => {
   };
 
   const testExample = () => {
-    setText1("1\n2\n3\n4\n5");
-    setText2("1\n2\n6");
+    setText1(defaultText1);
+    setText2(defaultText2);
   };
 
   const resultLines = result.split('\n').filter(line => line.trim() !== '').length;

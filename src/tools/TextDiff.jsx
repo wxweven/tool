@@ -108,12 +108,12 @@ function divide(x, y) {
         for (let i = 0; i < diffResult.length; i++) {
             const part = diffResult[i];
             const lines = part.value.split('\n');
-            
+
             // 处理每一行
             for (let j = 0; j < lines.length; j++) {
                 const line = lines[j];
                 const isLastLine = j === lines.length - 1;
-                
+
                 // 跳过最后一个空行（如果整个 part 以换行符结尾）
                 if (isLastLine && line === '' && part.value.endsWith('\n')) {
                     continue;
@@ -182,17 +182,15 @@ function divide(x, y) {
                         {linesA.map((line, index) => (
                             <div
                                 key={`a-${index}`}
-                                className={`px-4 py-1 border-b border-gray-100 font-mono text-sm ${
-                                    line.highlight ? 'bg-red-50' : ''
-                                } ${line.type === 'removed' ? 'bg-red-100' : ''}`}
+                                className={`px-4 py-1 border-b border-gray-100 font-mono text-sm ${line.highlight ? 'bg-red-50' : ''
+                                    } ${line.type === 'removed' ? 'bg-red-100' : ''}`}
                             >
                                 <div className="flex">
                                     <span className="text-gray-400 text-xs w-8 select-none">
                                         {line.number || ''}
                                     </span>
-                                    <span className={`flex-1 ${
-                                        line.type === 'removed' ? 'text-red-700' : 'text-gray-900'
-                                    }`}>
+                                    <span className={`flex-1 ${line.type === 'removed' ? 'text-red-700' : 'text-gray-900'
+                                        }`}>
                                         {line.content || '\u00A0'}
                                     </span>
                                 </div>
@@ -210,17 +208,15 @@ function divide(x, y) {
                         {linesB.map((line, index) => (
                             <div
                                 key={`b-${index}`}
-                                className={`px-4 py-1 border-b border-gray-100 font-mono text-sm ${
-                                    line.highlight ? 'bg-green-50' : ''
-                                } ${line.type === 'added' ? 'bg-green-100' : ''}`}
+                                className={`px-4 py-1 border-b border-gray-100 font-mono text-sm ${line.highlight ? 'bg-green-50' : ''
+                                    } ${line.type === 'added' ? 'bg-green-100' : ''}`}
                             >
                                 <div className="flex">
                                     <span className="text-gray-400 text-xs w-8 select-none">
                                         {line.number || ''}
                                     </span>
-                                    <span className={`flex-1 ${
-                                        line.type === 'added' ? 'text-green-700' : 'text-gray-900'
-                                    }`}>
+                                    <span className={`flex-1 ${line.type === 'added' ? 'text-green-700' : 'text-gray-900'
+                                        }`}>
                                         {line.content || '\u00A0'}
                                     </span>
                                 </div>
@@ -270,7 +266,7 @@ function divide(x, y) {
                         placeholder="请输入文本 B"
                         className="h-64 font-mono"
                     />
-                     <Button onClick={() => handleFormatJson('B')} variant="outline">
+                    <Button onClick={() => handleFormatJson('B')} variant="outline">
                         JSON 格式化 B
                     </Button>
                 </div>
