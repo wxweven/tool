@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { toast } from "sonner";
 import Papa from "papaparse";
 import * as XLSX from "xlsx";
@@ -12,9 +14,12 @@ const ExcelToSql = () => {
   const [tableName, setTableName] = useState("");
   const [sql, setSql] = useState("");
   const [file, setFile] = useState(null);
+  const [sqlType, setSqlType] = useState("insert");
+  const [fieldWarnings, setFieldWarnings] = useState([]);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
+    setFieldWarnings([]);
   };
 
   const handleGenerate = () => {
@@ -46,7 +51,12 @@ const ExcelToSql = () => {
           const worksheet = workbook.Sheets[sheetName];
           jsonData = XLSX.utils.sheet_to_json(worksheet);
         }
-        generateSql(jsonData, extractedTableName);
+        
+        if (sqlType === "insert") {
+          generateInsertSql(jsonData, extractedTableName);
+        } else {
+          generateUpdateSql(jsonData, extractedTableName);
+        }
       } catch (error) {
         console.error("Error processing file:", error);
         toast.error("处理文件时出错");
@@ -60,7 +70,7 @@ const ExcelToSql = () => {
     }
   };
 
-  const generateSql = (data, tableNameParam) => {
+  const generateInsertSql = (data, tableNameParam) => {
     // Extract fields from DDL
     const fields = ddl
       .split("\n")
@@ -113,6 +123,114 @@ const ExcelToSql = () => {
     setSql(insertStatements);
   };
 
+  const generateUpdateSql = (data, tableNameParam) => {
+    // Extract fields from DDL
+    const fields = ddl
+      .split("\n")
+      .map((line) => line.trim().match(/^`([^`]+)`/))
+      .filter(Boolean)
+      .map((match) => match[1]);
+
+    if (fields.length === 0) {
+      toast.error("无法从建表语句中解析出字段");
+      return;
+    }
+
+    if (data.length === 0) {
+      toast.error("Excel/CSV 文件中没有数据");
+      return;
+    }
+
+    // Get file headers
+    const fileHeaders = Object.keys(data[0]);
+    const fileHeadersLower = fileHeaders.map(h => h.toLowerCase());
+    const ddlFieldsLower = fields.map(f => f.toLowerCase());
+
+    // Check field matching
+    const unmatchedFields = fileHeadersLower.filter(f => !ddlFieldsLower.includes(f));
+    const warnings = [];
+    
+    if (unmatchedFields.length > 0) {
+      warnings.push(`Excel/CSV 中的以下字段在建表语句中未找到: ${unmatchedFields.join(', ')}`);
+      // 给出建议
+      unmatchedFields.forEach(unmatchedField => {
+        const suggestions = ddlFieldsLower.filter(field => 
+          field.includes(unmatchedField) || unmatchedField.includes(field)
+        );
+        if (suggestions.length > 0) {
+          warnings.push(`建议将 "${unmatchedField}" 替换为: ${suggestions.join(', ')}`);
+        }
+      });
+    }
+
+    setFieldWarnings(warnings);
+
+    // First column is the WHERE condition field
+    const whereField = fileHeaders[0];
+    const whereFieldLower = whereField.toLowerCase();
+    
+    if (!ddlFieldsLower.includes(whereFieldLower)) {
+      toast.error(`WHERE 条件字段 "${whereField}" 在建表语句中未找到`);
+      return;
+    }
+
+    // Other columns are SET fields
+    const setFields = fileHeaders.slice(1);
+    const validSetFields = setFields.filter(field => 
+      ddlFieldsLower.includes(field.toLowerCase())
+    );
+
+    if (validSetFields.length === 0) {
+      toast.error("没有找到有效的 SET 字段");
+      return;
+    }
+
+    const updateStatements = data
+      .map((row) => {
+        const lowerCaseRow = {};
+        for (const key in row) {
+            lowerCaseRow[key.toLowerCase()] = row[key];
+        }
+
+        // Get WHERE condition value
+        const whereValue = row[whereField];
+        if (whereValue === null || whereValue === undefined || whereValue === "") {
+          return null; // Skip rows with empty WHERE condition
+        }
+
+        // Build SET clause
+        const setClause = validSetFields
+          .map((field) => {
+            const value = row[field];
+            if (value === null || value === undefined || value === "") {
+              return `\`${field}\` = NULL`;
+            }
+            if (typeof value === "string") {
+              // Escape single quotes
+              const escapedValue = value.replace(/'/g, "''");
+              return `\`${field}\` = '${escapedValue}'`;
+            }
+            return `\`${field}\` = ${value}`;
+          })
+          .join(", ");
+
+        // Build WHERE clause
+        let whereClause;
+        if (typeof whereValue === "string") {
+          const escapedWhereValue = whereValue.replace(/'/g, "''");
+          whereClause = `\`${whereField}\` = '${escapedWhereValue}'`;
+        } else {
+          whereClause = `\`${whereField}\` = ${whereValue}`;
+        }
+
+        return `UPDATE \`${tableNameParam}\` SET ${setClause} WHERE ${whereClause};`;
+      })
+      .filter(Boolean) // Remove null statements
+      .join("\n");
+
+    setSql(updateStatements);
+  };
+
   const handleCopy = () => {
     if (sql) {
       navigator.clipboard.writeText(sql);
@@ -128,7 +246,8 @@ const ExcelToSql = () => {
     const blob = new Blob([sql], { type: "text/sql;charset=utf-8" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = `${tableName}_insert.sql`;
+    const fileType = sqlType === "insert" ? "insert" : "update";
+    link.download = `${tableName}_${fileType}.sql`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -156,7 +275,37 @@ const ExcelToSql = () => {
         <Label htmlFor="file-upload">上传 Excel/CSV 文件</Label>
         <Input id="file-upload" type="file" onChange={handleFileChange} accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
       </div>
+      <div>
+        <Label htmlFor="sql-type">SQL 类型</Label>
+        <Select value={sqlType} onValueChange={setSqlType}>
+          <SelectTrigger>
+            <SelectValue placeholder="选择 SQL 类型" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="insert">INSERT 语句</SelectItem>
+            <SelectItem value="update">UPDATE 语句</SelectItem>
+          </SelectContent>
+        </Select>
+        {sqlType === "update" && (
+          <p className="text-sm text-muted-foreground mt-1">
+            注意：UPDATE 语句的第一列将作为 WHERE 条件，其他列将作为 SET 字段
+          </p>
+        )}
+      </div>
       <Button onClick={handleGenerate}>生成 SQL</Button>
+      
+      {fieldWarnings.length > 0 && (
+        <Alert>
+          <AlertDescription>
+            <div className="space-y-1">
+              {fieldWarnings.map((warning, index) => (
+                <p key={index} className="text-sm">{warning}</p>
+              ))}
+            </div>
+          </AlertDescription>
+        </Alert>
+      )}
+      
       <div>
         <div className="flex justify-between items-center mb-2">
             <Label htmlFor="sql-output">生成的 SQL</Label>
@@ -169,7 +318,7 @@ const ExcelToSql = () => {
           id="sql-output"
           readOnly
           value={sqlWithLineNumbers}
-          placeholder="生成的 INSERT 语句将显示在此处"
+          placeholder={`生成的 ${sqlType.toUpperCase()} 语句将显示在此处`}
           rows={15}
           className="font-mono text-sm"
         />
