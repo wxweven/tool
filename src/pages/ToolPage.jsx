@@ -19,6 +19,11 @@ import CountdownReminder from "../tools/CountdownReminder";
 import ExpressTracker from "../tools/ExpressTracker";
 import LunchRandomizer from "../tools/LunchRandomizer";
 import UnitConverter from "../tools/UnitConverter";
+import BMICalculator from "../tools/BMICalculator";
+import DailyQuote from "../tools/DailyQuote";
+import QRCodeTool from "../tools/QRCodeTool";
+import RandomGroupTool from "../tools/RandomGroupTool";
+import ExpenseTracker from "../tools/ExpenseTracker";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import { StarIcon as StarIconOutline } from "@heroicons/react/24/outline";
 import { useFavorites } from "../context/FavoritesContext";
@@ -81,6 +86,16 @@ const ToolPage = ({ toolId }) => {
         return <LunchRandomizer />;
       case "unit-converter":
         return <UnitConverter />;
+      case "bmi-calculator":
+        return <BMICalculator />;
+      case "daily-quote":
+        return <DailyQuote />;
+      case "qr-code":
+        return <QRCodeTool />;
+      case "random-group":
+        return <RandomGroupTool />;
+      case "expense-tracker":
+        return <ExpenseTracker />;
       default:
         return (
           <div className="text-center py-12">

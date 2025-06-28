@@ -20,6 +20,11 @@ import CountdownReminder from "./CountdownReminder";
 import ExpressTracker from "./ExpressTracker";
 import LunchRandomizer from "./LunchRandomizer";
 import UnitConverter from "./UnitConverter";
+import BMICalculator from "./BMICalculator";
+import DailyQuote from "./DailyQuote";
+import QRCodeTool from "./QRCodeTool";
+import RandomGroupTool from "./RandomGroupTool";
+import ExpenseTracker from "./ExpenseTracker";
 
 export {
   BatchGenerator,
@@ -44,4 +49,9 @@ export {
   ExpressTracker,
   LunchRandomizer,
   UnitConverter,
+  BMICalculator,
+  DailyQuote,
+  QRCodeTool,
+  RandomGroupTool,
+  ExpenseTracker,
 }; 

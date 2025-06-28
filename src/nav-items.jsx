@@ -18,7 +18,11 @@ import {
   MinusIcon,
   TextIcon,
   StarIcon,
-  ZapIcon
+  ZapIcon,
+  QrCode,
+  Shuffle,
+  Wallet,
+  Quote
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
@@ -166,6 +170,36 @@ export const navItems = [
     icon: <CalculatorIcon className="h-4 w-4" />,
     page: <ToolPage toolId="unit-converter" />,
   },
+  {
+    title: "健康BMI计算器",
+    to: "/bmi-calculator",
+    icon: <HeartIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="bmi-calculator" />,
+  },
+  {
+    title: "每日一句/毒鸡汤",
+    to: "/daily-quote",
+    icon: <Quote className="h-4 w-4" />,
+    page: <ToolPage toolId="daily-quote" />,
+  },
+  {
+    title: "二维码生成与识别",
+    to: "/qr-code",
+    icon: <QrCode className="h-4 w-4" />,
+    page: <ToolPage toolId="qr-code" />,
+  },
+  {
+    title: "随机抽签/分组",
+    to: "/random-group",
+    icon: <Shuffle className="h-4 w-4" />,
+    page: <ToolPage toolId="random-group" />,
+  },
+  {
+    title: "记账/小账本",
+    to: "/expense-tracker",
+    icon: <Wallet className="h-4 w-4" />,
+    page: <ToolPage toolId="expense-tracker" />,
+  },
 ];
 
 // 分类导航菜单
@@ -208,6 +242,31 @@ export const categoryNavItems = [
         title: "房贷计算器",
         to: "/mortgage",
         icon: <CalculatorIcon className="h-4 w-4" />,
+      },
+      {
+        title: "健康BMI计算器",
+        to: "/bmi-calculator",
+        icon: <HeartIcon className="h-4 w-4" />,
+      },
+      {
+        title: "每日一句/毒鸡汤",
+        to: "/daily-quote",
+        icon: <Quote className="h-4 w-4" />,
+      },
+      {
+        title: "二维码生成与识别",
+        to: "/qr-code",
+        icon: <QrCode className="h-4 w-4" />,
+      },
+      {
+        title: "随机抽签/分组",
+        to: "/random-group",
+        icon: <Shuffle className="h-4 w-4" />,
+      },
+      {
+        title: "记账/小账本",
+        to: "/expense-tracker",
+        icon: <Wallet className="h-4 w-4" />,
       },
     ]
   },

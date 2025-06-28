@@ -14,7 +14,11 @@ import {
     DownloadIcon,
     MinusIcon,
     ZapIcon,
-    HeartIcon
+    HeartIcon,
+    QrCode,
+    Shuffle,
+    Wallet,
+    Quote
 } from "lucide-react";
 
 // 工具文件类
@@ -42,6 +46,13 @@ import {
     DownloadFiles,
     ExcelToTable,
 } from "./tools";
+
+// 新增生活类工具
+import BMICalculator from "./tools/BMICalculator";
+import DailyQuote from "./tools/DailyQuote";
+import QRCodeTool from "./tools/QRCodeTool";
+import RandomGroupTool from "./tools/RandomGroupTool";
+import ExpenseTracker from "./tools/ExpenseTracker";
 
 export const efficiencyTools = [
     {
@@ -199,5 +210,40 @@ export const lifeTools = [
         description: "支持等额本息和等额本金两种还款方式",
         icon: <CalculatorIcon className="h-5 w-5" />,
         color: "bg-cyan-500"
+    },
+    {
+        id: "bmi-calculator",
+        title: "健康BMI计算器",
+        description: "输入身高体重，自动计算BMI并给出健康建议",
+        icon: <HeartIcon className="h-5 w-5" />,
+        color: "bg-red-400"
+    },
+    {
+        id: "daily-quote",
+        title: "每日一句/毒鸡汤",
+        description: "每天推送一句正能量语录或幽默毒鸡汤",
+        icon: <Quote className="h-5 w-5" />,
+        color: "bg-purple-400"
+    },
+    {
+        id: "qr-code",
+        title: "二维码生成与识别",
+        description: "输入文本/网址生成二维码，支持上传图片识别",
+        icon: <QrCode className="h-5 w-5" />,
+        color: "bg-indigo-400"
+    },
+    {
+        id: "random-group",
+        title: "随机抽签/分组",
+        description: "适合聚会、活动分组、抽奖等场景",
+        icon: <Shuffle className="h-5 w-5" />,
+        color: "bg-teal-400"
+    },
+    {
+        id: "expense-tracker",
+        title: "记账/小账本",
+        description: "简单的日常收支记录，支持导出",
+        icon: <Wallet className="h-5 w-5" />,
+        color: "bg-emerald-400"
     }
 ];
