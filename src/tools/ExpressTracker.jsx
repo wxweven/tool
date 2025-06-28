@@ -325,6 +325,25 @@ const ExpressTracker = () => {
           <div>• 保存最近10次查询记录</div>
         </CardContent>
       </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>友情链接</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="text-sm text-muted-foreground">
+            更多快递查询服务：
+            <a 
+              href="http://www.kuaidi.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="ml-2 text-blue-600 hover:text-blue-800 hover:underline"
+            >
+              快递查询API
+            </a>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };
