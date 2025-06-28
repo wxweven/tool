@@ -30,6 +30,7 @@ import PomodoroTimer from "./PomodoroTimer";
 import ColorToolkit from "./ColorToolkit";
 import NumberBaseConverter from "./NumberBaseConverter";
 import ImageCompressor from "./ImageCompressor";
+import PictureProcessor from "./PictureProcessor";
 
 export {
   BatchGenerator,
@@ -64,4 +65,5 @@ export {
   ColorToolkit,
   NumberBaseConverter,
   ImageCompressor,
+  PictureProcessor,
 }; 

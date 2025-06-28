@@ -29,6 +29,7 @@ import PomodoroTimer from "../tools/PomodoroTimer";
 import ColorToolkit from "../tools/ColorToolkit";
 import NumberBaseConverter from "../tools/NumberBaseConverter";
 import ImageCompressor from "../tools/ImageCompressor";
+import PictureProcessor from "../tools/PictureProcessor";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import { StarIcon as StarIconOutline } from "@heroicons/react/24/outline";
 import { useFavorites } from "../context/FavoritesContext";
@@ -111,6 +112,8 @@ const ToolPage = ({ toolId }) => {
         return <NumberBaseConverter />;
       case "image-compressor":
         return <ImageCompressor />;
+      case "picture-processor":
+        return <PictureProcessor />;
       default:
         return (
           <div className="text-center py-12">

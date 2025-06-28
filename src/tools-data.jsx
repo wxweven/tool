@@ -22,7 +22,8 @@ import {
     Key as KeyIcon,
     Palette as PaletteIcon,
     Hash,
-    ImageIcon
+    ImageIcon,
+    FileImage
 } from "lucide-react";
 
 // 工具文件类
@@ -100,6 +101,13 @@ export const efficiencyTools = [
         description: "在线压缩图片，支持多种格式和批量处理，有效减小文件大小",
         icon: <ImageIcon className="h-5 w-5" />,
         color: "bg-green-500"
+    },
+    {
+        id: "picture-processor",
+        title: "图片处理工具",
+        description: "PDF转图片、图片格式转换，支持批量处理和多种输出设置",
+        icon: <FileImage className="h-5 w-5" />,
+        color: "bg-indigo-500"
     }
 ];
 

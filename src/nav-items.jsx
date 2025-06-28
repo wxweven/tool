@@ -26,7 +26,8 @@ import {
   Key,
   Palette,
   Hash,
-  ImageIcon
+  ImageIcon,
+  FileImage
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
@@ -234,6 +235,12 @@ export const navItems = [
     icon: <ImageIcon className="h-4 w-4" />,
     page: <ToolPage toolId="image-compressor" />,
   },
+  {
+    title: "图片处理工具",
+    to: "/picture-processor",
+    icon: <FileImage className="h-4 w-4" />,
+    page: <ToolPage toolId="picture-processor" />,
+  },
 ];
 
 // 分类导航菜单
@@ -337,6 +344,11 @@ export const categoryNavItems = [
         title: "图片压缩工具",
         to: "/image-compressor",
         icon: <ImageIcon className="h-4 w-4" />,
+      },
+      {
+        title: "图片处理工具",
+        to: "/picture-processor",
+        icon: <FileImage className="h-4 w-4" />,
       },
     ]
   },
