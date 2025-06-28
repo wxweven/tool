@@ -23,7 +23,10 @@ import {
     Palette as PaletteIcon,
     Hash,
     ImageIcon,
-    FileImage
+    FileImage,
+    Shield,
+    Command,
+    Globe
 } from "lucide-react";
 
 // 工具文件类
@@ -58,6 +61,11 @@ import DailyQuote from "./tools/DailyQuote";
 import QRCodeTool from "./tools/QRCodeTool";
 import RandomGroupTool from "./tools/RandomGroupTool";
 import ExpenseTracker from "./tools/ExpenseTracker";
+
+// 新增效率工具
+import FileHashCalculator from "./tools/FileHashCalculator";
+import ShortcutKeysReference from "./tools/ShortcutKeysReference";
+import NetworkUtilities from "./tools/NetworkUtilities";
 
 export const efficiencyTools = [
     {
@@ -108,6 +116,27 @@ export const efficiencyTools = [
         description: "PDF转图片、图片格式转换，支持批量处理和多种输出设置",
         icon: <FileImage className="h-5 w-5" />,
         color: "bg-indigo-500"
+    },
+    {
+        id: "file-hash-calculator",
+        title: "文件哈希计算器",
+        description: "计算文件和文本的哈希值，支持MD5、SHA-1、SHA-256、SHA-512算法",
+        icon: <Shield className="h-5 w-5" />,
+        color: "bg-cyan-500"
+    },
+    {
+        id: "shortcut-keys-reference",
+        title: "快捷键查询",
+        description: "常用软件和系统的快捷键查询工具，支持搜索和收藏",
+        icon: <Command className="h-5 w-5" />,
+        color: "bg-slate-500"
+    },
+    {
+        id: "network-utilities",
+        title: "网络工具集",
+        description: "IP查询、DNS解析、User-Agent生成、子网计算等网络工具",
+        icon: <Globe className="h-5 w-5" />,
+        color: "bg-emerald-500"
     }
 ];
 

@@ -27,7 +27,10 @@ import {
   Palette,
   Hash,
   ImageIcon,
-  FileImage
+  FileImage,
+  Shield,
+  Command,
+  Globe
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
@@ -241,6 +244,24 @@ export const navItems = [
     icon: <FileImage className="h-4 w-4" />,
     page: <ToolPage toolId="picture-processor" />,
   },
+  {
+    title: "文件哈希计算器",
+    to: "/file-hash-calculator",
+    icon: <Shield className="h-4 w-4" />,
+    page: <ToolPage toolId="file-hash-calculator" />,
+  },
+  {
+    title: "快捷键查询",
+    to: "/shortcut-keys-reference",
+    icon: <Command className="h-4 w-4" />,
+    page: <ToolPage toolId="shortcut-keys-reference" />,
+  },
+  {
+    title: "网络工具集",
+    to: "/network-utilities",
+    icon: <Globe className="h-4 w-4" />,
+    page: <ToolPage toolId="network-utilities" />,
+  },
 ];
 
 // 分类导航菜单
@@ -349,6 +370,21 @@ export const categoryNavItems = [
         title: "图片处理工具",
         to: "/picture-processor",
         icon: <FileImage className="h-4 w-4" />,
+      },
+      {
+        title: "文件哈希计算器",
+        to: "/file-hash-calculator",
+        icon: <Shield className="h-4 w-4" />,
+      },
+      {
+        title: "快捷键查询",
+        to: "/shortcut-keys-reference",
+        icon: <Command className="h-4 w-4" />,
+      },
+      {
+        title: "网络工具集",
+        to: "/network-utilities",
+        icon: <Globe className="h-4 w-4" />,
       },
     ]
   },

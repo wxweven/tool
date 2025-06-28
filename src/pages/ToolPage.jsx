@@ -30,6 +30,9 @@ import ColorToolkit from "../tools/ColorToolkit";
 import NumberBaseConverter from "../tools/NumberBaseConverter";
 import ImageCompressor from "../tools/ImageCompressor";
 import PictureProcessor from "../tools/PictureProcessor";
+import FileHashCalculator from "../tools/FileHashCalculator";
+import ShortcutKeysReference from "../tools/ShortcutKeysReference";
+import NetworkUtilities from "../tools/NetworkUtilities";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import { StarIcon as StarIconOutline } from "@heroicons/react/24/outline";
 import { useFavorites } from "../context/FavoritesContext";
@@ -114,6 +117,12 @@ const ToolPage = ({ toolId }) => {
         return <ImageCompressor />;
       case "picture-processor":
         return <PictureProcessor />;
+      case "file-hash-calculator":
+        return <FileHashCalculator />;
+      case "shortcut-keys-reference":
+        return <ShortcutKeysReference />;
+      case "network-utilities":
+        return <NetworkUtilities />;
       default:
         return (
           <div className="text-center py-12">

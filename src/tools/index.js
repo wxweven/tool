@@ -31,6 +31,9 @@ import ColorToolkit from "./ColorToolkit";
 import NumberBaseConverter from "./NumberBaseConverter";
 import ImageCompressor from "./ImageCompressor";
 import PictureProcessor from "./PictureProcessor";
+import FileHashCalculator from "./FileHashCalculator";
+import ShortcutKeysReference from "./ShortcutKeysReference";
+import NetworkUtilities from "./NetworkUtilities";
 
 export {
   BatchGenerator,
@@ -66,4 +69,7 @@ export {
   NumberBaseConverter,
   ImageCompressor,
   PictureProcessor,
+  FileHashCalculator,
+  ShortcutKeysReference,
+  NetworkUtilities,
 }; 
