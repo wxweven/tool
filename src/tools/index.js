@@ -26,6 +26,9 @@ import QRCodeTool from "./QRCodeTool";
 import RandomGroupTool from "./RandomGroupTool";
 import ExpenseTracker from "./ExpenseTracker";
 import PasswordGenerator from "./PasswordGenerator";
+import PomodoroTimer from "./PomodoroTimer";
+import ColorToolkit from "./ColorToolkit";
+import NumberBaseConverter from "./NumberBaseConverter";
 
 export {
   BatchGenerator,
@@ -56,4 +59,7 @@ export {
   RandomGroupTool,
   ExpenseTracker,
   PasswordGenerator,
+  PomodoroTimer,
+  ColorToolkit,
+  NumberBaseConverter,
 }; 

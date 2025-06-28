@@ -17,12 +17,15 @@ import {
   AlertTriangle,
   Settings,
   History,
-  Download
+  Download,
+  Trash2,
+  X
 } from "lucide-react";
 
 const PasswordGenerator = () => {
   // 密码配置
   const [length, setLength] = useState([12]);
+  const [manualLength, setManualLength] = useState('12');
   const [includeUppercase, setIncludeUppercase] = useState(true);
   const [includeLowercase, setIncludeLowercase] = useState(true);
   const [includeNumbers, setIncludeNumbers] = useState(true);
@@ -215,6 +218,18 @@ const PasswordGenerator = () => {
     }
   };
   
+  // 删除历史记录
+  const deleteHistoryItem = (id) => {
+    setHistory(prev => prev.filter(item => item.id !== id));
+  };
+  
+  // 清空所有历史记录
+  const clearAllHistory = () => {
+    if (window.confirm('确定要清空所有历史记录吗？此操作无法撤销。')) {
+      setHistory([]);
+    }
+  };
+  
   // 导出历史记录
   const exportHistory = () => {
     if (history.length === 0) {
@@ -266,11 +281,21 @@ const PasswordGenerator = () => {
   // 应用模板
   const applyTemplate = (template) => {
     setLength([template.config.length]);
+    setManualLength(template.config.length.toString());
     setIncludeUppercase(template.config.uppercase);
     setIncludeLowercase(template.config.lowercase);
     setIncludeNumbers(template.config.numbers);
     setIncludeSymbols(template.config.symbols);
     setExcludeSimilar(template.config.excludeSimilar);
+  };
+  
+  // 手动长度输入处理
+  const handleManualLengthChange = (value) => {
+    setManualLength(value);
+    const numValue = parseInt(value);
+    if (!isNaN(numValue) && numValue >= 4 && numValue <= 128) {
+      setLength([numValue]);
+    }
   };
   
   // 初始生成
@@ -311,9 +336,28 @@ const PasswordGenerator = () => {
                     <label className="text-sm font-medium">密码长度</label>
                     <Badge variant="outline">{length[0]} 位</Badge>
                   </div>
+                  
+                  {/* 手动输入长度 */}
+                  <div className="flex gap-2 items-center">
+                    <Input
+                      type="number"
+                      min="4"
+                      max="128"
+                      value={manualLength}
+                      onChange={(e) => handleManualLengthChange(e.target.value)}
+                      className="w-20"
+                      placeholder="长度"
+                    />
+                    <span className="text-sm text-muted-foreground">位 (4-128)</span>
+                  </div>
+                  
+                  {/* 滑块调节 */}
                   <Slider
                     value={length}
-                    onValueChange={setLength}
+                    onValueChange={(value) => {
+                      setLength(value);
+                      setManualLength(value[0].toString());
+                    }}
                     max={128}
                     min={4}
                     step={1}
@@ -528,10 +572,16 @@ const PasswordGenerator = () => {
                   生成历史 ({history.length})
                 </CardTitle>
                 {history.length > 0 && (
-                  <Button variant="outline" size="sm" onClick={exportHistory}>
-                    <Download className="h-4 w-4 mr-2" />
-                    导出
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm" onClick={exportHistory}>
+                      <Download className="h-4 w-4 mr-2" />
+                      导出
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={clearAllHistory}>
+                      <Trash2 className="h-4 w-4 mr-2" />
+                      清空
+                    </Button>
+                  </div>
                 )}
               </div>
             </CardHeader>
@@ -559,6 +609,13 @@ const PasswordGenerator = () => {
                         onClick={() => copyPassword(item.password)}
                       >
                         <Copy className="h-3 w-3" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => deleteHistoryItem(item.id)}
+                      >
+                        <X className="h-3 w-3" />
                       </Button>
                     </div>
                   ))}

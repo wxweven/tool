@@ -23,7 +23,8 @@ import {
   Shuffle,
   Wallet,
   Quote,
-  Key
+  Key,
+  Palette
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
@@ -142,7 +143,7 @@ export const navItems = [
     page: <ToolPage toolId="mortgage" />,
   },
   {
-    title: "批量生成",
+    title: "批量随机生成",
     to: "/batch-generator",
     icon: <ZapIcon className="h-4 w-4" />,
     page: <ToolPage toolId="batch-generator" />,
@@ -206,6 +207,18 @@ export const navItems = [
     to: "/password-generator",
     icon: <Key className="h-4 w-4" />,
     page: <ToolPage toolId="password-generator" />,
+  },
+  {
+    title: "番茄钟工具",
+    to: "/pomodoro-timer",
+    icon: <ClockIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="pomodoro-timer" />,
+  },
+  {
+    title: "颜色工具箱",
+    to: "/color-toolkit",
+    icon: <Palette className="h-4 w-4" />,
+    page: <ToolPage toolId="color-toolkit" />,
   },
 ];
 
@@ -282,7 +295,7 @@ export const categoryNavItems = [
     icon: <ZapIcon className="h-4 w-4" />,
     items: [
       {
-        title: "批量生成",
+        title: "批量随机生成",
         to: "/batch-generator",
         icon: <ZapIcon className="h-4 w-4" />,
       },
@@ -290,6 +303,16 @@ export const categoryNavItems = [
         title: "密码生成器",
         to: "/password-generator",
         icon: <Key className="h-4 w-4" />,
+      },
+      {
+        title: "番茄钟工具",
+        to: "/pomodoro-timer",
+        icon: <ClockIcon className="h-4 w-4" />,
+      },
+      {
+        title: "颜色工具箱",
+        to: "/color-toolkit",
+        icon: <Palette className="h-4 w-4" />,
       },
     ]
   },

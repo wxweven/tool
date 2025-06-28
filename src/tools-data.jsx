@@ -19,7 +19,8 @@ import {
     Shuffle,
     Wallet,
     Quote,
-    Key as KeyIcon
+    Key as KeyIcon,
+    Palette as PaletteIcon
 } from "lucide-react";
 
 // 工具文件类
@@ -58,7 +59,7 @@ import ExpenseTracker from "./tools/ExpenseTracker";
 export const efficiencyTools = [
     {
         id: "batch-generator",
-        title: "批量生成",
+        title: "批量随机生成",
         description: "批量生成随机姓名、数字等多种数据",
         icon: <ZapIcon className="h-5 w-5" />,
         color: "bg-yellow-500"
@@ -69,6 +70,20 @@ export const efficiencyTools = [
         description: "生成安全可靠的密码，支持多种复杂度设置",
         icon: <KeyIcon className="h-5 w-5" />,
         color: "bg-red-500"
+    },
+    {
+        id: "pomodoro-timer",
+        title: "番茄钟工具",
+        description: "基于番茄工作法的时间管理工具，提高专注力和工作效率",
+        icon: <ClockIcon className="h-5 w-5" />,
+        color: "bg-orange-500"
+    },
+    {
+        id: "color-toolkit",
+        title: "颜色工具箱",
+        description: "全方位的颜色处理工具，支持格式转换、调色板生成、对比度检测",
+        icon: <PaletteIcon className="h-5 w-5" />,
+        color: "bg-purple-500"
     }
 ];
 
