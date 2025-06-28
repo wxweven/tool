@@ -18,7 +18,8 @@ import {
     QrCode,
     Shuffle,
     Wallet,
-    Quote
+    Quote,
+    Key as KeyIcon
 } from "lucide-react";
 
 // 工具文件类
@@ -61,6 +62,13 @@ export const efficiencyTools = [
         description: "批量生成随机姓名、数字等多种数据",
         icon: <ZapIcon className="h-5 w-5" />,
         color: "bg-yellow-500"
+    },
+    {
+        id: "password-generator",
+        title: "密码生成器",
+        description: "生成安全可靠的密码，支持多种复杂度设置",
+        icon: <KeyIcon className="h-5 w-5" />,
+        color: "bg-red-500"
     }
 ];
 

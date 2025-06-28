@@ -24,6 +24,7 @@ import DailyQuote from "../tools/DailyQuote";
 import QRCodeTool from "../tools/QRCodeTool";
 import RandomGroupTool from "../tools/RandomGroupTool";
 import ExpenseTracker from "../tools/ExpenseTracker";
+import PasswordGenerator from "../tools/PasswordGenerator";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import { StarIcon as StarIconOutline } from "@heroicons/react/24/outline";
 import { useFavorites } from "../context/FavoritesContext";
@@ -96,6 +97,8 @@ const ToolPage = ({ toolId }) => {
         return <RandomGroupTool />;
       case "expense-tracker":
         return <ExpenseTracker />;
+      case "password-generator":
+        return <PasswordGenerator />;
       default:
         return (
           <div className="text-center py-12">

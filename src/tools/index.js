@@ -25,6 +25,7 @@ import DailyQuote from "./DailyQuote";
 import QRCodeTool from "./QRCodeTool";
 import RandomGroupTool from "./RandomGroupTool";
 import ExpenseTracker from "./ExpenseTracker";
+import PasswordGenerator from "./PasswordGenerator";
 
 export {
   BatchGenerator,
@@ -54,4 +55,5 @@ export {
   QRCodeTool,
   RandomGroupTool,
   ExpenseTracker,
+  PasswordGenerator,
 }; 

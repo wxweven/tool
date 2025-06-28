@@ -22,7 +22,8 @@ import {
   QrCode,
   Shuffle,
   Wallet,
-  Quote
+  Quote,
+  Key
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
@@ -200,6 +201,12 @@ export const navItems = [
     icon: <Wallet className="h-4 w-4" />,
     page: <ToolPage toolId="expense-tracker" />,
   },
+  {
+    title: "密码生成器",
+    to: "/password-generator",
+    icon: <Key className="h-4 w-4" />,
+    page: <ToolPage toolId="password-generator" />,
+  },
 ];
 
 // 分类导航菜单
@@ -278,6 +285,11 @@ export const categoryNavItems = [
         title: "批量生成",
         to: "/batch-generator",
         icon: <ZapIcon className="h-4 w-4" />,
+      },
+      {
+        title: "密码生成器",
+        to: "/password-generator",
+        icon: <Key className="h-4 w-4" />,
       },
     ]
   },
