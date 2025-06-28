@@ -321,11 +321,6 @@ export const categoryNavItems = [
         icon: <DownloadIcon className="h-4 w-4" />,
       },
       {
-        title: "纯文本提取",
-        to: "/plaintext",
-        icon: <FileTextIcon className="h-4 w-4" />,
-      },
-      {
         title: "Excel/CSV转SQL",
         to: "/excel-to-sql",
         icon: <FileTextIcon className="h-4 w-4" />,
