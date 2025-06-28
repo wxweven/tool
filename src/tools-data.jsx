@@ -13,7 +13,8 @@ import {
     FilterIcon,
     DownloadIcon,
     MinusIcon,
-    ZapIcon
+    ZapIcon,
+    HeartIcon
 } from "lucide-react";
 
 // 工具文件类
@@ -31,6 +32,15 @@ import {
     ShellCommands,
     JavaToJson,
     ExcelToSql,
+    CountdownReminder,
+    ExpressTracker,
+    LunchRandomizer,
+    UnitConverter,
+    TimestampConverter,
+    LotteryTool,
+    MortgageCalculator,
+    DownloadFiles,
+    ExcelToTable,
 } from "./tools";
 
 export const efficiencyTools = [
@@ -148,6 +158,34 @@ export const textTools = [
 ];
 
 export const lifeTools = [
+    {
+        id: "countdown-reminder",
+        title: "倒数日/纪念日提醒",
+        description: "输入重要日期，自动显示距离天数",
+        icon: <ClockIcon className="h-5 w-5" />,
+        color: "bg-blue-400"
+    },
+    {
+        id: "lunch-randomizer",
+        title: "随机午餐/晚餐",
+        description: "帮你决定今天吃什么，支持自定义菜品",
+        icon: <HeartIcon className="h-5 w-5" />,
+        color: "bg-pink-400"
+    },
+    {
+        id: "express-tracker",
+        title: "快递单号追踪",
+        description: "输入快递单号，自动识别快递公司并跳转查询",
+        icon: <LinkIcon className="h-5 w-5" />,
+        color: "bg-green-400"
+    },
+    {
+        id: "unit-converter",
+        title: "单位换算器",
+        description: "支持长度、重量、温度等常用单位换算",
+        icon: <CalculatorIcon className="h-5 w-5" />,
+        color: "bg-yellow-400"
+    },
     {
         id: "lottery",
         title: "年会抽奖工具",

@@ -142,6 +142,30 @@ export const navItems = [
     icon: <ZapIcon className="h-4 w-4" />,
     page: <ToolPage toolId="batch-generator" />,
   },
+  {
+    title: "倒数日/纪念日提醒",
+    to: "/countdown-reminder",
+    icon: <ClockIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="countdown-reminder" />,
+  },
+  {
+    title: "随机午餐/晚餐",
+    to: "/lunch-randomizer",
+    icon: <HeartIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="lunch-randomizer" />,
+  },
+  {
+    title: "快递单号追踪",
+    to: "/express-tracker",
+    icon: <LinkIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="express-tracker" />,
+  },
+  {
+    title: "单位换算器",
+    to: "/unit-converter",
+    icon: <CalculatorIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="unit-converter" />,
+  },
 ];
 
 // 分类导航菜单
@@ -150,6 +174,42 @@ export const categoryNavItems = [
     title: "我的收藏",
     icon: <StarIcon className="h-4 w-4" />,
     to: "/favorites"
+  },
+  {
+    title: "生活工具",
+    icon: <HeartIcon className="h-4 w-4" />,
+    items: [
+      {
+        title: "倒数日/纪念日提醒",
+        to: "/countdown-reminder",
+        icon: <ClockIcon className="h-4 w-4" />,
+      },
+      {
+        title: "随机午餐/晚餐",
+        to: "/lunch-randomizer",
+        icon: <HeartIcon className="h-4 w-4" />,
+      },
+      {
+        title: "快递单号追踪",
+        to: "/express-tracker",
+        icon: <LinkIcon className="h-4 w-4" />,
+      },
+      {
+        title: "单位换算器",
+        to: "/unit-converter",
+        icon: <CalculatorIcon className="h-4 w-4" />,
+      },
+      {
+        title: "年会抽奖工具",
+        to: "/lottery",
+        icon: <GiftIcon className="h-4 w-4" />,
+      },
+      {
+        title: "房贷计算器",
+        to: "/mortgage",
+        icon: <CalculatorIcon className="h-4 w-4" />,
+      },
+    ]
   },
   {
     title: "效率工具",
@@ -249,20 +309,4 @@ export const categoryNavItems = [
       },
     ]
   },
-  {
-    title: "生活工具",
-    icon: <HeartIcon className="h-4 w-4" />,
-    items: [
-      {
-        title: "年会抽奖工具",
-        to: "/lottery",
-        icon: <GiftIcon className="h-4 w-4" />,
-      },
-      {
-        title: "房贷计算器",
-        to: "/mortgage",
-        icon: <CalculatorIcon className="h-4 w-4" />,
-      },
-    ]
-  }
 ];
