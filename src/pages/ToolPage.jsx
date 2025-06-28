@@ -27,6 +27,8 @@ import ExpenseTracker from "../tools/ExpenseTracker";
 import PasswordGenerator from "../tools/PasswordGenerator";
 import PomodoroTimer from "../tools/PomodoroTimer";
 import ColorToolkit from "../tools/ColorToolkit";
+import NumberBaseConverter from "../tools/NumberBaseConverter";
+import ImageCompressor from "../tools/ImageCompressor";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import { StarIcon as StarIconOutline } from "@heroicons/react/24/outline";
 import { useFavorites } from "../context/FavoritesContext";
@@ -105,6 +107,10 @@ const ToolPage = ({ toolId }) => {
         return <PomodoroTimer />;
       case "color-toolkit":
         return <ColorToolkit />;
+      case "number-base-converter":
+        return <NumberBaseConverter />;
+      case "image-compressor":
+        return <ImageCompressor />;
       default:
         return (
           <div className="text-center py-12">

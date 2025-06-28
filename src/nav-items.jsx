@@ -24,7 +24,9 @@ import {
   Wallet,
   Quote,
   Key,
-  Palette
+  Palette,
+  Hash,
+  ImageIcon
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
@@ -220,6 +222,18 @@ export const navItems = [
     icon: <Palette className="h-4 w-4" />,
     page: <ToolPage toolId="color-toolkit" />,
   },
+  {
+    title: "进制转换器",
+    to: "/number-base-converter",
+    icon: <Hash className="h-4 w-4" />,
+    page: <ToolPage toolId="number-base-converter" />,
+  },
+  {
+    title: "图片压缩工具",
+    to: "/image-compressor",
+    icon: <ImageIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="image-compressor" />,
+  },
 ];
 
 // 分类导航菜单
@@ -313,6 +327,16 @@ export const categoryNavItems = [
         title: "颜色工具箱",
         to: "/color-toolkit",
         icon: <Palette className="h-4 w-4" />,
+      },
+      {
+        title: "进制转换器",
+        to: "/number-base-converter",
+        icon: <Hash className="h-4 w-4" />,
+      },
+      {
+        title: "图片压缩工具",
+        to: "/image-compressor",
+        icon: <ImageIcon className="h-4 w-4" />,
       },
     ]
   },

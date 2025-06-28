@@ -20,7 +20,9 @@ import {
     Wallet,
     Quote,
     Key as KeyIcon,
-    Palette as PaletteIcon
+    Palette as PaletteIcon,
+    Hash,
+    ImageIcon
 } from "lucide-react";
 
 // 工具文件类
@@ -84,6 +86,20 @@ export const efficiencyTools = [
         description: "全方位的颜色处理工具，支持格式转换、调色板生成、对比度检测",
         icon: <PaletteIcon className="h-5 w-5" />,
         color: "bg-purple-500"
+    },
+    {
+        id: "number-base-converter",
+        title: "进制转换器",
+        description: "支持多种进制之间的数值转换，程序员必备工具",
+        icon: <Hash className="h-5 w-5" />,
+        color: "bg-blue-500"
+    },
+    {
+        id: "image-compressor",
+        title: "图片压缩工具",
+        description: "在线压缩图片，支持多种格式和批量处理，有效减小文件大小",
+        icon: <ImageIcon className="h-5 w-5" />,
+        color: "bg-green-500"
     }
 ];
 

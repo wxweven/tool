@@ -29,6 +29,7 @@ import PasswordGenerator from "./PasswordGenerator";
 import PomodoroTimer from "./PomodoroTimer";
 import ColorToolkit from "./ColorToolkit";
 import NumberBaseConverter from "./NumberBaseConverter";
+import ImageCompressor from "./ImageCompressor";
 
 export {
   BatchGenerator,
@@ -62,4 +63,5 @@ export {
   PomodoroTimer,
   ColorToolkit,
   NumberBaseConverter,
+  ImageCompressor,
 }; 
