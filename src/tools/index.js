@@ -35,6 +35,8 @@ import FileHashCalculator from "./FileHashCalculator";
 import ShortcutKeysReference from "./ShortcutKeysReference";
 import NetworkUtilities from "./NetworkUtilities";
 import NumberPuzzle from "../games/games/NumberPuzzle/NumberPuzzle";
+import MemoryCard from "../games/games/MemoryCard/MemoryCard";
+import Sudoku from "../games/games/Sudoku/Sudoku";
 
 export {
   BatchGenerator,
@@ -74,4 +76,6 @@ export {
   ShortcutKeysReference,
   NetworkUtilities,
   NumberPuzzle,
+  MemoryCard,
+  Sudoku,
 }; 

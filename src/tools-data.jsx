@@ -332,5 +332,19 @@ export const gameTools = [
         description: "经典的滑块拼图游戏，将数字按顺序排列完成挑战",
         icon: <Gamepad2 className="h-5 w-5" />,
         color: "bg-indigo-500"
+    },
+    {
+        id: "memory-card",
+        title: "记忆翻牌",
+        description: "翻开卡片找到相同图案的配对，考验记忆力和反应速度",
+        icon: <Gamepad2 className="h-5 w-5" />,
+        color: "bg-purple-500"
+    },
+    {
+        id: "sudoku",
+        title: "数独游戏",
+        description: "经典数独逻辑游戏，支持多种难度、自动检查和笔记功能",
+        icon: <Gamepad2 className="h-5 w-5" />,
+        color: "bg-green-500"
     }
 ];

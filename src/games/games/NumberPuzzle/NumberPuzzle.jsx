@@ -343,7 +343,6 @@ const NumberPuzzle = () => {
 
   return (
     <GameContainer
-      title="数字华容道"
       description="经典的滑块拼图游戏，将数字按顺序排列完成挑战"
       onReset={handleReset}
       onTest={handleTest}

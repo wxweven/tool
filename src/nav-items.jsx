@@ -269,6 +269,18 @@ export const navItems = [
     icon: <Gamepad2 className="h-4 w-4" />,
     page: <ToolPage toolId="number-puzzle" />,
   },
+  {
+    title: "记忆翻牌",
+    to: "/memory-card",
+    icon: <Gamepad2 className="h-4 w-4" />,
+    page: <ToolPage toolId="memory-card" />,
+  },
+  {
+    title: "数独游戏",
+    to: "/sudoku",
+    icon: <Gamepad2 className="h-4 w-4" />,
+    page: <ToolPage toolId="sudoku" />,
+  },
 ];
 
 // 分类导航菜单
@@ -285,6 +297,16 @@ export const categoryNavItems = [
       {
         title: "数字华容道",
         to: "/number-puzzle",
+        icon: <Gamepad2 className="h-4 w-4" />,
+      },
+      {
+        title: "记忆翻牌",
+        to: "/memory-card",
+        icon: <Gamepad2 className="h-4 w-4" />,
+      },
+      {
+        title: "数独游戏",
+        to: "/sudoku",
         icon: <Gamepad2 className="h-4 w-4" />,
       },
     ]

@@ -121,6 +121,15 @@ const checkAchievements = (gameId, record) => {
     if (record.bestScore >= 1000) achievements.push('华容道大师');
   }
 
+  // 记忆翻牌特定成就
+  if (gameId === 'memory-card') {
+    if (record.maxCombo >= 3) achievements.push('连击高手');
+    if (record.maxCombo >= 5) achievements.push('连击大师');
+    if (record.bestTime > 0 && record.bestTime <= 30) achievements.push('闪电记忆');
+    if (record.bestMoves > 0 && record.bestMoves <= 20) achievements.push('记忆专家');
+    if (record.playCount >= 20) achievements.push('记忆达人');
+  }
+
   return achievements;
 };
 
