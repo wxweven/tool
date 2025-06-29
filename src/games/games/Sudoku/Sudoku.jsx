@@ -177,43 +177,59 @@ const Sudoku = () => {
     // 高亮同一行、列、宫格
     const isSameRow = selectedCell && selectedCell[0] === row;
     const isSameCol = selectedCell && selectedCell[1] === col;
-    const isSameBlock = selectedCell && Math.floor(selectedCell[0]/3) === Math.floor(row/3) && Math.floor(selectedCell[1]/3) === Math.floor(col/3);
+    const isSameBlock = selectedCell && Math.floor(selectedCell[0] / 3) === Math.floor(row / 3) && Math.floor(selectedCell[1] / 3) === Math.floor(col / 3);
     // 3x3宫格交错色
-    const isBlockEven = (Math.floor(row/3) + Math.floor(col/3)) % 2 === 0;
+    const isBlockEven = (Math.floor(row / 3) + Math.floor(col / 3)) % 2 === 0;
     const cellNotes = notes[row][col];
+
+    // 线条样式
+    const borderStyle = `border border-orange-300 ${col % 3 === 0 ? 'border-l-4 border-orange-400' : ''} ${row % 3 === 0 ? 'border-t-4 border-orange-400' : ''}`;
+    
+    // 数字颜色样式
+    let numColor = isPrefilled ? 'text-[#7a3b00]' : (value ? 'text-[#0077B6]' : '');
+    if (isSelected && value) numColor = 'text-[#ff2d2d]'; // 选中格子时数字变红色
+
     return (
       <td
         key={col}
         onClick={() => setSelectedCell([row, col])}
-        className={`w-10 h-10 border text-center align-middle cursor-pointer select-none transition-colors duration-200
-          ${isPrefilled ? 'bg-gray-200 text-gray-500 font-bold' : isBlockEven ? 'bg-blue-50' : 'bg-white'}
-          ${isSelected ? 'ring-2 ring-blue-500 z-10' : ''}
-          ${!isSelected && (isSameRow || isSameCol || isSameBlock) ? 'bg-blue-100' : ''}
+        className={`w-12 h-12 align-middle cursor-pointer select-none transition-colors duration-200 text-xl font-extrabold
+          ${borderStyle}
+          ${isPrefilled ? (isBlockEven ? 'bg-[#fff7e6]' : 'bg-[#ffeccc]') : (isBlockEven ? 'bg-[#fffbe6]' : 'bg-[#fff6e0]')}
+          ${isSelected ? 'ring-2 ring-[#ff9800] z-10' : ''}
+          ${!isSelected && (isSameRow || isSameCol || isSameBlock) ? 'bg-[#ffe0b2]' : ''}
+          shadow-sm
         `}
       >
         {showNotes && !isPrefilled && cellNotes.length > 0 ? (
-          <div className="grid grid-cols-3 text-xs text-gray-400">
-            {[1,2,3,4,5,6,7,8,9].map(n => (
-              <span key={n} className={cellNotes.includes(n) ? 'text-blue-500' : ''}>{cellNotes.includes(n) ? n : ''}</span>
+          <div className="grid grid-cols-3 text-xs text-orange-400">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => (
+              <span key={n} className={cellNotes.includes(n) ? 'text-[#ff9800]' : ''}>{cellNotes.includes(n) ? n : ''}</span>
             ))}
           </div>
-        ) : value !== 0 ? value : ''}
+        ) : (value !== 0 ? (
+          <span className={`${numColor} drop-shadow-[0_1px_1px_rgba(255,140,0,0.3)]`}>{value}</span>
+        ) : null)}
       </td>
     );
   };
 
   // 渲染数独棋盘
-  const renderBoard = () => (
-    <table className="border-collapse mx-auto bg-gray-100 rounded-lg shadow">
-      <tbody>
-        {userGrid.map((row, i) => (
-          <tr key={i}>
-            {row.map((_, j) => renderCell(i, j))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
+  const renderBoard = () => {
+    return (
+      <div className="rounded-xl overflow-hidden shadow-xl" style={{ background: 'linear-gradient(135deg,#fffbe6 60%,#ffe0b2 100%)' }}>
+        <table className="border-collapse mx-auto">
+          <tbody>
+            {userGrid.map((row, i) => (
+              <tr key={i}>
+                {row.map((_, j) => renderCell(i, j))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
 
   // 渲染数字输入区
   const renderInputPad = () => (
