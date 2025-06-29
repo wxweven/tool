@@ -30,7 +30,8 @@ import {
   FileImage,
   Shield,
   Command,
-  Globe
+  Globe,
+  Gamepad2
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
@@ -262,6 +263,12 @@ export const navItems = [
     icon: <Globe className="h-4 w-4" />,
     page: <ToolPage toolId="network-utilities" />,
   },
+  {
+    title: "数字华容道",
+    to: "/number-puzzle",
+    icon: <Gamepad2 className="h-4 w-4" />,
+    page: <ToolPage toolId="number-puzzle" />,
+  },
 ];
 
 // 分类导航菜单
@@ -270,6 +277,17 @@ export const categoryNavItems = [
     title: "我的收藏",
     icon: <StarIcon className="h-4 w-4" />,
     to: "/favorites"
+  },
+  {
+    title: "游戏娱乐",
+    icon: <Gamepad2 className="h-4 w-4" />,
+    items: [
+      {
+        title: "数字华容道",
+        to: "/number-puzzle",
+        icon: <Gamepad2 className="h-4 w-4" />,
+      },
+    ]
   },
   {
     title: "生活工具",

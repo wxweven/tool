@@ -26,7 +26,8 @@ import {
     FileImage,
     Shield,
     Command,
-    Globe
+    Globe,
+    Gamepad2
 } from "lucide-react";
 
 // 工具文件类
@@ -321,5 +322,15 @@ export const lifeTools = [
         description: "简单的日常收支记录，支持导出",
         icon: <Wallet className="h-5 w-5" />,
         color: "bg-emerald-400"
+    }
+];
+
+export const gameTools = [
+    {
+        id: "number-puzzle",
+        title: "数字华容道",
+        description: "经典的滑块拼图游戏，将数字按顺序排列完成挑战",
+        icon: <Gamepad2 className="h-5 w-5" />,
+        color: "bg-indigo-500"
     }
 ];

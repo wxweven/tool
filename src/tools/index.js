@@ -34,6 +34,7 @@ import PictureProcessor from "./PictureProcessor";
 import FileHashCalculator from "./FileHashCalculator";
 import ShortcutKeysReference from "./ShortcutKeysReference";
 import NetworkUtilities from "./NetworkUtilities";
+import NumberPuzzle from "../games/games/NumberPuzzle/NumberPuzzle";
 
 export {
   BatchGenerator,
@@ -72,4 +73,5 @@ export {
   FileHashCalculator,
   ShortcutKeysReference,
   NetworkUtilities,
+  NumberPuzzle,
 }; 

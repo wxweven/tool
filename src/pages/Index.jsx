@@ -22,13 +22,14 @@ import {
   MinusIcon,
   TextIcon,
   StarIcon,
-  ZapIcon
+  ZapIcon,
+  Gamepad2
 } from "lucide-react";
 import { useState, useEffect, useMemo } from "react";
 import { useFavorites } from "@/context/FavoritesContext";
-import { devTools, lifeTools, textTools, efficiencyTools } from "@/tools-data.jsx";
+import { devTools, lifeTools, textTools, efficiencyTools, gameTools } from "@/tools-data.jsx";
 
-const allTools = [...devTools, ...textTools, ...lifeTools, ...efficiencyTools];
+const allTools = [...devTools, ...textTools, ...lifeTools, ...efficiencyTools, ...gameTools];
 
 const ToolCategory = ({ title, icon, tools }) => {
   const { favorites, toggleFavorite } = useFavorites();
@@ -155,6 +156,12 @@ const Index = () => {
         title="生活工具"
         icon={<HeartIcon className="h-4 w-4" />}
         tools={lifeTools}
+      />
+
+      <ToolCategory
+        title="游戏娱乐"
+        icon={<Gamepad2 className="h-4 w-4" />}
+        tools={gameTools}
       />
 
       <div className="mt-6 text-center">

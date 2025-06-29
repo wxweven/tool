@@ -33,6 +33,7 @@ import PictureProcessor from "../tools/PictureProcessor";
 import FileHashCalculator from "../tools/FileHashCalculator";
 import ShortcutKeysReference from "../tools/ShortcutKeysReference";
 import NetworkUtilities from "../tools/NetworkUtilities";
+import NumberPuzzle from "../games/games/NumberPuzzle/NumberPuzzle";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import { StarIcon as StarIconOutline } from "@heroicons/react/24/outline";
 import { useFavorites } from "../context/FavoritesContext";
@@ -123,6 +124,8 @@ const ToolPage = ({ toolId }) => {
         return <ShortcutKeysReference />;
       case "network-utilities":
         return <NetworkUtilities />;
+      case "number-puzzle":
+        return <NumberPuzzle />;
       default:
         return (
           <div className="text-center py-12">
