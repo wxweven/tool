@@ -169,46 +169,75 @@ const Sudoku = () => {
     setIsPlaying(false);
   };
 
+  // 高亮逻辑计算
+  const selectedValue = selectedCell && userGrid.length ? userGrid[selectedCell[0]][selectedCell[1]] : null;
+  const rowsToHighlight = new Set();
+  const colsToHighlight = new Set();
+
+  if (selectedValue) {
+    // 当选中一个有数字的格子时，找出所有含相同数字的行和列
+    for (let r = 0; r < 9; r++) {
+      for (let c = 0; c < 9; c++) {
+        if (userGrid[r][c] === selectedValue) {
+          rowsToHighlight.add(r);
+          colsToHighlight.add(c);
+        }
+      }
+    }
+  } else if (selectedCell) {
+    // 当选中一个空格子时，只高亮其所在的行和列
+    rowsToHighlight.add(selectedCell[0]);
+    colsToHighlight.add(selectedCell[1]);
+  }
+
   // 渲染格子
   const renderCell = (row, col) => {
     const value = userGrid[row][col];
     const isPrefilled = puzzle[row][col] !== 0;
     const isSelected = selectedCell && selectedCell[0] === row && selectedCell[1] === col;
-    // 高亮同一行、列、宫格
-    const isSameRow = selectedCell && selectedCell[0] === row;
-    const isSameCol = selectedCell && selectedCell[1] === col;
-    const isSameBlock = selectedCell && Math.floor(selectedCell[0] / 3) === Math.floor(row / 3) && Math.floor(selectedCell[1] / 3) === Math.floor(col / 3);
-    // 3x3宫格交错色
-    const isBlockEven = (Math.floor(row / 3) + Math.floor(col / 3)) % 2 === 0;
-    const cellNotes = notes[row][col];
 
-    // 线条样式
-    const borderStyle = `border border-orange-300 ${col % 3 === 0 ? 'border-l-4 border-orange-400' : ''} ${row % 3 === 0 ? 'border-t-4 border-orange-400' : ''}`;
+    // 为圆圈高亮判断当前格子是否与选中格子的值相同
+    const isSameAsSelectedValue = selectedValue && value !== 0 && value === selectedValue;
+
+    // 根据新的高亮逻辑判断是否高亮行或列
+    const shouldHighlightRowCol = rowsToHighlight.has(row) || colsToHighlight.has(col);
     
-    // 数字颜色样式
-    let numColor = isPrefilled ? 'text-[#7a3b00]' : (value ? 'text-[#0077B6]' : '');
-    if (isSelected && value) numColor = 'text-[#ff2d2d]'; // 选中格子时数字变红色
+    // 边框样式
+    const borderStyle = `border border-gray-300 ${col > 0 && col % 3 === 0 ? 'border-l-2 border-gray-500' : ''} ${row > 0 && row % 3 === 0 ? 'border-t-2 border-gray-500' : ''}`;
+
+    // 数字颜色: 预设为黑色, 用户输入为蓝色
+    let numColor = isPrefilled ? 'text-black' : 'text-[#0077B6]';
+    if (isSelected && value) {
+      numColor = 'text-red-500'; // 选中时数字为红色
+    }
+
+    // 背景色逻辑
+    let bgColor = 'bg-white'; // 统一白色背景
+    if (isSelected) {
+      bgColor = 'bg-yellow-200'; // 选中格子为黄色
+    } else if (shouldHighlightRowCol) {
+      bgColor = 'bg-blue-100'; // 高亮行为淡蓝色
+    }
 
     return (
       <td
         key={col}
         onClick={() => setSelectedCell([row, col])}
-        className={`w-12 h-12 align-middle cursor-pointer select-none transition-colors duration-200 text-xl font-extrabold
+        className={`w-10 h-10 align-middle text-center cursor-pointer select-none transition-colors duration-150
           ${borderStyle}
-          ${isPrefilled ? (isBlockEven ? 'bg-[#fff7e6]' : 'bg-[#ffeccc]') : (isBlockEven ? 'bg-[#fffbe6]' : 'bg-[#fff6e0]')}
-          ${isSelected ? 'ring-2 ring-[#ff9800] z-10' : ''}
-          ${!isSelected && (isSameRow || isSameCol || isSameBlock) ? 'bg-[#ffe0b2]' : ''}
-          shadow-sm
+          ${bgColor}
         `}
       >
-        {showNotes && !isPrefilled && cellNotes.length > 0 ? (
-          <div className="grid grid-cols-3 text-xs text-orange-400">
+        {showNotes && !isPrefilled && notes[row][col].length > 0 ? (
+          <div className="grid grid-cols-3 text-xs text-gray-500">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => (
-              <span key={n} className={cellNotes.includes(n) ? 'text-[#ff9800]' : ''}>{cellNotes.includes(n) ? n : ''}</span>
+              <span key={n} className={notes[row][col].includes(n) ? 'text-blue-500' : ''}>{notes[row][col].includes(n) ? n : ''}</span>
             ))}
           </div>
         ) : (value !== 0 ? (
-          <span className={`${numColor} drop-shadow-[0_1px_1px_rgba(255,140,0,0.3)]`}>{value}</span>
+          <div className={`w-full h-full flex items-center justify-center ${isSameAsSelectedValue && !isSelected ? 'bg-orange-300 rounded-full' : ''}`}>
+            <span className={`${numColor} text-2xl font-semibold`}>{value}</span>
+          </div>
         ) : null)}
       </td>
     );
@@ -217,7 +246,7 @@ const Sudoku = () => {
   // 渲染数独棋盘
   const renderBoard = () => {
     return (
-      <div className="rounded-xl overflow-hidden shadow-xl" style={{ background: 'linear-gradient(135deg,#fffbe6 60%,#ffe0b2 100%)' }}>
+      <div className="rounded-lg overflow-hidden shadow-lg border-2 border-gray-500">
         <table className="border-collapse mx-auto">
           <tbody>
             {userGrid.map((row, i) => (
