@@ -15,6 +15,27 @@ import DownloadFiles from "../tools/DownloadFiles";
 import SubstractLines from "../tools/SubstractLines";
 import BatchGenerator from "../tools/BatchGenerator";
 import ExcelToSql from "../tools/ExcelToSql";
+import CountdownReminder from "../tools/CountdownReminder";
+import ExpressTracker from "../tools/ExpressTracker";
+import LunchRandomizer from "../tools/LunchRandomizer";
+import UnitConverter from "../tools/UnitConverter";
+import BMICalculator from "../tools/BMICalculator";
+import DailyQuote from "../tools/DailyQuote";
+import QRCodeTool from "../tools/QRCodeTool";
+import RandomGroupTool from "../tools/RandomGroupTool";
+import ExpenseTracker from "../tools/ExpenseTracker";
+import PasswordGenerator from "../tools/PasswordGenerator";
+import PomodoroTimer from "../tools/PomodoroTimer";
+import ColorToolkit from "../tools/ColorToolkit";
+import NumberBaseConverter from "../tools/NumberBaseConverter";
+import ImageCompressor from "../tools/ImageCompressor";
+import PictureProcessor from "../tools/PictureProcessor";
+import FileHashCalculator from "../tools/FileHashCalculator";
+import ShortcutKeysReference from "../tools/ShortcutKeysReference";
+import NetworkUtilities from "../tools/NetworkUtilities";
+import NumberPuzzle from "../games/games/NumberPuzzle/NumberPuzzle";
+import MemoryCard from "../games/games/MemoryCard/MemoryCard";
+import Sudoku from "../games/games/Sudoku/Sudoku";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import { StarIcon as StarIconOutline } from "@heroicons/react/24/outline";
 import { useFavorites } from "../context/FavoritesContext";
@@ -69,6 +90,48 @@ const ToolPage = ({ toolId }) => {
         return <BatchGenerator />;
       case "excel-to-sql":
         return <ExcelToSql />;
+      case "countdown-reminder":
+        return <CountdownReminder />;
+      case "express-tracker":
+        return <ExpressTracker />;
+      case "lunch-randomizer":
+        return <LunchRandomizer />;
+      case "unit-converter":
+        return <UnitConverter />;
+      case "bmi-calculator":
+        return <BMICalculator />;
+      case "daily-quote":
+        return <DailyQuote />;
+      case "qr-code":
+        return <QRCodeTool />;
+      case "random-group":
+        return <RandomGroupTool />;
+      case "expense-tracker":
+        return <ExpenseTracker />;
+      case "password-generator":
+        return <PasswordGenerator />;
+      case "pomodoro-timer":
+        return <PomodoroTimer />;
+      case "color-toolkit":
+        return <ColorToolkit />;
+      case "number-base-converter":
+        return <NumberBaseConverter />;
+      case "image-compressor":
+        return <ImageCompressor />;
+      case "picture-processor":
+        return <PictureProcessor />;
+      case "file-hash-calculator":
+        return <FileHashCalculator />;
+      case "shortcut-keys-reference":
+        return <ShortcutKeysReference />;
+      case "network-utilities":
+        return <NetworkUtilities />;
+      case "number-puzzle":
+        return <NumberPuzzle />;
+      case "memory-card":
+        return <MemoryCard />;
+      case "sudoku":
+        return <Sudoku />;
       default:
         return (
           <div className="text-center py-12">

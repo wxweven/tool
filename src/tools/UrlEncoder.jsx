@@ -6,7 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CopyIcon } from "lucide-react";
 
 const UrlEncoder = () => {
-  const [input, setInput] = useState("");
+  const defaultExample = "https://example.com/search?q=你好 世界";
+  const [input, setInput] = useState(defaultExample);
   const [output, setOutput] = useState("");
   const [copied, setCopied] = useState(false);
 
@@ -37,6 +38,10 @@ const UrlEncoder = () => {
     setOutput("");
   };
 
+  const loadExample = () => {
+    setInput(defaultExample);
+  };
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <Card>
@@ -59,6 +64,9 @@ const UrlEncoder = () => {
               <Button onClick={decodeUrl}>URL解码</Button>
               <Button variant="secondary" onClick={clearAll}>
                 清空
+              </Button>
+              <Button variant="outline" onClick={loadExample}>
+                示例
               </Button>
             </div>
           </div>

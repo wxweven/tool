@@ -18,7 +18,20 @@ import {
   MinusIcon,
   TextIcon,
   StarIcon,
-  ZapIcon
+  ZapIcon,
+  QrCode,
+  Shuffle,
+  Wallet,
+  Quote,
+  Key,
+  Palette,
+  Hash,
+  ImageIcon,
+  FileImage,
+  Shield,
+  Command,
+  Globe,
+  Gamepad2
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
@@ -137,10 +150,136 @@ export const navItems = [
     page: <ToolPage toolId="mortgage" />,
   },
   {
-    title: "批量生成",
+    title: "批量随机生成",
     to: "/batch-generator",
     icon: <ZapIcon className="h-4 w-4" />,
     page: <ToolPage toolId="batch-generator" />,
+  },
+  {
+    title: "倒数日/纪念日提醒",
+    to: "/countdown-reminder",
+    icon: <ClockIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="countdown-reminder" />,
+  },
+  {
+    title: "随机午餐/晚餐",
+    to: "/lunch-randomizer",
+    icon: <HeartIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="lunch-randomizer" />,
+  },
+  {
+    title: "快递单号追踪",
+    to: "/express-tracker",
+    icon: <LinkIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="express-tracker" />,
+  },
+  {
+    title: "单位换算器",
+    to: "/unit-converter",
+    icon: <CalculatorIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="unit-converter" />,
+  },
+  {
+    title: "健康BMI计算器",
+    to: "/bmi-calculator",
+    icon: <HeartIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="bmi-calculator" />,
+  },
+  {
+    title: "每日一句/毒鸡汤",
+    to: "/daily-quote",
+    icon: <Quote className="h-4 w-4" />,
+    page: <ToolPage toolId="daily-quote" />,
+  },
+  {
+    title: "二维码生成与识别",
+    to: "/qr-code",
+    icon: <QrCode className="h-4 w-4" />,
+    page: <ToolPage toolId="qr-code" />,
+  },
+  {
+    title: "随机抽签/分组",
+    to: "/random-group",
+    icon: <Shuffle className="h-4 w-4" />,
+    page: <ToolPage toolId="random-group" />,
+  },
+  {
+    title: "记账/小账本",
+    to: "/expense-tracker",
+    icon: <Wallet className="h-4 w-4" />,
+    page: <ToolPage toolId="expense-tracker" />,
+  },
+  {
+    title: "密码生成器",
+    to: "/password-generator",
+    icon: <Key className="h-4 w-4" />,
+    page: <ToolPage toolId="password-generator" />,
+  },
+  {
+    title: "番茄钟工具",
+    to: "/pomodoro-timer",
+    icon: <ClockIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="pomodoro-timer" />,
+  },
+  {
+    title: "颜色工具箱",
+    to: "/color-toolkit",
+    icon: <Palette className="h-4 w-4" />,
+    page: <ToolPage toolId="color-toolkit" />,
+  },
+  {
+    title: "进制转换器",
+    to: "/number-base-converter",
+    icon: <Hash className="h-4 w-4" />,
+    page: <ToolPage toolId="number-base-converter" />,
+  },
+  {
+    title: "图片压缩工具",
+    to: "/image-compressor",
+    icon: <ImageIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="image-compressor" />,
+  },
+  {
+    title: "图片处理工具",
+    to: "/picture-processor",
+    icon: <FileImage className="h-4 w-4" />,
+    page: <ToolPage toolId="picture-processor" />,
+  },
+  {
+    title: "文件哈希计算器",
+    to: "/file-hash-calculator",
+    icon: <Shield className="h-4 w-4" />,
+    page: <ToolPage toolId="file-hash-calculator" />,
+  },
+  {
+    title: "快捷键查询",
+    to: "/shortcut-keys-reference",
+    icon: <Command className="h-4 w-4" />,
+    page: <ToolPage toolId="shortcut-keys-reference" />,
+  },
+  {
+    title: "网络工具集",
+    to: "/network-utilities",
+    icon: <Globe className="h-4 w-4" />,
+    page: <ToolPage toolId="network-utilities" />,
+  },
+  {
+    title: "数字华容道",
+    to: "/number-puzzle",
+    icon: <Gamepad2 className="h-4 w-4" />,
+    page: <ToolPage toolId="number-puzzle" />,
+  },
+  {
+    title: "记忆翻牌",
+    to: "/memory-card",
+    icon: <Gamepad2 className="h-4 w-4" />,
+    page: <ToolPage toolId="memory-card" />,
+  },
+  {
+    title: "数独游戏",
+    to: "/sudoku",
+    icon: <Gamepad2 className="h-4 w-4" />,
+    page: <ToolPage toolId="sudoku" />,
   },
 ];
 
@@ -152,13 +291,140 @@ export const categoryNavItems = [
     to: "/favorites"
   },
   {
+    title: "游戏娱乐",
+    icon: <Gamepad2 className="h-4 w-4" />,
+    items: [
+      {
+        title: "数字华容道",
+        to: "/number-puzzle",
+        icon: <Gamepad2 className="h-4 w-4" />,
+      },
+      {
+        title: "记忆翻牌",
+        to: "/memory-card",
+        icon: <Gamepad2 className="h-4 w-4" />,
+      },
+      {
+        title: "数独游戏",
+        to: "/sudoku",
+        icon: <Gamepad2 className="h-4 w-4" />,
+      },
+    ]
+  },
+  {
+    title: "生活工具",
+    icon: <HeartIcon className="h-4 w-4" />,
+    items: [
+      {
+        title: "倒数日/纪念日提醒",
+        to: "/countdown-reminder",
+        icon: <ClockIcon className="h-4 w-4" />,
+      },
+      {
+        title: "随机午餐/晚餐",
+        to: "/lunch-randomizer",
+        icon: <HeartIcon className="h-4 w-4" />,
+      },
+      {
+        title: "快递单号追踪",
+        to: "/express-tracker",
+        icon: <LinkIcon className="h-4 w-4" />,
+      },
+      {
+        title: "单位换算器",
+        to: "/unit-converter",
+        icon: <CalculatorIcon className="h-4 w-4" />,
+      },
+      {
+        title: "年会抽奖工具",
+        to: "/lottery",
+        icon: <GiftIcon className="h-4 w-4" />,
+      },
+      {
+        title: "房贷计算器",
+        to: "/mortgage",
+        icon: <CalculatorIcon className="h-4 w-4" />,
+      },
+      {
+        title: "健康BMI计算器",
+        to: "/bmi-calculator",
+        icon: <HeartIcon className="h-4 w-4" />,
+      },
+      {
+        title: "每日一句/毒鸡汤",
+        to: "/daily-quote",
+        icon: <Quote className="h-4 w-4" />,
+      },
+      {
+        title: "二维码生成与识别",
+        to: "/qr-code",
+        icon: <QrCode className="h-4 w-4" />,
+      },
+      {
+        title: "随机抽签/分组",
+        to: "/random-group",
+        icon: <Shuffle className="h-4 w-4" />,
+      },
+      {
+        title: "记账/小账本",
+        to: "/expense-tracker",
+        icon: <Wallet className="h-4 w-4" />,
+      },
+    ]
+  },
+  {
     title: "效率工具",
     icon: <ZapIcon className="h-4 w-4" />,
     items: [
       {
-        title: "批量生成",
+        title: "批量随机生成",
         to: "/batch-generator",
         icon: <ZapIcon className="h-4 w-4" />,
+      },
+      {
+        title: "密码生成器",
+        to: "/password-generator",
+        icon: <Key className="h-4 w-4" />,
+      },
+      {
+        title: "番茄钟工具",
+        to: "/pomodoro-timer",
+        icon: <ClockIcon className="h-4 w-4" />,
+      },
+      {
+        title: "颜色工具箱",
+        to: "/color-toolkit",
+        icon: <Palette className="h-4 w-4" />,
+      },
+      {
+        title: "进制转换器",
+        to: "/number-base-converter",
+        icon: <Hash className="h-4 w-4" />,
+      },
+      {
+        title: "图片压缩工具",
+        to: "/image-compressor",
+        icon: <ImageIcon className="h-4 w-4" />,
+      },
+      {
+        title: "图片处理工具",
+        to: "/picture-processor",
+        icon: <FileImage className="h-4 w-4" />,
+      },
+      {
+        title: "文件哈希计算器",
+        to: "/file-hash-calculator",
+        icon: <Shield className="h-4 w-4" />,
+      },
+      {
+        title: "快捷键查询",
+        to: "/shortcut-keys-reference",
+        icon: <Command className="h-4 w-4" />,
+      },
+      {
+        title: "网络工具集",
+        to: "/network-utilities",
+        icon: <Globe className="h-4 w-4" />,
       },
     ]
   },
@@ -200,11 +466,6 @@ export const categoryNavItems = [
         title: "批量下载文件",
         to: "/download-files",
         icon: <DownloadIcon className="h-4 w-4" />,
-      },
-      {
-        title: "纯文本提取",
-        to: "/plaintext",
-        icon: <FileTextIcon className="h-4 w-4" />,
       },
       {
         title: "Excel/CSV转SQL",
@@ -249,20 +510,4 @@ export const categoryNavItems = [
       },
     ]
   },
-  {
-    title: "生活工具",
-    icon: <HeartIcon className="h-4 w-4" />,
-    items: [
-      {
-        title: "年会抽奖工具",
-        to: "/lottery",
-        icon: <GiftIcon className="h-4 w-4" />,
-      },
-      {
-        title: "房贷计算器",
-        to: "/mortgage",
-        icon: <CalculatorIcon className="h-4 w-4" />,
-      },
-    ]
-  }
 ];

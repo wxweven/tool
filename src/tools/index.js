@@ -16,6 +16,27 @@ import TextDiff from "./TextDiff";
 import TimestampConverter from "./TimestampConverter";
 import UrlEncoder from "./UrlEncoder";
 import ExcelToSql from "./ExcelToSql";
+import CountdownReminder from "./CountdownReminder";
+import ExpressTracker from "./ExpressTracker";
+import LunchRandomizer from "./LunchRandomizer";
+import UnitConverter from "./UnitConverter";
+import BMICalculator from "./BMICalculator";
+import DailyQuote from "./DailyQuote";
+import QRCodeTool from "./QRCodeTool";
+import RandomGroupTool from "./RandomGroupTool";
+import ExpenseTracker from "./ExpenseTracker";
+import PasswordGenerator from "./PasswordGenerator";
+import PomodoroTimer from "./PomodoroTimer";
+import ColorToolkit from "./ColorToolkit";
+import NumberBaseConverter from "./NumberBaseConverter";
+import ImageCompressor from "./ImageCompressor";
+import PictureProcessor from "./PictureProcessor";
+import FileHashCalculator from "./FileHashCalculator";
+import ShortcutKeysReference from "./ShortcutKeysReference";
+import NetworkUtilities from "./NetworkUtilities";
+import NumberPuzzle from "../games/games/NumberPuzzle/NumberPuzzle";
+import MemoryCard from "../games/games/MemoryCard/MemoryCard";
+import Sudoku from "../games/games/Sudoku/Sudoku";
 
 export {
   BatchGenerator,
@@ -36,4 +57,25 @@ export {
   TimestampConverter,
   UrlEncoder,
   ExcelToSql,
+  CountdownReminder,
+  ExpressTracker,
+  LunchRandomizer,
+  UnitConverter,
+  BMICalculator,
+  DailyQuote,
+  QRCodeTool,
+  RandomGroupTool,
+  ExpenseTracker,
+  PasswordGenerator,
+  PomodoroTimer,
+  ColorToolkit,
+  NumberBaseConverter,
+  ImageCompressor,
+  PictureProcessor,
+  FileHashCalculator,
+  ShortcutKeysReference,
+  NetworkUtilities,
+  NumberPuzzle,
+  MemoryCard,
+  Sudoku,
 }; 

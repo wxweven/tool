@@ -6,7 +6,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CopyIcon, Wand2Icon, DownloadIcon, ChevronUpIcon, ArrowUpDownIcon, ArrowUpIcon, ArrowDownIcon } from "lucide-react";
 
 const RemoveDuplicates = () => {
-  const [input, setInput] = useState("");
+  const defaultExample = `苹果
+香蕉
+苹果
+橙子
+香蕉
+葡萄
+苹果
+橙子
+葡萄
+西瓜`;
+
+  const [input, setInput] = useState(defaultExample);
   const [output, setOutput] = useState("");
   const [copied, setCopied] = useState(false);
   const [isScrollToTopVisible, setIsScrollToTopVisible] = useState(false);
@@ -126,17 +137,7 @@ const RemoveDuplicates = () => {
   };
 
   const loadExample = () => {
-    const example = `苹果
-香蕉
-苹果
-橙子
-香蕉
-葡萄
-苹果
-橙子
-葡萄
-西瓜`;
-    setInput(example);
+    setInput(defaultExample);
     setOutput("");
     setStats({ original: 0, unique: 0, removed: 0 });
     setIsSorted(false);

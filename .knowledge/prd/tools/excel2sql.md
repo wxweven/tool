@@ -74,6 +74,20 @@ CREATE TABLE `combination_keypoint` (
 从上面的 SQL 中提取表名和字段名，并忽略 PRIMARY KEY 和 KEY 等部分。
 - 生成的 SQL 结果中，加上行号显示；
 - 支持下载导出生成的 SQL 结果集，命名为"表名_insert.sql"。
-# 待修订功能
+
 bug fix: 生成的SQL语句，没有表名，需要修复。
 
+# 待修订功能
+优化功能：
+- 根据建表语句和输入的 Excel 或这 csv，生成 update SQL 语句。
+- Excel 或 csv 的第一列是 update 语句中 where 的字段，比如第一列是 id，那么生成的 SQL 语句是：
+```sql
+ update 表名 set 字段1=值1, 字段2=值2, ... where id=值1;
+ ```
+ - excel 中的其他列，是需要 update 的字段，比如第二列是 displayName，第三列是 age，那么生成的 SQL 语句是：
+ ```sql
+ update 表名 set displayName=值2, age=值3 where id=值1;
+ ```
+ - 如果 excel 中的列名，跟建表语句中的字段名不一致，则需要提示用户，并给出建议。
+ - Excel 中不需要包含表的所有字段名，有哪些字段名，SQL 语句就包含对应的字段名
+ - 如果 Excel 中有多余的字段名，则忽略。
