@@ -31,7 +31,8 @@ import {
   Shield,
   Command,
   Globe,
-  Gamepad2
+  Gamepad2,
+  PillIcon
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
@@ -281,6 +282,12 @@ export const navItems = [
     icon: <Gamepad2 className="h-4 w-4" />,
     page: <ToolPage toolId="sudoku" />,
   },
+  {
+    title: "用药提醒",
+    to: "/medicine-reminder",
+    icon: <PillIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="medicine-reminder" />,
+  },
 ];
 
 // 分类导航菜单
@@ -369,6 +376,11 @@ export const categoryNavItems = [
         title: "记账/小账本",
         to: "/expense-tracker",
         icon: <Wallet className="h-4 w-4" />,
+      },
+      {
+        title: "用药提醒",
+        to: "/medicine-reminder",
+        icon: <PillIcon className="h-4 w-4" />,
       },
     ]
   },

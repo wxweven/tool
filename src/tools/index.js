@@ -37,6 +37,7 @@ import NetworkUtilities from "./NetworkUtilities";
 import NumberPuzzle from "../games/games/NumberPuzzle/NumberPuzzle";
 import MemoryCard from "../games/games/MemoryCard/MemoryCard";
 import Sudoku from "../games/games/Sudoku/Sudoku";
+import MedicineReminder from "./MedicineReminder";
 
 export {
   BatchGenerator,
@@ -78,4 +79,5 @@ export {
   NumberPuzzle,
   MemoryCard,
   Sudoku,
+  MedicineReminder,
 }; 

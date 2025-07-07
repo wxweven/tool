@@ -27,7 +27,8 @@ import {
     Shield,
     Command,
     Globe,
-    Gamepad2
+    Gamepad2,
+    PillIcon
 } from "lucide-react";
 
 // 工具文件类
@@ -67,6 +68,7 @@ import ExpenseTracker from "./tools/ExpenseTracker";
 import FileHashCalculator from "./tools/FileHashCalculator";
 import ShortcutKeysReference from "./tools/ShortcutKeysReference";
 import NetworkUtilities from "./tools/NetworkUtilities";
+import MedicineReminder from "./tools/MedicineReminder";
 
 export const efficiencyTools = [
     {
@@ -322,6 +324,13 @@ export const lifeTools = [
         description: "简单的日常收支记录，支持导出",
         icon: <Wallet className="h-5 w-5" />,
         color: "bg-emerald-400"
+    },
+    {
+        id: "medicine-reminder",
+        title: "用药提醒",
+        description: "添加药品、生成每日用药计划和打卡记录",
+        icon: <PillIcon className="h-5 w-5" />,
+        color: "bg-red-400"
     }
 ];
 

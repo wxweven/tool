@@ -40,6 +40,7 @@ import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import { StarIcon as StarIconOutline } from "@heroicons/react/24/outline";
 import { useFavorites } from "../context/FavoritesContext";
 import { navItems } from "../nav-items.jsx";
+import MedicineReminder from "../tools/MedicineReminder";
 
 const ToolPage = ({ toolId }) => {
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
@@ -132,6 +133,8 @@ const ToolPage = ({ toolId }) => {
         return <MemoryCard />;
       case "sudoku":
         return <Sudoku />;
+      case "medicine-reminder":
+        return <MedicineReminder />;
       default:
         return (
           <div className="text-center py-12">
