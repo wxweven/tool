@@ -218,7 +218,7 @@ const MedicineReminder = () => {
                                                                 <p className="text-gray-600">
                                                                     服用 <span className="font-bold text-blue-500">{med.dosage} {med.unit}</span> - {getMealInfo(med)}
                                                                 </p>
-                                                                {med.remarks && <p className="text-sm text-blue-600 mt-1">备注: {med.remarks}</p>}
+                                                                {med.remarks && <p className="font-bold text-red-600 mt-1">备注: {med.remarks}</p>}
                                                             </div>
                                                         </div>
                                                         <CheckCircle2 className={`h-6 w-6 ${isChecked ? 'text-green-500' : 'text-gray-300'}`} />
