@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -13,6 +13,7 @@ const JsonFormatter = () => {
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
   const [isScrollToTopVisible, setIsScrollToTopVisible] = useState(false);
+  const [autoFormat, setAutoFormat] = useState(true);
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -34,10 +35,11 @@ const JsonFormatter = () => {
     });
   };
 
-  const formatJson = () => {
+  const formatJson = useCallback(() => {
     try {
       if (!inputJson.trim()) {
-        setError("请输入JSON内容");
+        setError("");
+        setFormattedJson("");
         return;
       }
 
@@ -49,7 +51,19 @@ const JsonFormatter = () => {
       setError("无效的JSON格式: " + err.message);
       setFormattedJson("");
     }
-  };
+  }, [inputJson]);
+
+  // 自动格式化：当输入内容变化时自动触发格式化
+  useEffect(() => {
+    if (autoFormat) {
+      // 使用防抖，避免频繁格式化
+      const timeoutId = setTimeout(() => {
+        formatJson();
+      }, 500);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [inputJson, autoFormat, formatJson]);
 
   const copyToClipboard = () => {
     if (!formattedJson) return;
@@ -96,9 +110,9 @@ const JsonFormatter = () => {
               <div className="text-red-500 text-sm">{error}</div>
             )}
 
-            <div className="flex gap-2 flex-wrap">
-              <Button onClick={formatJson}>
-                <Wand2Icon className="mr-2 h-4 w-4" /> 格式化
+            <div className="flex gap-2 flex-wrap items-center">
+              <Button onClick={formatJson} disabled={autoFormat}>
+                <Wand2Icon className="mr-2 h-4 w-4" /> 手动格式化
               </Button>
               <Button variant="secondary" onClick={clearAll}>
                 清空
@@ -109,6 +123,16 @@ const JsonFormatter = () => {
               <Button variant="outline" onClick={testComplexExample}>
                 复杂示例
               </Button>
+              <div className="flex items-center gap-2 ml-4">
+                <input
+                  type="checkbox"
+                  id="auto-format"
+                  checked={autoFormat}
+                  onChange={(e) => setAutoFormat(e.target.checked)}
+                  className="rounded"
+                />
+                <Label htmlFor="auto-format" className="text-sm">自动格式化</Label>
+              </div>
             </div>
           </div>
         </CardContent>
@@ -153,7 +177,7 @@ const JsonFormatter = () => {
             </div>
           ) : (
             <div className="text-center py-12 text-muted-foreground">
-              <p>输入JSON内容并点击格式化按钮</p>
+              <p>输入JSON内容{autoFormat ? '将自动格式化' : '并点击格式化按钮'}</p>
               <p className="mt-2 text-sm">支持验证和美化JSON数据</p>
             </div>
           )}
