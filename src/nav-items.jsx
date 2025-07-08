@@ -32,7 +32,8 @@ import {
   Command,
   Globe,
   Gamepad2,
-  PillIcon
+  PillIcon,
+  TargetIcon
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
@@ -288,6 +289,12 @@ export const navItems = [
     icon: <PillIcon className="h-4 w-4" />,
     page: <ToolPage toolId="medicine-reminder" />,
   },
+  {
+    title: "打卡小工具",
+    to: "/clock-in",
+    icon: <TargetIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="clock-in" />,
+  },
 ];
 
 // 分类导航菜单
@@ -322,6 +329,11 @@ export const categoryNavItems = [
     title: "生活工具",
     icon: <HeartIcon className="h-4 w-4" />,
     items: [
+      {
+        title: "打卡小工具",
+        to: "/clock-in",
+        icon: <TargetIcon className="h-4 w-4" />,
+      },
       {
         title: "倒数日/纪念日提醒",
         to: "/countdown-reminder",

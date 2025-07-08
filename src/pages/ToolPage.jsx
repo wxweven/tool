@@ -41,6 +41,7 @@ import { StarIcon as StarIconOutline } from "@heroicons/react/24/outline";
 import { useFavorites } from "../context/FavoritesContext";
 import { navItems } from "../nav-items.jsx";
 import MedicineReminder from "../tools/MedicineReminder";
+import ClockIn from "../tools/ClockIn";
 
 const ToolPage = ({ toolId }) => {
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
@@ -135,6 +136,8 @@ const ToolPage = ({ toolId }) => {
         return <Sudoku />;
       case "medicine-reminder":
         return <MedicineReminder />;
+      case "clock-in":
+        return <ClockIn />;
       default:
         return (
           <div className="text-center py-12">
