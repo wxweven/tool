@@ -1,0 +1,75 @@
+---
+alwaysApply: true
+---
+
+# React组件开发规范
+
+## 组件命名和结构
+
+- 使用PascalCase命名组件文件，如 `MyComponent.jsx`
+- 组件函数使用PascalCase命名
+- 每个组件文件只包含一个主要组件
+- 使用函数组件和React Hooks
+
+## 导入规范
+
+```jsx
+// 1. React相关导入
+import React, { useState, useEffect } from 'react';
+
+// 2. 第三方库导入
+import { Button } from '@/components/ui/button';
+
+// 3. 本地组件导入
+import MyComponent from './MyComponent';
+
+// 4. 工具函数导入
+import { cn } from '@/lib/utils';
+```
+
+## 组件结构模板
+
+```jsx
+import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
+
+const MyComponent = () => {
+  const [state, setState] = useState(null);
+
+  const handleClick = () => {
+    // 处理逻辑
+  };
+
+  return (
+    <div className="container mx-auto p-4">
+      <Button onClick={handleClick}>
+        点击我
+      </Button>
+    </div>
+  );
+};
+
+export default MyComponent;
+```
+
+## 工具组件开发
+
+工具组件应该：
+- 提供清晰的输入界面
+- 实时显示处理结果
+- 包含错误处理
+- 支持复制结果功能
+- 响应式设计
+
+## 状态管理
+
+- 使用 `useState` 管理本地状态
+- 使用 `useContext` 管理全局状态（如收藏功能）
+- 使用 `useQuery` 处理异步数据获取
+- 避免过度使用全局状态
+
+## 性能优化
+
+- 使用 `React.memo` 优化渲染性能
+- 使用 `useCallback` 和 `useMemo` 优化函数和计算
+- 避免在渲染函数中创建新对象或函数

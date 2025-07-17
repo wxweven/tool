@@ -1,0 +1,127 @@
+# 工具组件开发规范
+
+## 工具组件结构
+
+每个工具组件应该遵循以下结构：
+
+```jsx
+import React, { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Copy, Download } from 'lucide-react';
+
+const ToolComponent = () => {
+  const [input, setInput] = useState('');
+  const [output, setOutput] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const processInput = () => {
+    setIsProcessing(true);
+    try {
+      // 处理逻辑
+      const result = processData(input);
+      setOutput(result);
+    } catch (error) {
+      setOutput('处理出错: ' + error.message);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(output);
+      // 显示成功提示
+    } catch (error) {
+      // 显示错误提示
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      <Card>
+        <CardHeader>
+          <CardTitle>输入</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Textarea
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="请输入要处理的内容..."
+            rows={6}
+          />
+          <Button
+            onClick={processInput}
+            disabled={isProcessing || !input.trim()}
+            className="mt-2"
+          >
+            {isProcessing ? '处理中...' : '处理'}
+          </Button>
+        </CardContent>
+      </Card>
+
+      {output && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center justify-between">
+              输出结果
+              <div className="flex gap-2">
+                <Button variant="outline" size="sm" onClick={copyToClipboard}>
+                  <Copy className="h-4 w-4" />
+                  复制
+                </Button>
+              </div>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Textarea
+              value={output}
+              readOnly
+              rows={6}
+              className="font-mono"
+            />
+          </CardContent>
+        </Card>
+      )}
+    </div>
+  );
+};
+
+export default ToolComponent;
+```
+
+## 工具组件要求
+
+### 必需功能
+1. **输入验证**: 验证用户输入的有效性
+2. **错误处理**: 优雅处理各种错误情况
+3. **加载状态**: 显示处理进度
+4. **复制功能**: 提供复制结果到剪贴板的功能
+5. **响应式设计**: 适配不同屏幕尺寸
+
+### 可选功能
+1. **历史记录**: 保存用户的历史操作
+2. **导出功能**: 支持导出结果到文件
+3. **设置选项**: 提供可配置的处理选项
+4. **快捷键**: 支持键盘快捷键操作
+
+## 工具注册流程
+
+1. 在 [src/tools/](mdc:src/tools/) 目录创建组件文件
+2. 在 [src/tools/index.js](mdc:src/tools/index.js) 中导出组件
+3. 在 [src/nav-items.jsx](mdc:src/nav-items.jsx) 中添加导航项
+4. 测试工具功能完整性
+
+## 工具分类
+
+- **文本处理**: JSON格式化、代码格式化、文本Diff等
+- **编码转换**: URL编解码、Base64转换等
+- **计算工具**: 单位换算、计算器等
+- **文件处理**: 文件下载、图片处理等
+- **实用工具**: 密码生成、二维码生成等
+- **游戏娱乐**: 数独、记忆卡片等
+description:
+globs:
+alwaysApply: false
+---

@@ -1,0 +1,37 @@
+---
+alwaysApply: true
+---
+
+# 项目结构指南
+
+这是一个基于React + Vite的工具集合应用，提供各种实用工具和游戏。
+
+## 核心文件结构
+
+- [src/App.jsx](mdc:src/App.jsx) - 应用主入口，配置路由和全局Provider
+- [src/nav-items.jsx](mdc:src/nav-items.jsx) - 导航项配置，定义所有工具的路由和页面
+- [src/main.jsx](mdc:src/main.jsx) - React应用挂载点
+- [src/pages/](mdc:src/pages/) - 页面组件目录
+- [src/tools/](mdc:src/tools/) - 工具组件目录
+- [src/games/](mdc:src/games/) - 游戏组件目录
+- [src/components/](mdc:src/components/) - 通用UI组件目录
+- [src/context/](mdc:src/context/) - React Context目录
+
+## 工具开发模式
+
+每个工具都应该：
+1. 在 [src/tools/](mdc:src/tools/) 目录下创建独立组件
+2. 在 [src/tools/index.js](mdc:src/tools/index.js) 中导出
+3. 在 [src/nav-items.jsx](mdc:src/nav-items.jsx) 中配置路由
+4. 使用 [src/pages/ToolPage.jsx](mdc:src/pages/ToolPage.jsx) 作为容器页面
+
+## 技术栈
+
+- **前端框架**: React 18 + Vite
+- **路由**: React Router DOM
+- **UI组件**: Radix UI + Tailwind CSS
+- **状态管理**: React Query + Context API
+- **表单处理**: React Hook Form + Zod
+- **样式**: Tailwind CSS + CSS Modules
+- **图标**: Lucide React
+- **构建工具**: Vite

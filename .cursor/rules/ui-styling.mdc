@@ -1,0 +1,237 @@
+---
+alwaysApply: true
+---
+
+# UI和样式规范
+
+## 设计系统
+
+项目使用基于Radix UI和Tailwind CSS的设计系统，组件库位于 [src/components/ui/](mdc:src/components/ui/)。
+
+## 样式规范
+
+### Tailwind CSS使用
+- 优先使用Tailwind CSS类名
+- 使用 `cn()` 工具函数组合类名
+- 遵循移动优先的响应式设计
+
+```jsx
+import { cn } from '@/lib/utils';
+
+const className = cn(
+  "base-classes",
+  condition && "conditional-classes",
+  "responsive-classes"
+);
+```
+
+### 布局规范
+- 使用 `container mx-auto` 作为主容器
+- 使用 `space-y-4` 控制垂直间距
+- 使用 `gap-4` 控制网格间距
+- 使用 `p-4` 作为基础内边距
+
+### 颜色规范
+- 使用Tailwind的语义化颜色
+- 支持深色模式：`dark:` 前缀
+- 主要颜色：`primary`、`secondary`、`accent`
+- 状态颜色：`success`、`warning`、`error`、`info`
+
+## 组件使用规范
+
+### 基础组件
+```jsx
+// 按钮
+<Button variant="default" size="default">
+  按钮文本
+</Button>
+
+// 输入框
+<Input placeholder="请输入..." />
+
+// 文本域
+<Textarea placeholder="请输入..." rows={4} />
+
+// 卡片
+<Card>
+  <CardHeader>
+    <CardTitle>标题</CardTitle>
+  </CardHeader>
+  <CardContent>
+    内容
+  </CardContent>
+</Card>
+```
+
+### 表单组件
+```jsx
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+const schema = z.object({
+  field: z.string().min(1, '此字段为必填项'),
+});
+
+const { register, handleSubmit, formState: { errors } } = useForm({
+  resolver: zodResolver(schema),
+});
+```
+
+## 响应式设计
+
+### 断点规范
+- `sm:` (640px+) - 小屏幕
+- `md:` (768px+) - 中等屏幕
+- `lg:` (1024px+) - 大屏幕
+- `xl:` (1280px+) - 超大屏幕
+
+### 布局示例
+```jsx
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  {/* 响应式网格布局 */}
+</div>
+```
+
+## 图标使用
+
+使用Lucide React图标库：
+```jsx
+import { Copy, Download, Settings } from 'lucide-react';
+
+<Copy className="h-4 w-4" />
+```
+
+## 动画和过渡
+
+使用Tailwind的过渡类：
+```jsx
+<button className="transition-all duration-200 hover:scale-105">
+  悬停效果
+</button>
+```
+
+## 无障碍性
+
+- 使用语义化HTML标签
+- 提供适当的ARIA标签
+- 确保键盘导航支持
+- 保持足够的颜色对比度
+
+
+# UI和样式规范
+
+## 设计系统
+
+项目使用基于Radix UI和Tailwind CSS的设计系统，组件库位于 [src/components/ui/](mdc:src/components/ui/)。
+
+## 样式规范
+
+### Tailwind CSS使用
+- 优先使用Tailwind CSS类名
+- 使用 `cn()` 工具函数组合类名
+- 遵循移动优先的响应式设计
+
+```jsx
+import { cn } from '@/lib/utils';
+
+const className = cn(
+  "base-classes",
+  condition && "conditional-classes",
+  "responsive-classes"
+);
+```
+
+### 布局规范
+- 使用 `container mx-auto` 作为主容器
+- 使用 `space-y-4` 控制垂直间距
+- 使用 `gap-4` 控制网格间距
+- 使用 `p-4` 作为基础内边距
+
+### 颜色规范
+- 使用Tailwind的语义化颜色
+- 支持深色模式：`dark:` 前缀
+- 主要颜色：`primary`、`secondary`、`accent`
+- 状态颜色：`success`、`warning`、`error`、`info`
+
+## 组件使用规范
+
+### 基础组件
+```jsx
+// 按钮
+<Button variant="default" size="default">
+  按钮文本
+</Button>
+
+// 输入框
+<Input placeholder="请输入..." />
+
+// 文本域
+<Textarea placeholder="请输入..." rows={4} />
+
+// 卡片
+<Card>
+  <CardHeader>
+    <CardTitle>标题</CardTitle>
+  </CardHeader>
+  <CardContent>
+    内容
+  </CardContent>
+</Card>
+```
+
+### 表单组件
+```jsx
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+const schema = z.object({
+  field: z.string().min(1, '此字段为必填项'),
+});
+
+const { register, handleSubmit, formState: { errors } } = useForm({
+  resolver: zodResolver(schema),
+});
+```
+
+## 响应式设计
+
+### 断点规范
+- `sm:` (640px+) - 小屏幕
+- `md:` (768px+) - 中等屏幕
+- `lg:` (1024px+) - 大屏幕
+- `xl:` (1280px+) - 超大屏幕
+
+### 布局示例
+```jsx
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  {/* 响应式网格布局 */}
+</div>
+```
+
+## 图标使用
+
+使用Lucide React图标库：
+```jsx
+import { Copy, Download, Settings } from 'lucide-react';
+
+<Copy className="h-4 w-4" />
+```
+
+## 动画和过渡
+
+使用Tailwind的过渡类：
+```jsx
+<button className="transition-all duration-200 hover:scale-105">
+  悬停效果
+</button>
+```
+
+## 无障碍性
+
+- 使用语义化HTML标签
+- 提供适当的ARIA标签
+- 确保键盘导航支持
+- 保持足够的颜色对比度
+

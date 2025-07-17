@@ -1,0 +1,230 @@
+---
+alwaysApply: true
+---
+
+# 代码质量规范
+
+## 代码风格
+
+### 命名规范
+- **组件**: PascalCase (`MyComponent`)
+- **函数**: camelCase (`handleClick`)
+- **常量**: UPPER_SNAKE_CASE (`API_BASE_URL`)
+- **文件**: kebab-case (`my-component.jsx`) 或 PascalCase (`MyComponent.jsx`)
+
+### 导入顺序
+```jsx
+// 1. React相关
+import React, { useState, useEffect } from 'react';
+
+// 2. 第三方库
+import { Button } from '@/components/ui/button';
+import { useForm } from 'react-hook-form';
+
+// 3. 本地组件
+import MyComponent from './MyComponent';
+
+// 4. 工具函数
+import { cn } from '@/lib/utils';
+
+// 5. 类型定义
+import type { MyType } from './types';
+```
+
+## 组件规范
+
+### 函数组件结构
+```jsx
+import React, { useState, useEffect } from 'react';
+
+// 类型定义（如果需要）
+const MyComponent = ({ prop1, prop2, children }) => {
+  // 1. Hooks
+  const [state, setState] = useState(null);
+
+  // 2. 副作用
+  useEffect(() => {
+    // 副作用逻辑
+  }, []);
+
+  // 3. 事件处理函数
+  const handleClick = () => {
+    // 处理逻辑
+  };
+
+  // 4. 渲染函数
+  const renderContent = () => {
+    return <div>内容</div>;
+  };
+
+  // 5. 主渲染
+  return (
+    <div className="container">
+      {renderContent()}
+    </div>
+  );
+};
+
+// 默认属性
+MyComponent.defaultProps = {
+  prop1: 'default value',
+};
+
+export default MyComponent;
+```
+
+## 状态管理
+
+### useState使用
+```jsx
+// 基础状态
+const [value, setValue] = useState('');
+
+// 对象状态
+const [user, setUser] = useState({
+  name: '',
+  email: '',
+});
+
+// 更新对象状态
+setUser(prev => ({ ...prev, name: 'new name' }));
+```
+
+### useEffect使用
+```jsx
+// 组件挂载时执行
+useEffect(() => {
+  // 初始化逻辑
+}, []);
+
+// 依赖项变化时执行
+useEffect(() => {
+  // 响应变化
+}, [dependency]);
+
+// 清理函数
+useEffect(() => {
+  const timer = setInterval(() => {}, 1000);
+  return () => clearInterval(timer);
+}, []);
+```
+
+## 错误处理
+
+### 异步操作错误处理
+```jsx
+const handleAsyncOperation = async () => {
+  try {
+    setIsLoading(true);
+    const result = await apiCall();
+    setData(result);
+  } catch (error) {
+    console.error('操作失败:', error);
+    setError(error.message);
+  } finally {
+    setIsLoading(false);
+  }
+};
+```
+
+### 表单验证
+```jsx
+import { z } from 'zod';
+
+const schema = z.object({
+  email: z.string().email('邮箱格式不正确'),
+  password: z.string().min(6, '密码至少6位'),
+});
+
+const validateForm = (data) => {
+  try {
+    return { success: true, data: schema.parse(data) };
+  } catch (error) {
+    return { success: false, errors: error.errors };
+  }
+};
+```
+
+## 性能优化
+
+### 避免不必要的重渲染
+```jsx
+import React, { memo, useCallback, useMemo } from 'react';
+
+// 使用memo优化组件
+const ExpensiveComponent = memo(({ data }) => {
+  return <div>{data}</div>;
+});
+
+// 使用useCallback优化函数
+const handleClick = useCallback(() => {
+  // 处理逻辑
+}, [dependency]);
+
+// 使用useMemo优化计算
+const expensiveValue = useMemo(() => {
+  return heavyCalculation(data);
+}, [data]);
+```
+
+### 懒加载
+```jsx
+import { lazy, Suspense } from 'react';
+
+const LazyComponent = lazy(() => import('./LazyComponent'));
+
+const App = () => (
+  <Suspense fallback={<div>加载中...</div>}>
+    <LazyComponent />
+  </Suspense>
+);
+```
+
+## 代码注释
+
+### 组件注释
+```jsx
+/**
+ * 工具组件 - 用于处理特定功能
+ * @param {string} input - 输入内容
+ * @param {function} onProcess - 处理完成回调
+ * @returns {JSX.Element} 组件
+ */
+const ToolComponent = ({ input, onProcess }) => {
+  // 组件逻辑
+};
+```
+
+### 函数注释
+```jsx
+/**
+ * 处理用户输入数据
+ * @param {string} data - 原始数据
+ * @returns {string} 处理后的数据
+ */
+const processData = (data) => {
+  // 处理逻辑
+  return processedData;
+};
+```
+
+## 测试规范
+
+### 组件测试
+```jsx
+import { render, screen, fireEvent } from '@testing-library/react';
+import MyComponent from './MyComponent';
+
+describe('MyComponent', () => {
+  it('应该正确渲染', () => {
+    render(<MyComponent />);
+    expect(screen.getByText('预期文本')).toBeInTheDocument();
+  });
+
+  it('应该处理用户交互', () => {
+    render(<MyComponent />);
+    fireEvent.click(screen.getByRole('button'));
+    // 验证结果
+  });
+});
+```
