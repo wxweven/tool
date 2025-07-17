@@ -41,8 +41,9 @@ const InvalidImageUrlDetector = () => {
     });
   };
 
-  const handleDetect = async (urls) => {
-    if (urls.length === 0) {
+  const handleDetect = async (rawUrls) => {
+    const uniqueUrls = [...new Set(rawUrls.filter(url => url))];
+    if (uniqueUrls.length === 0) {
       toast({
         title: "提示",
         description: "请输入或上传至少一个URL。",
@@ -55,13 +56,13 @@ const InvalidImageUrlDetector = () => {
     setInvalidUrls([]);
     setValidUrls([]);
     setProgress(0);
-    setTotalUrlsToProcess(urls.length);
+    setTotalUrlsToProcess(uniqueUrls.length);
 
     let processedCount = 0;
-    const totalUrls = urls.length;
+    const totalUrls = uniqueUrls.length;
     const showProgress = totalUrls > 500;
 
-    const promises = urls.map(url =>
+    const promises = uniqueUrls.map(url =>
       checkUrlValidity(url)
         .catch(err => ({ url, isValid: false, reason: '检测异常' }))
         .finally(() => {
@@ -98,8 +99,9 @@ const InvalidImageUrlDetector = () => {
   };
 
   const handleDetectFromText = () => {
-    const urls = inputUrls.split('\n').map(url => url.trim()).filter(url => url);
-    if (urls.length > 200) {
+    const rawUrls = inputUrls.split('\n').map(url => url.trim());
+    const uniqueUrls = [...new Set(rawUrls.filter(url => url))];
+    if (uniqueUrls.length > 200) {
       toast({
         title: "提示",
         description: "文本框输入URL数量超过200个，请改用文件上传功能。",
@@ -107,7 +109,7 @@ const InvalidImageUrlDetector = () => {
       });
       return;
     }
-    handleDetect(urls);
+    handleDetect(uniqueUrls);
   };
 
   const handleFileUpload = (event) => {
@@ -126,11 +128,12 @@ const InvalidImageUrlDetector = () => {
         const json = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
         const urlsFromFile = json.map(row => row[0]).filter(url => typeof url === 'string' && url.trim().startsWith('http'));
-        setInputUrls(urlsFromFile.join('\n'));
-        handleDetect(urlsFromFile);
+        const uniqueUrlsFromFile = [...new Set(urlsFromFile)];
+        setInputUrls(uniqueUrlsFromFile.join('\n'));
+        handleDetect(uniqueUrlsFromFile);
         toast({
           title: "文件上传成功",
-          description: `成功从文件中解析出 ${urlsFromFile.length} 个URL，点击“开始检测”进行处理。`,
+          description: `成功从文件中解析出 ${uniqueUrlsFromFile.length} 个URL，点击“开始检测”进行处理。`,
         });
       } catch (error) {
         console.error("Error parsing file: ", error);
