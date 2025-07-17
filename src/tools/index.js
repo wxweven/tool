@@ -30,6 +30,7 @@ import PomodoroTimer from "./PomodoroTimer";
 import ColorToolkit from "./ColorToolkit";
 import NumberBaseConverter from "./NumberBaseConverter";
 import ImageCompressor from "./ImageCompressor";
+import InvalidImageUrlDetector from "./InvalidImageUrlDetector";
 import PictureProcessor from "./PictureProcessor";
 import FileHashCalculator from "./FileHashCalculator";
 import ShortcutKeysReference from "./ShortcutKeysReference";
@@ -44,9 +45,6 @@ export {
   CodeFormatter,
   DownloadFiles,
   ExcelToTable,
-  JavaToJson,
-  JavaToStringFormatter,
-  JsonFormatter,
   LotteryTool,
   MortgageCalculator,
   PlainTextExtractor,
@@ -71,13 +69,18 @@ export {
   PomodoroTimer,
   ColorToolkit,
   NumberBaseConverter,
-  ImageCompressor,
   PictureProcessor,
-  FileHashCalculator,
   ShortcutKeysReference,
   NetworkUtilities,
   NumberPuzzle,
   MemoryCard,
   Sudoku,
   MedicineReminder,
-}; 
+};
+
+export { default as FileHashCalculator } from './FileHashCalculator';
+export { default as ImageCompressor } from './ImageCompressor';
+export { default as InvalidImageUrlDetector } from './InvalidImageUrlDetector';
+export { default as JavaToJson } from './JavaToJson';
+export { default as JavaToStringFormatter } from './JavaToStringFormatter';
+export { default as JsonFormatter } from './JsonFormatter';

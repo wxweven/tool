@@ -153,7 +153,7 @@ const JsonFormatter = () => {
             </Button>
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent>·
           {formattedJson ? (
             <div className="relative">
               <SyntaxHighlighter

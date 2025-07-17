@@ -33,7 +33,8 @@ import {
   Globe,
   Gamepad2,
   PillIcon,
-  TargetIcon
+  TargetIcon,
+  Code
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
@@ -240,6 +241,12 @@ export const navItems = [
     to: "/image-compressor",
     icon: <ImageIcon className="h-4 w-4" />,
     page: <ToolPage toolId="image-compressor" />,
+  },
+  {
+    title: "无效图片URL检测",
+    to: "/invalid-image-url-detector",
+    icon: <ImageIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="invalid-image-url-detector" />,
   },
   {
     title: "图片处理工具",
@@ -454,12 +461,17 @@ export const categoryNavItems = [
   },
   {
     title: "开发者工具",
-    icon: <WrenchIcon className="h-4 w-4" />,
+    icon: <Code className="h-5 w-5" />,
     items: [
       {
         title: "JSON格式化",
         to: "/json",
         icon: <CodeIcon className="h-4 w-4" />,
+      },
+      {
+        title: "无效图片URL检测",
+        to: "/invalid-image-url-detector",
+        icon: <ImageIcon className="h-4 w-4" />,
       },
       {
         title: "时间戳转换",

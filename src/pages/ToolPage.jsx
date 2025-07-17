@@ -42,6 +42,7 @@ import { useFavorites } from "../context/FavoritesContext";
 import { navItems } from "../nav-items.jsx";
 import MedicineReminder from "../tools/MedicineReminder";
 import ClockIn from "../tools/ClockIn";
+import InvalidImageUrlDetector from "../tools/InvalidImageUrlDetector";
 
 const ToolPage = ({ toolId }) => {
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
@@ -120,6 +121,8 @@ const ToolPage = ({ toolId }) => {
         return <NumberBaseConverter />;
       case "image-compressor":
         return <ImageCompressor />;
+      case "invalid-image-url-detector":
+        return <InvalidImageUrlDetector />;
       case "picture-processor":
         return <PictureProcessor />;
       case "file-hash-calculator":
