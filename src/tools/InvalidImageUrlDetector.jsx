@@ -11,6 +11,7 @@ const InvalidImageUrlDetector = () => {
   const [inputUrls, setInputUrls] = useState('');
   const [invalidUrls, setInvalidUrls] = useState([]);
   const [validUrls, setValidUrls] = useState([]);
+  const [uncertainUrls, setUncertainUrls] = useState([]); // 新增：无法验证的URL
   const [isLoading, setIsLoading] = useState(false);
   const [lineCount, setLineCount] = useState(1);
   const [copied, setCopied] = useState(false);
@@ -32,13 +33,152 @@ const InvalidImageUrlDetector = () => {
     }
   };
 
-  const checkUrlValidity = (url) => {
+  const checkUrlValidity = (url, timeout = 8000) => {
     return new Promise((resolve) => {
+      // 首先尝试使用Image对象加载
       const img = new Image();
-      img.onload = () => resolve({ url, isValid: true });
-      img.onerror = () => resolve({ url, isValid: false, reason: '加载失败或非图片' });
+      let isResolved = false;
+
+      // 设置超时
+      const timer = setTimeout(() => {
+        if (!isResolved) {
+          isResolved = true;
+          // 超时后尝试fetch验证
+          checkUrlWithFetch(url).then(result => resolve(result));
+        }
+      }, timeout);
+
+      img.onload = () => {
+        if (!isResolved) {
+          isResolved = true;
+          clearTimeout(timer);
+          resolve({ url, isValid: true, method: 'image' });
+        }
+      };
+
+      img.onerror = () => {
+        if (!isResolved) {
+          isResolved = true;
+          clearTimeout(timer);
+          // 图片加载失败，尝试fetch验证
+          checkUrlWithFetch(url).then(result => resolve(result));
+        }
+      };
+
+      // 尝试设置crossOrigin属性避免某些CORS问题
+      try {
+        img.crossOrigin = 'anonymous';
+      } catch (e) {
+        // 忽略crossOrigin设置失败
+      }
+
       img.src = url;
     });
+  };
+
+  const checkUrlWithFetch = async (url) => {
+    try {
+      // 首先尝试HEAD请求（更轻量）
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+      try {
+        const response = await fetch(url, {
+          method: 'HEAD',
+          signal: controller.signal,
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (compatible; Image-Validator/1.0)'
+          }
+        });
+
+        clearTimeout(timeoutId);
+
+        if (response.ok) {
+          const contentType = response.headers.get('content-type');
+          if (contentType && contentType.startsWith('image/')) {
+            return { url, isValid: true, method: 'fetch-head', contentType };
+          } else {
+            return { url, isValid: false, reason: '非图片类型', method: 'fetch-head', contentType };
+          }
+        } else {
+          return { url, isValid: false, reason: `HTTP ${response.status}`, method: 'fetch-head' };
+        }
+      } catch (fetchError) {
+        clearTimeout(timeoutId);
+
+        // 检查是否是CORS错误或网络错误
+        if (fetchError.name === 'TypeError' && fetchError.message.includes('CORS')) {
+          return { url, isValid: null, isUncertain: true, reason: 'CORS限制', method: 'fetch-cors' };
+        }
+
+        // 如果HEAD请求失败，尝试GET请求（某些服务器不支持HEAD）
+        if (fetchError.name !== 'AbortError') {
+          try {
+            const getController = new AbortController();
+            const getTimeoutId = setTimeout(() => getController.abort(), 5000);
+
+            const getResponse = await fetch(url, {
+              method: 'GET',
+              signal: getController.signal,
+              headers: {
+                'Range': 'bytes=0-1023', // 只请求前1KB
+                'User-Agent': 'Mozilla/5.0 (compatible; Image-Validator/1.0)'
+              }
+            });
+
+            clearTimeout(getTimeoutId);
+
+            if (getResponse.ok || getResponse.status === 206) {
+              const contentType = getResponse.headers.get('content-type');
+              if (contentType && contentType.startsWith('image/')) {
+                return { url, isValid: true, method: 'fetch-get', contentType };
+              } else {
+                return { url, isValid: false, reason: '非图片类型', method: 'fetch-get', contentType };
+              }
+            }
+          } catch (getError) {
+            // 检查GET请求是否也是CORS错误
+            if (getError.name === 'TypeError' && getError.message.includes('CORS')) {
+              return { url, isValid: null, isUncertain: true, reason: 'CORS限制', method: 'fetch-cors' };
+            }
+          }
+        }
+
+        // 对于网络错误等，检查URL格式来判断是否可能有效
+        if (isLikelyImageUrl(url)) {
+          return { url, isValid: null, isUncertain: true, reason: '网络限制或CORS', method: 'network-restricted' };
+        } else {
+          return { url, isValid: false, reason: '网络错误', method: 'fetch-failed' };
+        }
+      }
+    } catch (error) {
+      // 对于其他错误，如果URL看起来像图片URL，标记为不确定
+      if (isLikelyImageUrl(url)) {
+        return { url, isValid: null, isUncertain: true, reason: '无法验证', method: 'error-uncertain' };
+      }
+      return { url, isValid: false, reason: '网络异常', method: 'fetch-error' };
+    }
+  };
+
+  const isLikelyImageUrl = (url) => {
+    try {
+      const urlObj = new URL(url);
+      const pathname = urlObj.pathname.toLowerCase();
+      const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.svg', '.ico'];
+
+      // 检查文件扩展名
+      if (imageExtensions.some(ext => pathname.endsWith(ext))) {
+        return true;
+      }
+
+      // 检查URL中是否包含图片相关的关键词
+      const imageKeywords = ['image', 'img', 'photo', 'pic', 'picture', 'avatar', 'thumbnail'];
+      const fullUrl = url.toLowerCase();
+
+      return imageKeywords.some(keyword => fullUrl.includes(keyword));
+    } catch (e) {
+      return false;
+    }
   };
 
   const handleDetect = async (rawUrls) => {
@@ -55,6 +195,7 @@ const InvalidImageUrlDetector = () => {
     setIsLoading(true);
     setInvalidUrls([]);
     setValidUrls([]);
+    setUncertainUrls([]); // 清空无法验证的URL
     setProgress(0);
     setTotalUrlsToProcess(uniqueUrls.length);
 
@@ -76,21 +217,35 @@ const InvalidImageUrlDetector = () => {
 
     const newValidUrls = [];
     const newInvalidUrls = [];
+    const newUncertainUrls = [];
     results.forEach(result => {
-      if (result.isValid) {
+      if (result.isValid === true) {
         newValidUrls.push(result.url);
-      } else {
-        newInvalidUrls.push(result.url);
+      } else if (result.isValid === false) {
+        // 为无效URL添加详细信息
+        const reasonInfo = result.reason ? ` (${result.reason})` : '';
+        const methodInfo = result.method ? ` [${result.method}]` : '';
+        newInvalidUrls.push(`${result.url}${reasonInfo}${methodInfo}`);
+      } else if (result.isUncertain) {
+        // 无法验证的URL
+        const reasonInfo = result.reason ? ` (${result.reason})` : '';
+        const methodInfo = result.method ? ` [${result.method}]` : '';
+        newUncertainUrls.push(`${result.url}${reasonInfo}${methodInfo}`);
       }
     });
 
     setValidUrls(newValidUrls);
     setInvalidUrls(newInvalidUrls);
+    setUncertainUrls(newUncertainUrls);
     setIsLoading(false);
+
+    const corsCount = results.filter(r => r.reason && r.reason.includes('CORS')).length;
+    const corsWarning = corsCount > 0 ?
+      `\n注意：有 ${corsCount} 个URL因CORS限制无法验证，可能实际有效。` : '';
 
     toast({
         title: "检测完成",
-        description: `共检测了 ${totalUrls} 个URL，其中 ${newValidUrls.length} 个有效，${newInvalidUrls.length} 个无效。`,
+        description: `共检测了 ${totalUrls} 个URL，其中 ${newValidUrls.length} 个有效，${newInvalidUrls.length} 个无效，${newUncertainUrls.length} 个无法验证。${corsWarning}`,
     });
 
     setTimeout(() => {
@@ -207,7 +362,11 @@ const InvalidImageUrlDetector = () => {
     <div className="container mx-auto p-4 space-y-4 h-full flex flex-col">
       <h1 className="text-2xl font-bold">无效图片URL检测工具</h1>
       <p className="text-muted-foreground">
-        输入一批图片URL，工具会自动检测哪些URL是无效的。URL是否有效定义: URL能正常访问且返回的类型为图片类型。
+        输入一批图片URL，工具会自动检测哪些URL是无效的。检测方法：首先尝试图片加载，如果失败则使用HTTP请求验证。
+        <br />
+        <span className="text-sm">
+          结果分为三类：<strong>有效</strong>（可正常访问的图片）、<strong>无效</strong>（确认无法访问或非图片）、<strong>无法验证</strong>（因CORS限制等无法验证但可能有效）。
+        </span>
       </p>
 
       <div className="space-y-4">
@@ -282,6 +441,32 @@ const InvalidImageUrlDetector = () => {
               readOnly
               value={validUrls.join('\n')}
               placeholder="这里将显示检测出的有效URL。"
+              className="h-60"
+            />
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <div className="flex justify-between items-center">
+              <CardTitle>无法验证的URL ({uncertainUrls.length})</CardTitle>
+              <div className="flex gap-2">
+                <Button variant="outline" size="sm" onClick={() => handleCopy(uncertainUrls, 'uncertain')} disabled={uncertainUrls.length === 0}>
+                  <Copy className="mr-2 h-4 w-4" />
+                  {copied === 'uncertain' ? '已复制' : '复制结果'}
+                </Button>
+                <Button variant="outline" size="sm" onClick={() => handleDownload(uncertainUrls, 'uncertain_urls.csv')} disabled={uncertainUrls.length === 0}>
+                  <Download className="mr-2 h-4 w-4" />
+                  下载结果
+                </Button>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <Textarea
+              readOnly
+              value={uncertainUrls.join('\n')}
+              placeholder="这里将显示无法通过图片加载或HTTP请求验证的URL。"
               className="h-60"
             />
           </CardContent>
