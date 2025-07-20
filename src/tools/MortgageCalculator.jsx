@@ -11,12 +11,12 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 const MortgageCalculator = () => {
   const [loanAmount, setLoanAmount] = useState(1000000);
   const [loanTerm, setLoanTerm] = useState(30);
-  const [loanTermMonths, setLoanTermMonths] = useState(360);
+  const [loanTermMonths, setLoanTermMonths] = useState(280);
   const [interestRate, setInterestRate] = useState(3.5);
   const [lprRate, setLprRate] = useState(3.5);
   const [additionalPoints, setAdditionalPoints] = useState(-0.3);
   const [paymentType, setPaymentType] = useState("equal-principal-interest");
-  const [termType, setTermType] = useState("years");
+  const [termType, setTermType] = useState("months");
   const [monthlyPayment, setMonthlyPayment] = useState(0);
   const [totalPayment, setTotalPayment] = useState(0);
   const [totalInterest, setTotalInterest] = useState(0);
@@ -110,6 +110,17 @@ const MortgageCalculator = () => {
   };
 
   const handleCalculate = () => {
+    // 验证输入
+    if (!loanAmount || loanAmount <= 0) {
+      alert("请输入有效的贷款金额");
+      return;
+    }
+    
+    if (!loanTermMonths || loanTermMonths <= 0) {
+      alert("请输入有效的贷款期限");
+      return;
+    }
+
     let result;
 
     if (paymentType === "equal-principal-interest") {
@@ -151,8 +162,11 @@ const MortgageCalculator = () => {
                   <Input
                     id="loan-amount"
                     type="number"
-                    value={loanAmount}
-                    onChange={(e) => setLoanAmount(parseFloat(e.target.value) || 0)}
+                    value={loanAmount || ""}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setLoanAmount(value === "" ? "" : parseFloat(value) || 0);
+                    }}
                     className="w-full"
                   />
                 </div>
