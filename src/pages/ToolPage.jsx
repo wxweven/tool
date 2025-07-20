@@ -43,6 +43,7 @@ import { navItems } from "../nav-items.jsx";
 import MedicineReminder from "../tools/MedicineReminder";
 import ClockIn from "../tools/ClockIn";
 import InvalidImageUrlDetector from "../tools/InvalidImageUrlDetector";
+import TextProcessor from "../tools/TextProcessor";
 
 const ToolPage = ({ toolId }) => {
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
@@ -83,8 +84,8 @@ const ToolPage = ({ toolId }) => {
         return <JavaToStringFormatter />;
       case "text-diff":
         return <TextDiff />;
-      case "remove-duplicates":
-        return <RemoveDuplicates />;
+      case "text-processor":
+        return <TextProcessor />;
       case "download-files":
         return <DownloadFiles />;
       case "substract-lines":

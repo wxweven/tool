@@ -39,6 +39,7 @@ import NumberPuzzle from "../games/games/NumberPuzzle/NumberPuzzle";
 import MemoryCard from "../games/games/MemoryCard/MemoryCard";
 import Sudoku from "../games/games/Sudoku/Sudoku";
 import MedicineReminder from "./MedicineReminder";
+import TextProcessor from "./TextProcessor";
 
 export {
   BatchGenerator,
@@ -76,6 +77,7 @@ export {
   MemoryCard,
   Sudoku,
   MedicineReminder,
+  TextProcessor,
 };
 
 export { default as FileHashCalculator } from './FileHashCalculator';

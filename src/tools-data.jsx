@@ -225,11 +225,11 @@ export const textTools = [
         color: "bg-slate-500"
     },
     {
-        id: "remove-duplicates",
-        title: "文本去重排序",
-        description: "去除文本行中的重复项",
-        icon: <FilterIcon className="h-5 w-5" />,
-        color: "bg-gray-500"
+        id: "text-processor",
+        title: "通用文本处理",
+        description: "删除空行、去重、排序、处理空白字符等",
+        icon: <FileTextIcon className="h-5 w-5" />,
+        color: "bg-blue-500"
     },
     {
         id: "substract-lines",

@@ -99,10 +99,10 @@ export const navItems = [
     page: <ToolPage toolId="text-diff" />,
   },
   {
-    title: "文本去重排序",
-    to: "/remove-duplicates",
-    icon: <FilterIcon className="h-4 w-4" />,
-    page: <ToolPage toolId="remove-duplicates" />,
+    title: "通用文本处理",
+    to: "/text-processor",
+    icon: <FileTextIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="text-processor" />,
   },
   {
     title: "文本相减",
@@ -530,9 +530,9 @@ export const categoryNavItems = [
         icon: <FileDiffIcon className="h-4 w-4" />,
       },
       {
-        title: "文本去重排序",
-        to: "/remove-duplicates",
-        icon: <FilterIcon className="h-4 w-4" />,
+        title: "通用文本处理",
+        to: "/text-processor",
+        icon: <FileTextIcon className="h-4 w-4" />,
       },
       {
         title: "文本相减",
