@@ -28,7 +28,8 @@ import {
     Command,
     Globe,
     Gamepad2,
-    PillIcon
+    PillIcon,
+    PackageIcon
 } from "lucide-react";
 
 // 工具文件类
@@ -55,6 +56,7 @@ import {
     MortgageCalculator,
     DownloadFiles,
     ExcelToTable,
+    FileSplitter
 } from "./tools";
 
 // 新增生活类工具
@@ -145,215 +147,241 @@ export const efficiencyTools = [
 
 export const devTools = [
     {
-        id: "json",
+        id: "json-formatter",
         title: "JSON格式化",
-        description: "格式化、验证并美化JSON数据",
-        icon: <CodeIcon className="h-5 w-5" />,
-        color: "bg-green-500"
-    },
-    {
-        id: "timestamp",
-        title: "时间戳转换",
-        description: "时间戳与日期时间相互转换",
-        icon: <ClockIcon className="h-5 w-5" />,
-        color: "bg-blue-500"
-    },
-    {
-        id: "java-json",
-        title: "Java转JSON",
-        description: "将Java类转换为JSON格式并生成Mock数据",
-        icon: <CodeIcon className="h-5 w-5" />,
-        color: "bg-red-500"
-    },
-    {
-        id: "java-tostring",
-        title: "toString转JSON",
-        description: "将Java toString输出转换为JSON格式",
+        description: "在线解析和格式化JSON数据，支持校验和压缩",
         icon: <BracesIcon className="h-5 w-5" />,
-        color: "bg-emerald-500"
-    },
-    {
-        id: "url",
-        title: "URL编解码",
-        description: "URL编码与解码工具",
-        icon: <LinkIcon className="h-5 w-5" />,
-        color: "bg-purple-500"
+        color: "bg-yellow-500"
     },
     {
         id: "code-formatter",
         title: "代码格式化",
-        description: "支持多种编程语言的代码格式化",
+        description: "支持多种编程语言的代码美化和格式化工具",
+        icon: <CodeIcon className="h-5 w-5" />,
+        color: "bg-blue-500"
+    },
+    {
+        id: "java-to-json",
+        title: "Java转JSON",
+        description: "将Java实体类代码转换为对应的JSON格式数据",
         icon: <FileCodeIcon className="h-5 w-5" />,
-        color: "bg-teal-500"
-    },
-    {
-        id: "download-files",
-        title: "批量下载文件",
-        description: "输入多个URL，批量下载文件",
-        icon: <DownloadIcon className="h-5 w-5" />,
-        color: "bg-sky-500"
-    },
-    {
-        id: "excel-to-sql",
-        title: "Excel/CSV转SQL",
-        description: "将Excel或CSV文件内容转换为SQL插入语句",
-        icon: <FileCodeIcon className="h-5 w-5" />,
-        color: "bg-lime-500"
-    },
-    {
-        id: "shell",
-        title: "Shell命令",
-        description: "常用Shell命令速查与示例",
-        icon: <TerminalIcon className="h-5 w-5" />,
         color: "bg-indigo-500"
     },
     {
-        id: "regex",
-        title: "正则测试",
-        description: "在线测试正则表达式",
-        icon: <CpuIcon className="h-5 w-5" />,
-        color: "bg-pink-500"
+        id: "java-tostring-formatter",
+        title: "Java toString美化",
+        description: "格式化Java toString方法的输出结果，提高代码可读性",
+        icon: <FileCodeIcon className="h-5 w-5" />,
+        color: "bg-purple-500"
     },
+    {
+        id: "shell-commands",
+        title: "Shell命令生成",
+        description: "根据操作生成对应的Shell命令，提高命令行操作效率",
+        icon: <TerminalIcon className="h-5 w-5" />,
+        color: "bg-green-500"
+    },
+    {
+        id: "excel-to-sql",
+        title: "Excel转SQL",
+        description: "将Excel表格数据转换为SQL插入语句，方便数据导入",
+        icon: <FileCodeIcon className="h-5 w-5" />,
+        color: "bg-cyan-500"
+    },
+    {
+        id: "excel-to-table",
+        title: "Excel转HTML表格",
+        description: "将Excel表格数据转换为HTML表格，支持样式设置",
+        icon: <FileCodeIcon className="h-5 w-5" />,
+        color: "bg-orange-500"
+    }
 ];
 
 export const textTools = [
     {
-        id: "text-diff",
-        title: "文本Diff",
-        description: "文本对比工具，支持JSON格式化",
-        icon: <FileDiffIcon className="h-5 w-5" />,
-        color: "bg-slate-500"
+        id: "regex-tester",
+        title: "正则表达式测试",
+        description: "在线测试正则表达式的匹配结果",
+        icon: <FilterIcon className="h-5 w-5" />,
+        color: "bg-purple-500"
     },
     {
-        id: "text-processor",
-        title: "通用文本处理",
-        description: "删除空行、去重、排序、处理空白字符等",
-        icon: <FileTextIcon className="h-5 w-5" />,
+        id: "text-diff",
+        title: "文本对比工具",
+        description: "在线对比文本差异，高亮显示不同之处",
+        icon: <FileDiffIcon className="h-5 w-5" />,
         color: "bg-blue-500"
     },
     {
-        id: "substract-lines",
-        title: "文本相减",
-        description: "从一个文本中减去另一个文本的内容",
+        id: "remove-duplicates",
+        title: "去除重复行",
+        description: "去除文本中的重复行，支持多种去重模式",
         icon: <MinusIcon className="h-5 w-5" />,
-        color: "bg-zinc-500"
+        color: "bg-red-500"
     },
     {
-        id: "plaintext",
-        title: "纯文本提取",
-        description: "从富文本中提取纯文本内容",
-        icon: <FileTextIcon className="h-5 w-5" />,
+        id: "subtract-lines",
+        title: "文本行相减",
+        description: "从一个文本中减去另一个文本的行，得到差集",
+        icon: <MinusIcon className="h-5 w-5" />,
         color: "bg-amber-500"
     },
+    {
+        id: "url-encoder",
+        title: "URL编解码",
+        description: "对URL进行编码或解码处理",
+        icon: <LinkIcon className="h-5 w-5" />,
+        color: "bg-indigo-500"
+    },
+    {
+        id: "plain-text-extractor",
+        title: "纯文本提取",
+        description: "从HTML或其他格式中提取纯文本内容",
+        icon: <FileTextIcon className="h-5 w-5" />,
+        color: "bg-slate-500"
+    },
+    {
+        id: "timestamp-converter",
+        title: "时间戳转换",
+        description: "在时间戳和标准时间之间进行相互转换",
+        icon: <ClockIcon className="h-5 w-5" />,
+        color: "bg-cyan-500"
+    },
+    {
+        id: "unit-converter",
+        title: "单位转换器",
+        description: "支持多种单位之间的转换，包括长度、重量、温度等",
+        icon: <CpuIcon className="h-5 w-5" />,
+        color: "bg-emerald-500"
+    },
+    {
+        id: "file-splitter",
+        title: "文件分割工具",
+        description: "将大文本文件按指定行数拆分成多个小文件",
+        icon: <FileTextIcon className="h-5 w-5" />,
+        color: "bg-blue-500"
+    }
 ];
 
 export const lifeTools = [
     {
-        id: "countdown-reminder",
-        title: "倒数日/纪念日提醒",
-        description: "输入重要日期，自动显示距离天数",
-        icon: <ClockIcon className="h-5 w-5" />,
-        color: "bg-blue-400"
-    },
-    {
-        id: "lunch-randomizer",
-        title: "随机午餐/晚餐",
-        description: "帮你决定今天吃什么，支持自定义菜品",
-        icon: <HeartIcon className="h-5 w-5" />,
-        color: "bg-pink-400"
-    },
-    {
-        id: "express-tracker",
-        title: "快递单号追踪",
-        description: "输入快递单号，自动识别快递公司并跳转查询",
-        icon: <LinkIcon className="h-5 w-5" />,
-        color: "bg-green-400"
-    },
-    {
-        id: "unit-converter",
-        title: "单位换算器",
-        description: "支持长度、重量、温度等常用单位换算",
-        icon: <CalculatorIcon className="h-5 w-5" />,
-        color: "bg-yellow-400"
-    },
-    {
-        id: "lottery",
-        title: "年会抽奖工具",
-        description: "年会多轮抽奖工具，支持自定义参与者和奖品",
-        icon: <GiftIcon className="h-5 w-5" />,
-        color: "bg-orange-500"
-    },
-    {
-        id: "mortgage",
-        title: "房贷计算器",
-        description: "支持等额本息和等额本金两种还款方式",
-        icon: <CalculatorIcon className="h-5 w-5" />,
-        color: "bg-cyan-500"
-    },
-    {
         id: "bmi-calculator",
-        title: "健康BMI计算器",
-        description: "输入身高体重，自动计算BMI并给出健康建议",
-        icon: <HeartIcon className="h-5 w-5" />,
-        color: "bg-red-400"
+        title: "BMI计算器",
+        description: "计算身体质量指数(BMI)，评估体重是否健康",
+        icon: <CalculatorIcon className="h-5 w-5" />,
+        color: "bg-green-500"
     },
     {
         id: "daily-quote",
-        title: "每日一句/毒鸡汤",
-        description: "每天推送一句正能量语录或幽默毒鸡汤",
+        title: "每日一句",
+        description: "获取每日励志名言，激励自己不断前行",
         icon: <Quote className="h-5 w-5" />,
-        color: "bg-purple-400"
+        color: "bg-purple-500"
     },
     {
-        id: "qr-code",
-        title: "二维码生成与识别",
-        description: "输入文本/网址生成二维码，支持上传图片识别",
+        id: "qr-code-tool",
+        title: "二维码工具",
+        description: "生成和解析二维码，支持多种格式",
         icon: <QrCode className="h-5 w-5" />,
-        color: "bg-indigo-400"
+        color: "bg-orange-500"
     },
     {
-        id: "random-group",
-        title: "随机抽签/分组",
-        description: "适合聚会、活动分组、抽奖等场景",
+        id: "lottery-tool",
+        title: "彩票选号器",
+        description: "随机生成各种彩票号码，提供选号参考",
+        icon: <GiftIcon className="h-5 w-5" />,
+        color: "bg-pink-500"
+    },
+    {
+        id: "random-group-tool",
+        title: "随机分组工具",
+        description: "将人员或项目随机分组，适用于活动组织",
         icon: <Shuffle className="h-5 w-5" />,
-        color: "bg-teal-400"
+        color: "bg-cyan-500"
+    },
+    {
+        id: "lunch-randomizer",
+        title: "午餐选择器",
+        description: "帮你解决选择困难症，随机推荐午餐选择",
+        icon: <GiftIcon className="h-5 w-5" />,
+        color: "bg-amber-500"
+    },
+    {
+        id: "mortgage-calculator",
+        title: "房贷计算器",
+        description: "计算房贷月供、利息等详细信息",
+        icon: <Wallet className="h-5 w-5" />,
+        color: "bg-blue-500"
     },
     {
         id: "expense-tracker",
-        title: "记账/小账本",
-        description: "简单的日常收支记录，支持导出",
+        title: "支出追踪器",
+        description: "记录和分析日常支出，帮助管理个人财务",
         icon: <Wallet className="h-5 w-5" />,
-        color: "bg-emerald-400"
+        color: "bg-green-500"
     },
     {
         id: "medicine-reminder",
-        title: "用药提醒",
-        description: "添加药品、生成每日用药计划和打卡记录",
+        title: "吃药提醒",
+        description: "设置吃药提醒，帮助按时服药",
         icon: <PillIcon className="h-5 w-5" />,
-        color: "bg-red-400"
+        color: "bg-red-500"
+    }
+];
+
+export const workTools = [
+    {
+        id: "express-tracker",
+        title: "快递查询",
+        description: "通过快递单号查询物流信息",
+        icon: <PackageIcon className="h-5 w-5" />,
+        color: "bg-green-500"
+    },
+    {
+        id: "countdown-reminder",
+        title: "倒计时提醒",
+        description: "设置重要事件倒计时，及时提醒",
+        icon: <ClockIcon className="h-5 w-5" />,
+        color: "bg-orange-500"
+    },
+    {
+        id: "download-files",
+        title: "批量下载文件",
+        description: "根据链接列表批量下载文件",
+        icon: <DownloadIcon className="h-5 w-5" />,
+        color: "bg-blue-500"
     }
 ];
 
 export const gameTools = [
     {
-        id: "number-puzzle",
-        title: "数字华容道",
-        description: "经典的滑块拼图游戏，将数字按顺序排列完成挑战",
-        icon: <Gamepad2 className="h-5 w-5" />,
-        color: "bg-indigo-500"
-    },
-    {
         id: "memory-card",
-        title: "记忆翻牌",
-        description: "翻开卡片找到相同图案的配对，考验记忆力和反应速度",
+        title: "记忆卡片",
+        description: "经典的记忆卡片游戏，锻炼记忆力",
         icon: <Gamepad2 className="h-5 w-5" />,
         color: "bg-purple-500"
     },
     {
+        id: "number-puzzle",
+        title: "数字拼图",
+        description: "经典的数字拼图游戏，考验逻辑思维",
+        icon: <Gamepad2 className="h-5 w-5" />,
+        color: "bg-blue-500"
+    },
+    {
         id: "sudoku",
         title: "数独游戏",
-        description: "经典数独逻辑游戏，支持多种难度、自动检查和笔记功能",
+        description: "经典的数独游戏，锻炼思维能力",
         icon: <Gamepad2 className="h-5 w-5" />,
         color: "bg-green-500"
     }
+];
+
+export const allTools = [
+    ...efficiencyTools,
+    ...devTools,
+    ...textTools,
+    ...lifeTools,
+    ...workTools,
+    ...gameTools
 ];

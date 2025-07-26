@@ -44,6 +44,7 @@ import MedicineReminder from "../tools/MedicineReminder";
 import ClockIn from "../tools/ClockIn";
 import InvalidImageUrlDetector from "../tools/InvalidImageUrlDetector";
 import TextProcessor from "../tools/TextProcessor";
+import FileSplitter from "../tools/FileSplitter";
 
 const ToolPage = ({ toolId }) => {
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
@@ -142,6 +143,8 @@ const ToolPage = ({ toolId }) => {
         return <MedicineReminder />;
       case "clock-in":
         return <ClockIn />;
+      case "file-splitter":
+        return <FileSplitter />;
       default:
         return (
           <div className="text-center py-12">

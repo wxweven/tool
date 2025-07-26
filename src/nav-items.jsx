@@ -302,6 +302,12 @@ export const navItems = [
     icon: <TargetIcon className="h-4 w-4" />,
     page: <ToolPage toolId="clock-in" />,
   },
+  {
+    title: "文件分割工具",
+    to: "/file-splitter",
+    icon: <FileTextIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="file-splitter" />,
+  },
 ];
 
 // 分类导航菜单
@@ -524,6 +530,11 @@ export const categoryNavItems = [
     title: "文本工具",
     icon: <TextIcon className="h-4 w-4" />,
     items: [
+      {
+        title: "文件分割工具",
+        to: "/file-splitter",
+        icon: <FileTextIcon className="h-4 w-4" />,
+      },
       {
         title: "文本Diff",
         to: "/text-diff",
