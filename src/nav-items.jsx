@@ -58,9 +58,9 @@ export const navItems = [
   },
   {
     title: "JSON格式化",
-    to: "/json",
+    to: "/json-formatter",
     icon: <CodeIcon className="h-4 w-4" />,
-    page: <ToolPage toolId="json" />,
+    page: <ToolPage toolId="json-formatter" />,
   },
   {
     title: "时间戳转换",
@@ -471,7 +471,7 @@ export const categoryNavItems = [
     items: [
       {
         title: "JSON格式化",
-        to: "/json",
+        to: "/json-formatter",
         icon: <CodeIcon className="h-4 w-4" />,
       },
       {

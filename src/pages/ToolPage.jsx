@@ -64,6 +64,7 @@ const ToolPage = ({ toolId }) => {
       case "timestamp":
         return <TimestampConverter />;
       case "json":
+      case "json-formatter":
         return <JsonFormatter />;
       case "url":
         return <UrlEncoder />;

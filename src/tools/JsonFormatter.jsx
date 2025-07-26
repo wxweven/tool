@@ -211,8 +211,8 @@ const JsonFormatter = () => {
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <Card className="lg:col-span-1">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+        <Card className="lg:col-span-2 transform scale-x-110">
           <CardContent className="pt-6">
             <div className="space-y-4">
               <div>
@@ -222,8 +222,8 @@ const JsonFormatter = () => {
                   value={inputJson}
                   onChange={(e) => setInputJson(e.target.value)}
                   placeholder='{"name": "John", "age": 30, "city": "New York"}'
-                  rows={10}
-                  className="font-mono mt-1"
+                  rows={17}
+                  className="font-mono mt-1 min-h-[39vh]"
                 />
               </div>
 
@@ -258,8 +258,7 @@ const JsonFormatter = () => {
             </div>
           </CardContent>
         </Card>
-
-        <Card className="lg:col-span-2">
+        <Card className="lg:col-span-3">
           <CardHeader>
             <div className="flex justify-between items-center flex-wrap gap-2">
               <CardTitle>格式化结果</CardTitle>
@@ -299,7 +298,7 @@ const JsonFormatter = () => {
           <CardContent>
             {parsedJson ? (
               <div className="relative">
-                                <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4 font-mono text-sm overflow-x-auto max-h-96 overflow-y-auto">
+                                <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4 font-mono text-sm overflow-x-auto">
                   <JsonNode
                     data={parsedJson}
                     expandAll={expandAll}
