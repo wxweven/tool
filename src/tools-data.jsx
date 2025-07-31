@@ -168,14 +168,14 @@ export const devTools = [
         color: "bg-indigo-500"
     },
     {
-        id: "java-tostring-formatter",
+        id: "java-tostring",
         title: "Java toString美化",
         description: "格式化Java toString方法的输出结果，提高代码可读性",
         icon: <FileCodeIcon className="h-5 w-5" />,
         color: "bg-purple-500"
     },
     {
-        id: "shell-commands",
+        id: "shell",
         title: "Shell命令生成",
         description: "根据操作生成对应的Shell命令，提高命令行操作效率",
         icon: <TerminalIcon className="h-5 w-5" />,
@@ -199,7 +199,7 @@ export const devTools = [
 
 export const textTools = [
     {
-        id: "regex-tester",
+        id: "regex",
         title: "正则表达式测试",
         description: "在线测试正则表达式的匹配结果",
         icon: <FilterIcon className="h-5 w-5" />,
@@ -220,28 +220,28 @@ export const textTools = [
         color: "bg-red-500"
     },
     {
-        id: "subtract-lines",
+        id: "substract-lines",
         title: "文本行相减",
         description: "从一个文本中减去另一个文本的行，得到差集",
         icon: <MinusIcon className="h-5 w-5" />,
         color: "bg-amber-500"
     },
     {
-        id: "url-encoder",
+        id: "url",
         title: "URL编解码",
         description: "对URL进行编码或解码处理",
         icon: <LinkIcon className="h-5 w-5" />,
         color: "bg-indigo-500"
     },
     {
-        id: "plain-text-extractor",
+        id: "plaintext",
         title: "纯文本提取",
         description: "从HTML或其他格式中提取纯文本内容",
         icon: <FileTextIcon className="h-5 w-5" />,
         color: "bg-slate-500"
     },
     {
-        id: "timestamp-converter",
+        id: "timestamp",
         title: "时间戳转换",
         description: "在时间戳和标准时间之间进行相互转换",
         icon: <ClockIcon className="h-5 w-5" />,
@@ -279,21 +279,21 @@ export const lifeTools = [
         color: "bg-purple-500"
     },
     {
-        id: "qr-code-tool",
+        id: "qr-code",
         title: "二维码工具",
         description: "生成和解析二维码，支持多种格式",
         icon: <QrCode className="h-5 w-5" />,
         color: "bg-orange-500"
     },
     {
-        id: "lottery-tool",
+        id: "lottery",
         title: "彩票选号器",
         description: "随机生成各种彩票号码，提供选号参考",
         icon: <GiftIcon className="h-5 w-5" />,
         color: "bg-pink-500"
     },
     {
-        id: "random-group-tool",
+        id: "random-group",
         title: "随机分组工具",
         description: "将人员或项目随机分组，适用于活动组织",
         icon: <Shuffle className="h-5 w-5" />,
