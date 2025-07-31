@@ -111,6 +111,12 @@ export const navItems = [
     page: <ToolPage toolId="substract-lines" />,
   },
   {
+    title: "文本去重",
+    to: "/remove-duplicates",
+    icon: <FilterIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="remove-duplicates" />,
+  },
+  {
     title: "批量下载文件",
     to: "/download-files",
     icon: <DownloadIcon className="h-4 w-4" />,
@@ -127,6 +133,12 @@ export const navItems = [
     to: "/excel-to-sql",
     icon: <FileTextIcon className="h-4 w-4" />,
     page: <ToolPage toolId="excel-to-sql" />,
+  },
+  {
+    title: "Excel转表格",
+    to: "/excel-to-table",
+    icon: <FileTextIcon className="h-4 w-4" />,
+    page: <ToolPage toolId="excel-to-table" />,
   },
   {
     title: "Shell命令",
@@ -549,6 +561,11 @@ export const categoryNavItems = [
         title: "文本相减",
         to: "/substract-lines",
         icon: <MinusIcon className="h-4 w-4" />,
+      },
+      {
+        title: "文本去重",
+        to: "/remove-duplicates",
+        icon: <FilterIcon className="h-4 w-4" />,
       },
       {
         title: "纯文本提取",
