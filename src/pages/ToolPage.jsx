@@ -15,6 +15,7 @@ import DownloadFiles from "../tools/DownloadFiles";
 import SubstractLines from "../tools/SubstractLines";
 import BatchGenerator from "../tools/BatchGenerator";
 import ExcelToSql from "../tools/ExcelToSql";
+import ExcelToTable from "../tools/ExcelToTable";
 import CountdownReminder from "../tools/CountdownReminder";
 import ExpressTracker from "../tools/ExpressTracker";
 import LunchRandomizer from "../tools/LunchRandomizer";
@@ -86,6 +87,8 @@ const ToolPage = ({ toolId }) => {
         return <JavaToStringFormatter />;
       case "text-diff":
         return <TextDiff />;
+      case "remove-duplicates":
+        return <RemoveDuplicates />;
       case "text-processor":
         return <TextProcessor />;
       case "download-files":
@@ -96,6 +99,8 @@ const ToolPage = ({ toolId }) => {
         return <BatchGenerator />;
       case "excel-to-sql":
         return <ExcelToSql />;
+      case "excel-to-table":
+        return <ExcelToTable />;
       case "countdown-reminder":
         return <CountdownReminder />;
       case "express-tracker":

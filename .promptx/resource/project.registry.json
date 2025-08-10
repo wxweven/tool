@@ -4,8 +4,8 @@
   "metadata": {
     "version": "2.0.0",
     "description": "project 级资源注册表",
-    "createdAt": "2025-07-28T01:55:34.047Z",
-    "updatedAt": "2025-07-28T01:55:34.051Z",
+    "createdAt": "2025-07-31T15:22:07.832Z",
+    "updatedAt": "2025-07-31T15:22:07.838Z",
     "resourceCount": 5
   },
   "resources": [
@@ -17,9 +17,9 @@
       "description": "执行模式，定义具体的行为模式",
       "reference": "@project://.promptx/resource/role/frontend-developer/execution/frontend-development-workflow.execution.md",
       "metadata": {
-        "createdAt": "2025-07-28T01:55:34.049Z",
-        "updatedAt": "2025-07-28T01:55:34.049Z",
-        "scannedAt": "2025-07-28T01:55:34.049Z",
+        "createdAt": "2025-07-31T15:22:07.835Z",
+        "updatedAt": "2025-07-31T15:22:07.835Z",
+        "scannedAt": "2025-07-31T15:22:07.835Z",
         "path": "role/frontend-developer/execution/frontend-development-workflow.execution.md"
       }
     },
@@ -31,9 +31,9 @@
       "description": "专业角色，提供特定领域的专业能力",
       "reference": "@project://.promptx/resource/role/frontend-developer/frontend-developer.role.md",
       "metadata": {
-        "createdAt": "2025-07-28T01:55:34.049Z",
-        "updatedAt": "2025-07-28T01:55:34.049Z",
-        "scannedAt": "2025-07-28T01:55:34.049Z",
+        "createdAt": "2025-07-31T15:22:07.836Z",
+        "updatedAt": "2025-07-31T15:22:07.836Z",
+        "scannedAt": "2025-07-31T15:22:07.836Z",
         "path": "role/frontend-developer/frontend-developer.role.md"
       }
     },
@@ -45,9 +45,9 @@
       "description": "思维模式，指导AI的思考方式",
       "reference": "@project://.promptx/resource/role/frontend-developer/thought/code-quality-awareness.thought.md",
       "metadata": {
-        "createdAt": "2025-07-28T01:55:34.050Z",
-        "updatedAt": "2025-07-28T01:55:34.050Z",
-        "scannedAt": "2025-07-28T01:55:34.050Z",
+        "createdAt": "2025-07-31T15:22:07.837Z",
+        "updatedAt": "2025-07-31T15:22:07.837Z",
+        "scannedAt": "2025-07-31T15:22:07.837Z",
         "path": "role/frontend-developer/thought/code-quality-awareness.thought.md"
       }
     },
@@ -59,9 +59,9 @@
       "description": "思维模式，指导AI的思考方式",
       "reference": "@project://.promptx/resource/role/frontend-developer/thought/frontend-thinking.thought.md",
       "metadata": {
-        "createdAt": "2025-07-28T01:55:34.050Z",
-        "updatedAt": "2025-07-28T01:55:34.050Z",
-        "scannedAt": "2025-07-28T01:55:34.050Z",
+        "createdAt": "2025-07-31T15:22:07.837Z",
+        "updatedAt": "2025-07-31T15:22:07.837Z",
+        "scannedAt": "2025-07-31T15:22:07.837Z",
         "path": "role/frontend-developer/thought/frontend-thinking.thought.md"
       }
     },
@@ -73,9 +73,9 @@
       "description": "思维模式，指导AI的思考方式",
       "reference": "@project://.promptx/resource/role/frontend-developer/thought/user-experience-sensitivity.thought.md",
       "metadata": {
-        "createdAt": "2025-07-28T01:55:34.050Z",
-        "updatedAt": "2025-07-28T01:55:34.050Z",
-        "scannedAt": "2025-07-28T01:55:34.050Z",
+        "createdAt": "2025-07-31T15:22:07.837Z",
+        "updatedAt": "2025-07-31T15:22:07.837Z",
+        "scannedAt": "2025-07-31T15:22:07.837Z",
         "path": "role/frontend-developer/thought/user-experience-sensitivity.thought.md"
       }
     }
