@@ -161,7 +161,7 @@ export const devTools = [
         color: "bg-blue-500"
     },
     {
-        id: "java-to-json",
+        id: "java-json",
         title: "Java转JSON",
         description: "将Java实体类代码转换为对应的JSON格式数据",
         icon: <FileCodeIcon className="h-5 w-5" />,
@@ -307,7 +307,7 @@ export const lifeTools = [
         color: "bg-amber-500"
     },
     {
-        id: "mortgage-calculator",
+        id: "mortgage",
         title: "房贷计算器",
         description: "计算房贷月供、利息等详细信息",
         icon: <Wallet className="h-5 w-5" />,
