@@ -46,6 +46,7 @@ import ClockIn from "../tools/ClockIn";
 import InvalidImageUrlDetector from "../tools/InvalidImageUrlDetector";
 import TextProcessor from "../tools/TextProcessor";
 import FileSplitter from "../tools/FileSplitter";
+import DataVisualizer from "../tools/DataVisualizer";
 
 const ToolPage = ({ toolId }) => {
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
@@ -151,6 +152,8 @@ const ToolPage = ({ toolId }) => {
         return <ClockIn />;
       case "file-splitter":
         return <FileSplitter />;
+      case "data-visualizer":
+        return <DataVisualizer />;
       default:
         return (
           <div className="text-center py-12">

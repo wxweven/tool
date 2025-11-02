@@ -41,6 +41,7 @@ import Sudoku from "../games/games/Sudoku/Sudoku";
 import MedicineReminder from "./MedicineReminder";
 import TextProcessor from "./TextProcessor";
 import FileSplitter from "./FileSplitter";
+import DataVisualizer from "./DataVisualizer";
 
 export {
   BatchGenerator,
@@ -79,7 +80,8 @@ export {
   Sudoku,
   MedicineReminder,
   TextProcessor,
-  FileSplitter
+  FileSplitter,
+  DataVisualizer
 };
 
 export { default as FileHashCalculator } from './FileHashCalculator';

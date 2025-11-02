@@ -29,7 +29,8 @@ import {
     Globe,
     Gamepad2,
     PillIcon,
-    PackageIcon
+    PackageIcon,
+    BarChart3
 } from "lucide-react";
 
 // 工具文件类
@@ -56,7 +57,8 @@ import {
     MortgageCalculator,
     DownloadFiles,
     ExcelToTable,
-    FileSplitter
+    FileSplitter,
+    DataVisualizer
 } from "./tools";
 
 // 新增生活类工具
@@ -142,6 +144,13 @@ export const efficiencyTools = [
         description: "IP查询、DNS解析、User-Agent生成、子网计算等网络工具",
         icon: <Globe className="h-5 w-5" />,
         color: "bg-emerald-500"
+    },
+    {
+        id: "data-visualizer",
+        title: "数据可视化",
+        description: "将文本数据快速转换为柱状图、折线图、饼图等可视化图表",
+        icon: <BarChart3 className="h-5 w-5" />,
+        color: "bg-violet-500"
     }
 ];
 

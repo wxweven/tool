@@ -34,7 +34,8 @@ import {
   Gamepad2,
   PillIcon,
   TargetIcon,
-  Code
+  Code,
+  BarChart3
 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import ToolPage from "./pages/ToolPage.jsx";
@@ -320,6 +321,12 @@ export const navItems = [
     icon: <FileTextIcon className="h-4 w-4" />,
     page: <ToolPage toolId="file-splitter" />,
   },
+  {
+    title: "数据可视化",
+    to: "/data-visualizer",
+    icon: <BarChart3 className="h-4 w-4" />,
+    page: <ToolPage toolId="data-visualizer" />,
+  },
 ];
 
 // 分类导航菜单
@@ -474,6 +481,11 @@ export const categoryNavItems = [
         title: "网络工具集",
         to: "/network-utilities",
         icon: <Globe className="h-4 w-4" />,
+      },
+      {
+        title: "数据可视化",
+        to: "/data-visualizer",
+        icon: <BarChart3 className="h-4 w-4" />,
       },
     ]
   },
